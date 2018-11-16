@@ -7,26 +7,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import OVP.Display;
+
 public class Tab3Fragment extends Fragment {
     private static final String TAG = "Tab3Fragment";
-    private Button btnTest;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.tab3_fragment,container,false);
-    btnTest = (Button) view.findViewById(R.id.btnTEST3);
+    public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
 
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "TESTING BUTTON CLICK 3",Toast.LENGTH_SHORT).show();
-            }
-        });
+        View view = inflater.inflate(R.layout.tab3_fragment, container, false);
 
-return view;
+        WebView TimeTable3 = (WebView) view.findViewById(R.id.Table3);
+        Display.ViewOVP(TimeTable3, 3);
+
+        return view;
     }
 }
