@@ -1,4 +1,4 @@
-package management;
+package com.zero.zero.timetable;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,14 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.zero.zero.timetable.MainActivity;
-import com.zero.zero.timetable.R;
 
-public class login  extends DialogFragment {
-
+public class LoginDialogFragment  extends DialogFragment{
+    private static final String TAG = "LoginDialog";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,10 +34,23 @@ public class login  extends DialogFragment {
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        login.this.getDialog().cancel();
+                        LoginDialogFragment.this.getDialog().cancel();
                     }
                 });
 
         return builder.create();
     }
+//    public void saveLoginData(){
+//        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putString(USERDATA, mUsername.getText().toString()+":"+mPassword.getText().toString());
+//        editor.commit();
+//    }
+//    public String loadLoginData(){
+//        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+//        return sharedPref.getString(USERDATA,"");
+//    }
+//    public void setLinkData(){
+//        OVP.Display.LoginData = loadLoginData();
+//    }
 }

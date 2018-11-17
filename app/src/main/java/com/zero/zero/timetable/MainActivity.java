@@ -1,8 +1,5 @@
 package com.zero.zero.timetable;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.SharedPreferences;
         import android.support.design.widget.TabLayout;
         import android.support.v4.app.DialogFragment;
         import android.support.v4.app.FragmentActivity;
@@ -11,7 +8,7 @@ package com.zero.zero.timetable;
         import android.os.Bundle;
         import android.util.Log;
 
-        import management.login;
+
 
 
 public class MainActivity extends FragmentActivity {
@@ -46,8 +43,7 @@ public class MainActivity extends FragmentActivity {
         //necessary
         Log.d(TAG,"onCreate: Starting.");
         Log.d(TAG,"onCreate: calling Logincheck.");
-//        Intent intent = new Intent(this, management.LoginActivity.class);
-//        startActivity(intent);
+
         showLogin();
         Log.d(TAG,"onCreate: Initializing Tabs.");
         //Setting a sections adapter to add tabs into
@@ -61,9 +57,10 @@ public class MainActivity extends FragmentActivity {
 //        Log.d(TAG,"userstuff: "+loadLoginData());
     }
     public void showLogin() {
-        DialogFragment newFragment = new management.login();
+        DialogFragment newFragment = new LoginDialogFragment();
         newFragment.show(getSupportFragmentManager(), "login");
     }
+
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new Tab1Fragment(), "Gestern");

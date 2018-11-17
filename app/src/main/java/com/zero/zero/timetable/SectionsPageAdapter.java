@@ -13,12 +13,13 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>(); //For keeping track of the Fragments
     private final List<String> mFragmentTitleList = new ArrayList<>(); //for keeping trag of the titles
 
-    public void addFragment(Fragment fragment,String title){
-    mFragmentList.add(fragment);
-    mFragmentTitleList.add(title);
-    }
     public SectionsPageAdapter(FragmentManager fm) {
         super(fm);
+    }
+
+    public void addFragment(Fragment fragment,String title){
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
     }
 
 //returns all the obvious stuff
