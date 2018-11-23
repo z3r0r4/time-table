@@ -26,7 +26,7 @@ public class TabFragmentActivity extends FragmentActivity {
     //Setting a sections adapter to add tabs into
     mSectionsPageAdapter =new SectionsPageAdapter(getSupportFragmentManager());
     //Setting up the Viewpager with the sections adapter.
-    mViewPager =(ViewPager) findViewById(R.id.container);
+    mViewPager = (ViewPager) findViewById(R.id.container);
 
     setupViewPager(mViewPager);
 
@@ -38,7 +38,7 @@ private void setupViewPager(ViewPager viewPager){
     SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
     adapter.addFragment(new Tab1Fragment(), "Gestern");
     adapter.addFragment(new Tab2Fragment(), "Heute");
-    adapter.addFragment(new Tab3Fragment(), "Morgen");
+   // adapter.addFragment(new Tab3Fragment(), "Morgen");
     viewPager.setAdapter(adapter);
 }
 
