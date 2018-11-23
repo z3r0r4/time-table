@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+    <!--checkable makes sure that only one can be selected
+        all icons should be contained in here
+        change ic_launcher to the fitting icons from drawable-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ovp"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="OVP"/>
+        <item
+            android:id="@+id/nav_timetable"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Eigener Stundenplan"/>
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Nachrichten"/>
+    </group>
+
+    <item android:title="Stuff">
+        <menu>
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_launcher_background"
+                android:title="Login"/>
+        </menu>
+    </item>
+
+</menu>
