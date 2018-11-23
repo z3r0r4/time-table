@@ -2,13 +2,19 @@ package com.zero.zero.timetable;
 
         import android.support.design.widget.TabLayout;
         import android.support.v4.app.DialogFragment;
+        import android.support.v4.app.Fragment;
         import android.support.v4.app.FragmentActivity;
         import android.support.v4.view.ViewPager;
 
         import android.os.Bundle;
         import android.util.Log;
 
-
+        import com.zero.zero.timetable.Login.LoginDialogFragment;
+        import com.zero.zero.timetable.Tabs.SectionsPageAdapter;
+        import com.zero.zero.timetable.Tabs.Tab1Fragment;
+        import com.zero.zero.timetable.Tabs.Tab2Fragment;
+        import com.zero.zero.timetable.Tabs.Tab3Fragment;
+        import com.zero.zero.timetable.Tabs.TabFragmentActivity;
 
 
 public class MainActivity extends FragmentActivity {
@@ -20,8 +26,8 @@ public class MainActivity extends FragmentActivity {
     private ViewPager mViewPager;
 
 
-    //make it necessary to input the password instead of hardcoding it -----------------------did it
-    // reload webview better plz
+    //FINISHED: make it necessary to input the password instead of hardcoding it
+    //reload webview better plz
     //refractor
     //add a drawer space for all differnet kind of stuff
     //translate all the shorts to actual names
@@ -45,27 +51,29 @@ public class MainActivity extends FragmentActivity {
         Log.d(TAG,"onCreate: calling Logincheck.");
 
         showLogin();
+
+        //put into own class and stuff
         Log.d(TAG,"onCreate: Initializing Tabs.");
         //Setting a sections adapter to add tabs into
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        //Setting up the Viewpager with the sections adapter.
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+      //Setting up the Viewpager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-//        Log.d(TAG,"userstuff: "+loadLoginData());
+
     }
     public void showLogin() {
         DialogFragment newFragment = new LoginDialogFragment();
         newFragment.show(getSupportFragmentManager(), "login");
     }
 
+    //put into own class and stuff
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new Tab1Fragment(), "Gestern");
         adapter.addFragment(new Tab2Fragment(), "Heute");
-        adapter.addFragment(new Tab3Fragment(), "Morgen");
+        //adapter.addFragment(new Tab3Fragment(), "Morgen");
         viewPager.setAdapter(adapter);
     }
 }
