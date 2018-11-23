@@ -1,5 +1,7 @@
 package com.zero.zero.timetable;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.zero.zero.timetable.Login.LoginDialogFragment;
 import com.zero.zero.timetable.Tabs.SectionsPageAdapter;
@@ -22,7 +26,7 @@ import com.zero.zero.timetable.Tabs.Tab3Fragment;
 import com.zero.zero.timetable.Tabs.TabFragmentActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
     private SectionsPageAdapter mSectionsPageAdapter;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     //
     //future: add controller for grades and homework and plan for exams
     private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +61,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
-
-       // this conncets the cute button at top to the action of opening the drawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,
-                R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        // this conncets the cute button at top to the action of opening the drawer
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new MyTimeTableFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_timetable);
+        }
 
 //        Log.d(TAG, "onCreate: Starting.");
 //
@@ -82,26 +94,49 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             super.onBackPressed();
         }
         super.onBackPressed();
     }
 
-    public void showLogin() {
-        DialogFragment newFragment = new LoginDialogFragment();
-        newFragment.show(getSupportFragmentManager(), "login");
-    }
+//    public void showLogin() {
+//        DialogFragment newFragment = new LoginDialogFragment();
+//        newFragment.show(getSupportFragmentManager(), "login");
+//    }
+//
+//    //put into own class and stuff
+//    private void setupViewPager(ViewPager viewPager) {
+//        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+//        adapter.addFragment(new Tab1Fragment(), "Gestern");
+//        adapter.addFragment(new Tab2Fragment(), "Heute");
+//        //adapter.addFragment(new Tab3Fragment(), "Morgen");
+//        viewPager.setAdapter(adapter);
+//    }
 
-    //put into own class and stuff
-    private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), "Gestern");
-        adapter.addFragment(new Tab2Fragment(), "Heute");
-        //adapter.addFragment(new Tab3Fragment(), "Morgen");
-        viewPager.setAdapter(adapter);
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.nav_ovp:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new TabFragmentActivity()).commit();
+                break;
+
+            case R.id.nav_timetable:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MyTimeTableFragment()).commit();
+                break;
+            case R.id.nav_notifications:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NotificationsFragment()).commit();
+                break;
+            case R.id.nav_login:
+                Toast.makeText(this, "LOGIN", Toast.LENGTH_LONG);
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
 
