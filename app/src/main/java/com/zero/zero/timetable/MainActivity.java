@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new TabFragmentActivity()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new TabFragment()).commit();
                 break;
 
             case R.id.nav_timetable:
