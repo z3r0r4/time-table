@@ -19,20 +19,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.zero.zero.timetable.Login.LoginDialogFragment;
-import com.zero.zero.timetable.Tabs.SectionsPageAdapter;
-import com.zero.zero.timetable.Tabs.Tab1Fragment;
-import com.zero.zero.timetable.Tabs.Tab2Fragment;
-import com.zero.zero.timetable.Tabs.Tab3Fragment;
-import com.zero.zero.timetable.Tabs.TabFragmentActivity;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-    private SectionsPageAdapter mSectionsPageAdapter;
-
-    private ViewPager mViewPager;
-
 
     //FINISHED: make it necessary to input the password instead of hardcoding it
     //reload webview better plz
@@ -56,10 +47,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //necessary
+
+
         //cause the original tolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -74,22 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new MyTimeTableFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_timetable);
         }
-
-//        Log.d(TAG, "onCreate: Starting.");
-//
-//        Log.d(TAG, "onCreate: calling Logincheck.");
-//        showLogin();
-//
-//
-//        //put into own class and stuff
-//        Log.d(TAG, "onCreate: Initializing Tabs.");
-//        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager()); //Setting a sections adapter to add tabs into
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-//        mViewPager = (ViewPager) findViewById(R.id.container);   //Setting up the Viewpager with the sections adapter.
-//        setupViewPager(mViewPager);
-//        tabLayout.setupWithViewPager(mViewPager);
-
-
     }
 
     @Override
@@ -102,19 +78,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onBackPressed();
     }
 
-//    public void showLogin() {
-//        DialogFragment newFragment = new LoginDialogFragment();
-//        newFragment.show(getSupportFragmentManager(), "login");
-//    }
-//
-//    //put into own class and stuff
-//    private void setupViewPager(ViewPager viewPager) {
-//        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-//        adapter.addFragment(new Tab1Fragment(), "Gestern");
-//        adapter.addFragment(new Tab2Fragment(), "Heute");
-//        //adapter.addFragment(new Tab3Fragment(), "Morgen");
-//        viewPager.setAdapter(adapter);
-//    }
+    public void showLogin() {
+        DialogFragment newFragment = new LoginDialogFragment();
+        newFragment.show(getSupportFragmentManager(), "login");
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -134,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_login:
                 Toast.makeText(this, "LOGIN", Toast.LENGTH_LONG);
+                Log.d("LOAGFADF",TAG);
+                showLogin();
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
