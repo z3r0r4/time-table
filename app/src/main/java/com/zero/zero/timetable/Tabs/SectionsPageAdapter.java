@@ -1,4 +1,4 @@
-package com.zero.zero.timetable;
+package com.zero.zero.timetable.Tabs;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

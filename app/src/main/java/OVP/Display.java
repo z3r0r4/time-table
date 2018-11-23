@@ -1,5 +1,8 @@
 package OVP;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,31 +12,32 @@ import android.webkit.WebViewClient;
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 
-public class Display {
+public class Display{
     private static final String TAG = "TTDisplay";
-    public static String LoginData = "";
+    private static String OVP_link = "";
 
-    public static void ViewOVP(WebView TimeTable,int i){
-        String OVP_Link;
+
+    public static void ViewOVP(WebView TimeTable, String LoginData, int i){
+
         Log.d(TAG,LoginData);
         switch (i){
             case 1:
-                 OVP_Link = "http://"+LoginData+"@";
+                 OVP_link = LoginData+"1.htm";
                 break;
             case 2:
-                OVP_Link = "http://"+LoginData+"@";
+                OVP_link =  LoginData+"2.htm";
                 break;
             case 3:
-                OVP_Link ="";
+                OVP_link ="";
                 break;
             default:
-                OVP_Link = "http://www.network-error.com/";
+                OVP_link = "";
                 break;
         }
 
 
 
-        TimeTable.loadUrl(OVP_Link);
+        TimeTable.loadUrl(OVP_link);
 
         //set interaction environment variables and things
         final boolean Interaction_enabler = false;
