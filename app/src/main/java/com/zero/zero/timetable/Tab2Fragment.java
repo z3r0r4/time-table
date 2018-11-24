@@ -12,25 +12,24 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.zero.zero.timetable.R;
 
 
 public class Tab2Fragment extends Fragment {
     private static final String TAG = "Tab2Fragment";
 
-        @Nullable
-        @Override
-        public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-            View view = inflater.inflate(R.layout.tab2_fragment, container, false);
+        View view = inflater.inflate(R.layout.tab2_fragment, container, false);
 
-            WebView TimeTable2 = (WebView) view.findViewById(R.id.Table2);
-            SharedPreferences sharedPref =  getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
-            String LoginData = sharedPref.getString(getString(R.string.login_data_storage),"default oh no");
-            Display.ViewOVP(TimeTable2, new String("http://"+LoginData+"@"+getString(R.string.ovp_link)),2);
+        WebView TimeTable2 = (WebView) view.findViewById(R.id.Table2);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
+        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
+        Display.ViewOVP(TimeTable2, new String("http://" + LoginData + "@" + getString(R.string.ovp_link)), 2);
 
-            return view;
-        }
+        return view;
     }
+}
 
