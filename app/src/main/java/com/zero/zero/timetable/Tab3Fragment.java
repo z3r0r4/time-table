@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.Tabs;
+package com.zero.zero.timetable;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.zero.zero.timetable.R;
 
-import OVP.Display;
+
 
 public class Tab3Fragment extends Fragment {
     private static final String TAG = "Tab3Fragment";

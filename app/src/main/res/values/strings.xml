@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">TimeTable</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="login">Login</string>
     <string name="password">Passwort</string>
     <string name="Username">Benutzername</string>
     <string name="confirm">Bestätigen</string>
     <string name="login_data_storage">USERDATA</string>
-    <string name="ovp_link"></string>
 </resources>

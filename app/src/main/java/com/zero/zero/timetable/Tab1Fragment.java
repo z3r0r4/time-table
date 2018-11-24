@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.Tabs;
+package com.zero.zero.timetable;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.zero.zero.timetable.Login.LoginDialogFragment;
 import com.zero.zero.timetable.R;
-
-import OVP.Display;
 
 public class Tab1Fragment extends Fragment {
 
