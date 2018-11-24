@@ -16,21 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabFragment extends Fragment {
-//    @Nullable
+    //    @Nullable
 //    @Override
 //    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return inflater.inflate(R.layout.fragment_mytimetable, container, false);
 //    }
-@Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setRetainInstance(true);
-}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fixtures_new_tabs,container, false);
+        View view = inflater.inflate(R.layout.fixtures_new_tabs, container, false);
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -53,7 +53,6 @@ public void onCreate(Bundle savedInstanceState) {
         adapter.addFragment(new Tab2Fragment(), "Heute");
 //        adapter.addFragment(new Tab3Fragment(), "Morgen");
         viewPager.setAdapter(adapter);
-
 
 
     }
@@ -86,7 +85,5 @@ public void onCreate(Bundle savedInstanceState) {
             return mFragmentTitleList.get(position);
         }
     }
-
-
 
 }

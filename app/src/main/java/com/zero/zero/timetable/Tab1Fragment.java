@@ -22,18 +22,17 @@ public class Tab1Fragment extends Fragment {
 //    private Button btnTest;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.tab1_fragment,container,false);
+        View view = inflater.inflate(R.layout.tab1_fragment, container, false);
 
         WebView TimeTable1 = (WebView) view.findViewById(R.id.Table1);
 
-        SharedPreferences sharedPref =  getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
-        String LoginData = sharedPref.getString(getString(R.string.login_data_storage),"default oh no");
-        Display.ViewOVP(TimeTable1, new String("http://"+LoginData+"@"+getString(R.string.ovp_link)),1);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
+        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
+        Display.ViewOVP(TimeTable1, new String("http://" + LoginData + "@" + getString(R.string.ovp_link)), 1);
 
 //
 //    btnTest = (Button) view.findViewById(R.id.btnTEST1);
@@ -45,6 +44,6 @@ public class Tab1Fragment extends Fragment {
 //            }
 //        });
 
-return view;
+        return view;
     }
 }

@@ -2,13 +2,8 @@ package com.zero.zero.timetable;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,29 +12,26 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.zero.zero.timetable.Login.LoginDialogFragment;
+//FINISHED: make it necessary to input the password instead of hardcoding it
+//reload webview better plz
+//refractor
+//add a drawer space for all differnet kind of stuff
+//translate all the shorts to actual names
+//add the own timetable to autoshow those lessons that are canceled
+//automagically notify when the plan is updated and if one of my lessons is canceled
 
+
+//add information about current date and week on top of the app or in info space
+
+//ideas: merge the automatic timetable creator (maybe ocr maybe file based) with this ovp. then save the created timetable and mark the lessons that are canceled
+// or substitute lessons
+//
+//future: add controller for grades and homework and plan for exams
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-
-    //FINISHED: make it necessary to input the password instead of hardcoding it
-    //reload webview better plz
-    //refractor
-    //add a drawer space for all differnet kind of stuff
-    //translate all the shorts to actual names
-    //add the own timetable to autoshow those lessons that are canceled
-    //automagically notify when the plan is updated and if one of my lessons is canceled
-
-
-    //add information about current date and week on top of the app or in info space
-
-    //ideas: merge the automatic timetable creator (maybe ocr maybe file based) with this ovp. then save the created timetable and mark the lessons that are canceled
-    // or substitute lessons
-    //
-    //future: add controller for grades and homework and plan for exams
     private DrawerLayout drawer;
 
     @Override
@@ -49,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //necessary
 
 
-        //cause the original tolbar was removed
+        //cause the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        // this conncets the cute button at top to the action of opening the drawer
+        // this conncets the button at top to the action of opening the drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -100,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new NotificationsFragment()).commit();
                 break;
             case R.id.nav_login:
-                Toast.makeText(this, "LOGIN", Toast.LENGTH_LONG);
-                Log.d("LOAGFADF",TAG);
+                Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT);
+                Log.d("Showing LoginDialog", TAG);
                 showLogin();
         }
         drawer.closeDrawer(GravityCompat.START);
