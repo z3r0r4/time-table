@@ -1,4 +1,4 @@
-package OVP;
+package com.zero.zero.timetable;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -40,7 +40,7 @@ public class Display{
         TimeTable.loadUrl(OVP_link);
 
         //set interaction environment variables and things
-        final boolean Interaction_enabler = false;
+        final boolean Interaction_enabler = true;
         TimeTable.setInitialScale(100);
         TimeTable.getSettings().setBuiltInZoomControls(Interaction_enabler);
         TimeTable.setWebViewClient(new WebViewClient(){  //just disables the redirection to hyperlinks
