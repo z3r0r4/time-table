@@ -12,7 +12,7 @@ public class SubstitutionSchedule {
 		this.title = title;
 		this.infos = infos;
 	}
-l
+
 	public String getTitle() {
 		return title;
 	}

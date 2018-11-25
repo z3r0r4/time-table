@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zero.zero.timetable"
-        minSdkVersion 17
+        minSdkVersion 24 //17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
