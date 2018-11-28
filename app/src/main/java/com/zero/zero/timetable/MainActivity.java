@@ -1,5 +1,6 @@
 package com.zero.zero.timetable;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -11,8 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
-import com.zero.zero.timetable.Login.LoginDialogFragment;
+import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
+import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
+import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
+import com.zero.zero.timetable.TabManagement.TabFragment;
+
+import receive.HTMLFetcher;
 //FINISHED: make it necessary to input the password instead of hardcoding it
 //reload webview better plz
 //refractor
@@ -40,6 +47,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         //necessary
 
+        HTMLFetcher.initializeFetcher("***REMOVED***", "***REMOVED***", "***REMOVED***");
+//                        String[] s = readLoginData().split(":");
+//                        Log.d(s[0]+s[1],TAG);
+//                        HTMLFetcher.initializeFetcher("http://"+getString(R.string.ovp_link)+"1.htm",s[0],s[1]);
+//                        HTMLFetcher.initializeFetcher("http/***REMOVED***1.htm", "***REMOVED***", "***REMOVED***");
+//                        Log.d(Arrays.toString(HTMLFetcher.getData("Q2").get(0)),TAG);
+
 
         //cause the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,11 +67,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MyTimeTableFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_timetable);
         }
+
     }
 
     @Override
@@ -70,13 +86,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onBackPressed();
     }
 
-    public void showLogin() {
-        DialogFragment newFragment = new LoginDialogFragment();
-        newFragment.show(getSupportFragmentManager(), "login");
-    }
-
+//    private int clickedNavItem = 0;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        drawer.closeDrawer(GravityCompat.START);
+//        clickedNavItem = menuItem.getItemId();
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -92,13 +106,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new NotificationsFragment()).commit();
                 break;
             case R.id.nav_login:
-                Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT);
+//                Log.d(Arrays.toString(HTMLFetcher.getData("Q1").get(0)),TAG);
+                Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
                 Log.d("Showing LoginDialog", TAG);
-                showLogin();
+                LoginDialogFragment.showLogin(this);
         }
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
+//    public void onDrawerClosed(View drawerView) {
+//        switch (clickedNavItem) {
+//            case R.id.nav_ovp:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new TabFragment()).commit();
+//                break;
+//
+//            case R.id.nav_timetable:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new MyTimeTableFragment()).commit();
+//                break;
+//            case R.id.nav_notifications:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new NotificationsFragment()).commit();
+//                break;
+//            case R.id.nav_login:
+////                Log.d(Arrays.toString(HTMLFetcher.getData("Q1").get(0)),TAG);
+//                Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
+//                Log.d("Showing LoginDialog", TAG);
+//                LoginDialogFragment.showLogin(this);
+//        }
+//        }
+    }
+
 
 

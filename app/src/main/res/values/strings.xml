@@ -7,4 +7,5 @@
     <string name="Username">Benutzername</string>
     <string name="confirm">Bestätigen</string>
     <string name="login_data_storage">USERDATA</string>
+    <string name="loadingtext">Loading, . . .</string>
 </resources>
