@@ -9,7 +9,9 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -19,20 +21,31 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/result_tabs"
-                app:tabTextColor="@color/colorAccent"
-                app:tabSelectedTextColor="@color/colorPrimaryLight"
-                app:tabIndicatorColor="@color/colorPrimaryLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabMode="fixed"/>
+                app:tabIndicatorColor="@color/colorPrimaryLight"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorPrimaryLight"
+                app:tabTextColor="@color/colorAccent"/>
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </android.support.v4.view.ViewPager>
 
     </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/sync_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/stat_notify_sync"/>
 
 </RelativeLayout>

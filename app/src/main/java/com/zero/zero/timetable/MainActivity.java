@@ -110,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
                 Log.d("Showing LoginDialog", TAG);
                 LoginDialogFragment.showLogin(this);
+                break;
+
+            case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NotificationsFragment()).commit();
+                break;
         }
         return true;
     }
