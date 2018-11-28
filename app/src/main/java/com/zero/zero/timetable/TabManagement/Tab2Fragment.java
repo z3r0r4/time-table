@@ -1,4 +1,4 @@
-package com.zero.zero.timetable;
+package com.zero.zero.timetable.TabManagement;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,8 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.Toast;
+
 import com.zero.zero.timetable.R;
 
 
@@ -27,7 +26,7 @@ public class Tab2Fragment extends Fragment {
         WebView TimeTable2 = (WebView) view.findViewById(R.id.Table2);
         SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
-        Display.ViewOVP(TimeTable2, new String("http://" + LoginData + "@" + getString(R.string.ovp_link)), 2);
+        TimeTableDisplay.ViewOVP(TimeTable2, view, new String("http://" + LoginData + "@" + getString(R.string.ovp_link)), 2);
 
         return view;
     }
