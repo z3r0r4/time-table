@@ -1,6 +1,7 @@
 package com.zero.zero.timetable.TabManagement;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.zero.zero.timetable.R;
 
@@ -16,11 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabFragment extends Fragment {
-    //    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_mytimetable, container, false);
-//    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +36,13 @@ public class TabFragment extends Fragment {
         TabLayout tabs = (TabLayout) view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
+        FloatingActionButton syncfab = (FloatingActionButton) view.findViewById(R.id.sync_btn);
+        syncfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tab1Fragment.reload();
+            }
+        });
 
         return view;
 

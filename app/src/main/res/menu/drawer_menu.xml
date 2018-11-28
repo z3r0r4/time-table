@@ -28,5 +28,11 @@
                 android:title="Login"/>
         </menu>
     </item>
+    <group android:checkableBehavior="single">
+        <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Settings"/>
+    </group>
 
 </menu>
