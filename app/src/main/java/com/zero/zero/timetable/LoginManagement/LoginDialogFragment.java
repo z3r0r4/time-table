@@ -54,10 +54,10 @@ public class LoginDialogFragment extends DialogFragment {
                         writeLoginData();
 
                         //reload web view instead of restarting the whole application
-                        Intent i = getActivity().getPackageManager()
-                                .getLaunchIntentForPackage(getActivity().getPackageName());
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
+//                        Intent i = getActivity().getPackageManager()
+//                                .getLaunchIntentForPackage(getActivity().getPackageName());
+//                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(i);
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
