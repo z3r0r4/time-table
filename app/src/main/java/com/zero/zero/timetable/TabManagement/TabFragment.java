@@ -54,8 +54,8 @@ public class TabFragment extends Fragment {
 
 
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), "Gestern");
-        adapter.addFragment(new Tab2Fragment(), "Heute");
+        adapter.addFragment(new Tab1Fragment(), getString(R.string.tab1title));
+        adapter.addFragment(new Tab2Fragment(), getString(R.string.tab2title));
 //        adapter.addFragment(new Tab3Fragment(), "Morgen");
         viewPager.setAdapter(adapter);
 
