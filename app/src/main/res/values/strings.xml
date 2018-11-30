@@ -7,4 +7,24 @@
     <string name="Username">Benutzername</string>
     <string name="confirm">Bestätigen</string>
     <string name="login_data_storage">USERDATA</string>
+    <string name="loadingtext">Loading, . . .</string>
+
+
+
+    <string-array name="list_preference_entries_Stufen">
+        <item>EF</item>
+        <item>Q1</item>
+        <item>Q2</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_entries_Kurse">
+        <item>DE</item>
+        <item>GE</item>
+        <item>ENG-G12</item>
+    </string-array>
+
+
+    <string name="tab2title">Morgen</string>
+    <string name="tab1title">Heute</string>
+    <string name="list_preference_summary">Wähle deine Stufe</string>
 </resources>

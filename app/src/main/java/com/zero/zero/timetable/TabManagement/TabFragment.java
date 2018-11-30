@@ -1,8 +1,7 @@
-package com.zero.zero.timetable;
+package com.zero.zero.timetable.TabManagement;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,26 +10,25 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TabFragment extends Fragment {
-//    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_mytimetable, container, false);
-//    }
-@Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setRetainInstance(true);
-}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
-        View view = inflater.inflate(R.layout.fixtures_new_tabs,container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fixtures_new_tabs, container, false);
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -38,6 +36,13 @@ public void onCreate(Bundle savedInstanceState) {
         TabLayout tabs = (TabLayout) view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
+        FloatingActionButton syncfab = (FloatingActionButton) view.findViewById(R.id.sync_btn);
+        syncfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tab1Fragment.reload();
+            }
+        });
 
         return view;
 
@@ -49,11 +54,10 @@ public void onCreate(Bundle savedInstanceState) {
 
 
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), "Gestern");
-        adapter.addFragment(new Tab2Fragment(), "Heute");
+        adapter.addFragment(new Tab1Fragment(), getString(R.string.tab1title));
+        adapter.addFragment(new Tab2Fragment(), getString(R.string.tab2title));
 //        adapter.addFragment(new Tab3Fragment(), "Morgen");
         viewPager.setAdapter(adapter);
-
 
 
     }
@@ -86,7 +90,5 @@ public void onCreate(Bundle savedInstanceState) {
             return mFragmentTitleList.get(position);
         }
     }
-
-
 
 }
