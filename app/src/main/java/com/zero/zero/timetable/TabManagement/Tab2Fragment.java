@@ -21,7 +21,7 @@ public class Tab2Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.tab2_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_tab2, container, false);
         WebView TimeTable2 = (WebView) view.findViewById(R.id.Table2);
         SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "default oh no");

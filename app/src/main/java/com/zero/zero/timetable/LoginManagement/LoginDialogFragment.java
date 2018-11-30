@@ -50,7 +50,7 @@ public class LoginDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // sign in the user ...
-                        Log.d("login in with " + mUsername.getText().toString() + ":" + mPassword.getText().toString(), TAG);
+                        Log.d("LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString(), TAG);
                         writeLoginData();
 
                         //reload web view instead of restarting the whole application
