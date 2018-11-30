@@ -32,7 +32,7 @@ public class TimeTableDisplay {
         Log.d("Login in to "+OVP_link+" ",TAG);
         //set interaction environment variables and things
         final boolean Interaction_enabler = false;
-        TimeTable.setInitialScale(100);
+        TimeTable.setInitialScale(120);
         TimeTable.getSettings().setBuiltInZoomControls(Interaction_enabler);
         TimeTable.setWebViewClient(new WebViewClient() {  //just disables the redirection to hyperlinks
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

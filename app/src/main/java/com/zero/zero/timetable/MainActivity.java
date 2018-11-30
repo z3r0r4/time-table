@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
 import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
+import com.zero.zero.timetable.SettingManagement.SettingsFragment;
 import com.zero.zero.timetable.TabManagement.TabFragment;
 
 import receive.HTMLFetcher;
@@ -39,7 +41,8 @@ import receive.HTMLFetcher;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-    private DrawerLayout drawer;
+    private DrawerLayout mDrawerLayout;
+    private int clickedNavItem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +61,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //cause the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // this conncets the button at top to the action of opening the drawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
+       mDrawerLayout.addDrawerListener(toggle);
+      toggle.syncState();
 
 
         if (savedInstanceState == null) {
@@ -73,23 +77,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new MyTimeTableFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_timetable);
         }
+        /**
+         * USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
+         * **/
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+                                            @Override
+                                            public void onDrawerSlide(View drawerView, float slideOffset) {
+                                            }
 
+                                            @Override
+                                            public void onDrawerOpened(View drawerView) {
+                                            }
+
+                                            @Override
+                                            public void onDrawerStateChanged(int newState) {
+                                            }
+
+                                            @Override
+                                            public void onDrawerClosed(View drawerView) {
+                                                //Set your new fragment here
+                                                switch (clickedNavItem) {
+                                                    case R.id.nav_ovp:
+                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                                                new TabFragment()).commit();
+                                                        break;
+
+                                                    case R.id.nav_timetable:
+                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                                                new MyTimeTableFragment()).commit();
+                                                        break;
+                                                    case R.id.nav_notifications:
+                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                                                new NotificationsFragment()).commit();
+                                                        break;
+                                                    case R.id.nav_login:
+                                                        Log.d("Showing LoginDialog", TAG);
+                                                        LoginDialogFragment.showLogin(MainActivity.this);
+                                                        break;
+                                                    //doesnt work yet
+                                                    case R.id.nav_settings:
+                                                        Intent intent = new Intent(MainActivity.this, SettingsFragment.class);
+                                                        startActivity(intent);
+                                                        break;
+                                                }
+                                            }
+                                        }
+
+        );
     }
+
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-        super.onBackPressed();
+//        super.onBackPressed();
     }
-
-//    private int clickedNavItem = 0;
+/**
+ * USE THIS IF DRAWER DOESNT LAG
+ * **/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawer.closeDrawer(GravityCompat.START);
+
 //        clickedNavItem = menuItem.getItemId();
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
@@ -111,37 +163,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("Showing LoginDialog", TAG);
                 LoginDialogFragment.showLogin(this);
                 break;
-
+////doesnt work yet
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NotificationsFragment()).commit();
+                        new SettingsFragment()).commit();
                 break;
         }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-//    public void onDrawerClosed(View drawerView) {
-//        switch (clickedNavItem) {
-//            case R.id.nav_ovp:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new TabFragment()).commit();
-//                break;
-//
-//            case R.id.nav_timetable:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new MyTimeTableFragment()).commit();
-//                break;
-//            case R.id.nav_notifications:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new NotificationsFragment()).commit();
-//                break;
-//            case R.id.nav_login:
-////                Log.d(Arrays.toString(HTMLFetcher.getData("Q1").get(0)),TAG);
-//                Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
-//                Log.d("Showing LoginDialog", TAG);
-//                LoginDialogFragment.showLogin(this);
-//        }
-//        }
-    }
+}
 
 
 

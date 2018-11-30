@@ -1,9 +1,7 @@
 package com.zero.zero.timetable.TabManagement;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,9 +27,9 @@ public class Tab1Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab1_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         final WebView TimeTable1 = (WebView) view.findViewById(R.id.Table1);
-        TT1=TimeTable1;
+        TT1 = TimeTable1;
         SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
         final TextView txtview = (TextView) view.findViewById(R.id.tV1);
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pB1);
@@ -60,17 +56,6 @@ public class Tab1Fragment extends Fragment {
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
         TimeTableDisplay.ViewOVP(TimeTable1, view, "http://" + LoginData + "@" + getString(R.string.ovp_link), 1);
 
-
-//        final ProgressBar progess = (ProgressBar) view.findViewById(R.id.pb1);
-//        TimeTable1.setWebViewClient(new WebViewClient() {
-//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//                progess.setVisibility(View.VISIBLE);
-//            }
-//
-//            public void onPageFinished(WebView view, String url) {
-//                progess.setVisibility(View.GONE);
-//            }
-//        });
         return view;
     }
 
