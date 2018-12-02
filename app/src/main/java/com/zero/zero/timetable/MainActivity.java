@@ -50,14 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         //necessary
 
-        HTMLFetcher.initializeFetcher("***REMOVED***", "***REMOVED***", "***REMOVED***");
-//                        String[] s = readLoginData().split(":");
-//                        Log.d(s[0]+s[1],TAG);
-//                        HTMLFetcher.initializeFetcher("http://"+getString(R.string.ovp_link)+"1.htm",s[0],s[1]);
-//                        HTMLFetcher.initializeFetcher("http/***REMOVED***1.htm", "***REMOVED***", "***REMOVED***");
-//                        Log.d(Arrays.toString(HTMLFetcher.getData("Q2").get(0)),TAG);
-
-
         //cause the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -114,10 +106,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                         Log.d("Showing LoginDialog", TAG);
                                                         LoginDialogFragment.showLogin(MainActivity.this);
                                                         break;
-                                                    //doesnt work yet
                                                     case R.id.nav_settings:
-                                                        Intent intent = new Intent(MainActivity.this, SettingsFragment.class);
-                                                        startActivity(intent);
+                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                                                new SettingsFragment()).commit();
+//                                                        Intent intent = new Intent(getApplicationContext(), SettingsFragment.class);
+//                                                        startActivity(intent);
                                                         break;
                                                 }
                                             }
@@ -163,10 +156,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("Showing LoginDialog", TAG);
                 LoginDialogFragment.showLogin(this);
                 break;
-////doesnt work yet
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();
+//                Intent intent = new Intent(getApplicationContext(), SettingsFragment.class);
+//                                                        startActivity(intent);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
