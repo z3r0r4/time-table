@@ -12,7 +12,6 @@
         android:text="YOUR Timetable Here"
         android:textSize="30sp"
         android:layout_centerInParent="true"/>
-
     <ListView
         android:id="@+id/Liste"
         android:layout_width="match_parent"

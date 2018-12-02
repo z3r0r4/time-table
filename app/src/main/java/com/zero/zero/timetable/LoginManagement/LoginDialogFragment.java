@@ -1,12 +1,10 @@
+
 package com.zero.zero.timetable.LoginManagement;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -16,12 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 
-import java.util.Arrays;
 
-import receive.HTMLFetcher;
+
+
 
 
 public class LoginDialogFragment extends DialogFragment {

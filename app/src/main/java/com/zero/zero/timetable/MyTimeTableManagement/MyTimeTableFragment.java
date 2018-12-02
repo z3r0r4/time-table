@@ -1,9 +1,11 @@
 package com.zero.zero.timetable.MyTimeTableManagement;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,43 +19,57 @@ import com.zero.zero.timetable.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 import receive.HTMLFetcher;
 
+
 public class MyTimeTableFragment extends Fragment {
+    final String TAG = "MyTimeTableFragment";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        HTMLFetcher.initializeFetcher("http://removedlink/ovp/heute/subst_001.htm", "removed", "removed");
         View viewTimetable = inflater.inflate(R.layout.fragment_mytimetable, container, false);
 
-        TextView tv1 = (TextView) viewTimetable.findViewById(R.id.textView_timetable);
-        tv1.setText("Hello");
 
-        ListView lv1 = (ListView) viewTimetable.findViewById(R.id.Liste);
+        ListView listView = (ListView) viewTimetable.findViewById(R.id.Liste);
 
         // Create a List from String Array elements
-
-        ArrayAdapter<String> adapter;
-        ArrayList<String> listItems=new ArrayList<String>();
+        ArrayList<String> listItems = new ArrayList<String>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        listView.setAdapter(arrayAdapter);
+        fetchAndSetData(listItems, arrayAdapter);
 
-        lv1.setAdapter(arrayAdapter);
-        Log.d("INITITITITI","TAG");
-while(!HTMLFetcher.initialized){}
-        ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData();
-        ArrayList<String> result = new ArrayList<String>();
-        for(Iterator<String[]> it = data.iterator(); it.hasNext();) {
-            result.add(Arrays.toString(it.next()));
-        }
 
-        Log.d(result.size()+"size"+result.get(1),"TAG");
-        for(Iterator<String[]> it = data.iterator(); it.hasNext();) {
-            listItems.add(Arrays.toString(it.next()).replace("[","").replace("]",""));
-        }
-        listItems.add("LOLO");
-        arrayAdapter.notifyDataSetChanged();
         return viewTimetable;
+    }
+
+    private void fetchAndSetData(ArrayList<String> listItems, ArrayAdapter<String> arrayAdapter) {
+        ////////////////fetch web stuff
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String identifier = prefs.getString("list_preference_1", "");
+
+
+        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", getString(R.string.ovp_username), getString(R.string.ovp_password));
+        //wait for FETCHER
+        //should be done asynchronous
+        while (!HTMLFetcher.initialized) {
+        }
+        Log.d("Fetching for " + identifier, TAG);
+        ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData();
+//        ArrayList<String[]> data = (identifier != "Alle") ?   HTMLFetcher.staticSchedule.getData(identifier) :  HTMLFetcher.staticSchedule.getData();
+        System.out.println(identifier+" Alle");
+        System.out.println(!"Alle".equals(identifier));
+        if(!"Alle".equals(identifier)){
+            System.out.println("DREXK");
+            data = HTMLFetcher.staticSchedule.getData(identifier);
+        }
+
+        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
+            listItems.add(Arrays.toString(it.next()).replace("[", "").replace("]", ""));
+        }
+
+
+        arrayAdapter.notifyDataSetChanged();
     }
 }

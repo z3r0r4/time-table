@@ -28,8 +28,9 @@ public class TimeTableDisplay {
                 OVP_link = LoginData + "2.htm";
                 break;
         }
+        Log.d("LOADING: "+OVP_link,TAG);
         TimeTable.loadUrl(OVP_link);
-        Log.d("Login in to "+OVP_link+" ",TAG);
+
         //set interaction environment variables and things
         final boolean Interaction_enabler = false;
         TimeTable.setInitialScale(120);

@@ -21,7 +21,7 @@ import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
 import com.zero.zero.timetable.SettingManagement.SettingsFragment;
 import com.zero.zero.timetable.TabManagement.TabFragment;
 
-import receive.HTMLFetcher;
+
 //FINISHED: make it necessary to input the password instead of hardcoding it
 //reload webview better plz
 //refractor
@@ -106,11 +106,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                         Log.d("Showing LoginDialog", TAG);
                                                         LoginDialogFragment.showLogin(MainActivity.this);
                                                         break;
+                                                    //doesnt work yet
                                                     case R.id.nav_settings:
-                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new SettingsFragment()).commit();
-//                                                        Intent intent = new Intent(getApplicationContext(), SettingsFragment.class);
-//                                                        startActivity(intent);
+                                                        Intent intent = new Intent(MainActivity.this, SettingsFragment.class);
+                                                        startActivity(intent);
                                                         break;
                                                 }
                                             }
@@ -156,11 +155,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("Showing LoginDialog", TAG);
                 LoginDialogFragment.showLogin(this);
                 break;
+////doesnt work yet
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();
-//                Intent intent = new Intent(getApplicationContext(), SettingsFragment.class);
-//                                                        startActivity(intent);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

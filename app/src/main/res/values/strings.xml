@@ -12,12 +12,18 @@
 
 
     <string-array name="list_preference_entries_Stufen">
-        <item>S1</item>
+       <item>Alle</item>
         <item>EF</item>
         <item>Q1</item>
         <item>Q2</item>
     </string-array>
-<!--populate this automatically-->
+    <string-array name="list_preference_entryvalues_Stufen">
+        <item>Alle</item>
+        <item>EF</item>
+        <item>Q1</item>
+        <item>Q2</item>
+    </string-array>
+
     <string-array name="multi_select_list_preference_entries_Kurse">
         <item>DE</item>
         <item>GE</item>
@@ -28,6 +34,4 @@
     <string name="tab2title">Morgen</string>
     <string name="tab1title">Heute</string>
     <string name="list_preference_summary">Wähle deine Stufe</string>
-    <string name="listkey">list_preference_1</string>
-    <string name="multikey">multi_select_list_preference_1</string>
 </resources>

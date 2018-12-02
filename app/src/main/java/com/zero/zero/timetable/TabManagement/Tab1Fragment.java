@@ -3,9 +3,9 @@ package com.zero.zero.timetable.TabManagement;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +53,7 @@ public class Tab1Fragment extends Fragment {
             }
         });
 
-        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
+        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
         TimeTableDisplay.ViewOVP(TimeTable1, view, "http://" + LoginData + "@" + getString(R.string.ovp_link), 1);
 
         return view;
