@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListPreference
+        app:iconSpaceReserved="false"
         android:defaultValue="1"
         android:entries="@array/list_preference_entries_Stufen"
         android:entryValues="@array/list_preference_entries_Stufen"
@@ -9,10 +11,13 @@
         android:title="Stufe"
         android:summary="@string/list_preference_summary"/>
     <SwitchPreference
+        app:iconSpaceReserved="false"
         android:defaultValue="true"
         android:key="switch_preference_1"
-        android:title="Alle Ausfälle anzeigen"/>
+        android:title="Ausfälle aller Kurse anzeigen"/>
     <MultiSelectListPreference
+        android:enabled="false"
+        app:iconSpaceReserved="false"
         android:entries="@array/multi_select_list_preference_entries_Kurse"
         android:entryValues="@array/multi_select_list_preference_entries_Kurse"
         android:key="multi_select_list_preference_1"

@@ -3,7 +3,7 @@
                 android:id="@+id/fragment_mytimetable"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary">
+                android:background="@android:color/white">
     <TextView
         android:visibility="invisible"
         android:id="@+id/textView_timetable"
@@ -12,6 +12,8 @@
         android:text="YOUR Timetable Here"
         android:textSize="30sp"
         android:layout_centerInParent="true"/>
+
+
     <ListView
         android:id="@+id/Liste"
         android:layout_width="match_parent"
@@ -20,4 +22,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="1dp"/>
+
+
 </RelativeLayout>

@@ -46,30 +46,19 @@ public class MyTimeTableFragment extends Fragment {
 
     private void fetchAndSetData(ArrayList<String> listItems, ArrayAdapter<String> arrayAdapter) {
         ////////////////fetch web stuff
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String identifier = prefs.getString("list_preference_1", "");
-
-
         HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", getString(R.string.ovp_username), getString(R.string.ovp_password));
         //wait for FETCHER
         //should be done asynchronous
         while (!HTMLFetcher.initialized) {
         }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String identifier = prefs.getString("list_preference_1", "");
         Log.d("Fetching for " + identifier, TAG);
-        ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData();
-//        ArrayList<String[]> data = (identifier != "Alle") ?   HTMLFetcher.staticSchedule.getData(identifier) :  HTMLFetcher.staticSchedule.getData();
-        System.out.println(identifier+" Alle");
-        System.out.println(!"Alle".equals(identifier));
-        if(!"Alle".equals(identifier)){
-            System.out.println("DREXK");
-            data = HTMLFetcher.staticSchedule.getData(identifier);
-        }
+        ArrayList<String[]> data = (!"Alle".equals(identifier)) ? HTMLFetcher.staticSchedule.getData(identifier) : HTMLFetcher.staticSchedule.getData();
 
         for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
             listItems.add(Arrays.toString(it.next()).replace("[", "").replace("]", ""));
         }
-
-
         arrayAdapter.notifyDataSetChanged();
     }
 }
