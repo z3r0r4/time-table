@@ -4,15 +4,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white">
-    <TextView
-        android:visibility="invisible"
-        android:id="@+id/textView_timetable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YOUR Timetable Here"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
-
 
     <ListView
         android:id="@+id/Liste"
@@ -21,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="1dp"/>
-
+        android:layout_marginTop="1dp"
+        android:visibility="visible"/>
 
 </RelativeLayout>

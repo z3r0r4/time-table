@@ -21,7 +21,6 @@ import com.zero.zero.timetable.R;
 public class Tab1Fragment extends Fragment {
 
     private static final String TAG = "Tab1Fragment";
-
     private static WebView TT1 = null;
 
     @Nullable
@@ -30,7 +29,7 @@ public class Tab1Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         final WebView TimeTable1 = (WebView) view.findViewById(R.id.Table1);
         TT1 = TimeTable1;
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
         final TextView txtview = (TextView) view.findViewById(R.id.tV1);
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pB1);
 
@@ -40,7 +39,7 @@ public class Tab1Fragment extends Fragment {
                     TimeTable1.setVisibility(WebView.INVISIBLE);
                     progressBar.setVisibility(ProgressBar.VISIBLE);
                     txtview.setVisibility(View.VISIBLE);
-                    Log.d("Loading " + TimeTable1.getProgress() + "% done", TAG);
+                    Log.v(TAG,"Loading " + TimeTable1.getProgress() + "% done");
                 }
 
                 progressBar.setProgress(progress);
@@ -48,7 +47,7 @@ public class Tab1Fragment extends Fragment {
                     TimeTable1.setVisibility(WebView.VISIBLE);
                     progressBar.setVisibility(ProgressBar.GONE);
                     txtview.setVisibility(View.GONE);
-                    Log.d("FINISHED Loading", TAG);
+                    Log.v(TAG,"FINISHED Loading");
                 }
             }
         });

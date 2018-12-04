@@ -1,18 +1,10 @@
 package com.zero.zero.timetable.TabManagement;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
-
-import com.zero.zero.timetable.MainActivity;
-import com.zero.zero.timetable.R;
 
 public class TimeTableDisplay {
     private static final String TAG = "TimeTableDisplay";
@@ -28,17 +20,18 @@ public class TimeTableDisplay {
                 OVP_link = LoginData + "2.htm";
                 break;
         }
-        Log.d("LOADING: "+OVP_link,TAG);
+        Log.d(TAG, "LOADING Website: " + OVP_link);
         TimeTable.loadUrl(OVP_link);
 
         //set interaction environment variables and things
-        final boolean Interaction_enabler = false;
-        TimeTable.setInitialScale(120);
-        TimeTable.getSettings().setBuiltInZoomControls(Interaction_enabler);
+        final boolean interactions_enabled = false;
+        TimeTable.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        TimeTable.getSettings().setBuiltInZoomControls(interactions_enabled);
         TimeTable.setWebViewClient(new WebViewClient() {  //just disables the redirection to hyperlinks
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return true;
             }
         });
+
     }
 }

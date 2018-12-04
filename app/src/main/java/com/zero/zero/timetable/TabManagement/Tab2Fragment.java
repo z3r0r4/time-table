@@ -23,7 +23,7 @@ public class Tab2Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_tab2, container, false);
         WebView TimeTable2 = (WebView) view.findViewById(R.id.Table2);
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
 
         TimeTableDisplay.ViewOVP(TimeTable2, view, new String("http://" + LoginData + "@" + getString(R.string.ovp_link)), 2);

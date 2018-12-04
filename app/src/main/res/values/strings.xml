@@ -10,18 +10,19 @@
     <string name="loadingtext">Loading, . . .</string>
 
 
-
     <string-array name="list_preference_entries_Stufen">
-       <item>Alle</item>
+        <item>Alle</item>
         <item>EF</item>
         <item>Q1</item>
         <item>Q2</item>
+        <item>S1</item>
     </string-array>
     <string-array name="list_preference_entryvalues_Stufen">
         <item>Alle</item>
         <item>EF</item>
         <item>Q1</item>
         <item>Q2</item>
+        <item>05A,05B,05C,05D,06A,06B,06C,06D,07A,07B,07C,07D,08A,08B,08C,08D,09A,09B,09C,09D</item>
     </string-array>
 
     <string-array name="multi_select_list_preference_entries_Kurse">
@@ -34,4 +35,11 @@
     <string name="tab2title">Morgen</string>
     <string name="tab1title">Heute</string>
     <string name="list_preference_summary">Wähle deine Stufe</string>
+    <string name="ovp_fragment_title">OVP</string>
+    <string name="my_tt_fragment_title">Eigener Stundenplan</string>
+    <string name="notifications_fragment_title">Nachrichten</string>
+    <string name="drawer_divider_title">Stuff</string>
+    <string name="login_button_title">Login</string>
+    <string name="settings_fragment_title">Settings</string>
+    <string name="login_data_prefs">LoginDataPrefs</string>
 </resources>

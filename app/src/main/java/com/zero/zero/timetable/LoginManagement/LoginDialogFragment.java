@@ -47,7 +47,7 @@ public class LoginDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // sign in the user ...
-                        Log.d("LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString(), TAG);
+                        Log.d(TAG,"LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString());
                         writeLoginData();
 
                         //reload web view instead of restarting the whole application
@@ -67,7 +67,7 @@ public class LoginDialogFragment extends DialogFragment {
 
     private void writeLoginData() {
         Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences("lol", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
 //        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.login_data_storage), mUsername.getText().toString() + ":" + mPassword.getText().toString());
@@ -75,7 +75,7 @@ public class LoginDialogFragment extends DialogFragment {
     }
 
     public String readLoginData() {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("lol", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
         return sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
     }
 

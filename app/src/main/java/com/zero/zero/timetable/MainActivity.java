@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
 import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
@@ -23,15 +22,15 @@ import com.zero.zero.timetable.TabManagement.TabFragment;
 
 
 //FINISHED: make it necessary to input the password instead of hardcoding it
-//reload webview better plz
+//FINISHED reload webview better plz
+//REFACTOR so that it can be used in every tabfragment
 //refractor
-//add a drawer space for all differnet kind of stuff
-//translate all the shorts to actual names
-//add the own timetable to autoshow those lessons that are canceled
+//FINISHED add a drawer space for all differnet kind of stuff
+//FINISHED translate all the shorts to actual names
+//WORKING ON IT add the own timetable to autoshow those lessons that are canceled
 //automagically notify when the plan is updated and if one of my lessons is canceled
 
-
-//add information about current date and week on top of the app or in info space
+//WORKING ON IT add information about current date and week on top of the app or in info space
 
 //ideas: merge the automatic timetable creator (maybe ocr maybe file based) with this ovp. then save the created timetable and mark the lessons that are canceled
 // or substitute lessons
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                                 new NotificationsFragment()).commit();
                                                         break;
                                                     case R.id.nav_login:
-                                                        Log.d("Showing LoginDialog", TAG);
+                                                        Log.i(TAG,"OPEN LoginDialog");
                                                         LoginDialogFragment.showLogin(MainActivity.this);
                                                         break;
                                                     //doesnt work yet
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_login:
 //                Log.d(Arrays.toString(HTMLFetcher.getData("Q1").get(0)),TAG);
                 Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
-                Log.d("Showing LoginDialog", TAG);
+                Log.i(TAG,"OPEN LoginDialog");
                 LoginDialogFragment.showLogin(this);
                 break;
 ////doesnt work yet
