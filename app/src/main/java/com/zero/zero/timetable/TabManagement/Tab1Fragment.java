@@ -29,7 +29,7 @@ public class Tab1Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         final WebView TimeTable1 = (WebView) view.findViewById(R.id.Table1);
         TT1 = TimeTable1;
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         final TextView txtview = (TextView) view.findViewById(R.id.tV1);
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pB1);
 

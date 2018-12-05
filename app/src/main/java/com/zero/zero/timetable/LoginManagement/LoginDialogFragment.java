@@ -1,4 +1,3 @@
-
 package com.zero.zero.timetable.LoginManagement;
 
 import android.app.AlertDialog;
@@ -17,15 +16,19 @@ import android.widget.EditText;
 import com.zero.zero.timetable.R;
 
 
-
-
-
-
 public class LoginDialogFragment extends DialogFragment {
     private static final String TAG = "LoginDialog";
+    private final String USERDATA = "";
     private EditText mUsername = null;
     private EditText mPassword = null;
-    private final String USERDATA = "";
+
+    //    private void setLinkData(){
+//        OVP.TimeTableDisplay.LoginData = loadLoginData();
+//    }
+    public static void showLogin(FragmentActivity activity) {
+        DialogFragment newFragment = new LoginDialogFragment();
+        newFragment.show(activity.getSupportFragmentManager(), "login");
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -42,23 +45,19 @@ public class LoginDialogFragment extends DialogFragment {
         mUsername = (EditText) mView.findViewById(R.id.etUsername);
         mPassword = (EditText) mView.findViewById(R.id.etPassword);
         // Set the layout for the dialog
-        builder.setView(mView)  // Add action buttons
+        builder.setView(mView)
+                // Add action buttons
                 .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
-                        Log.d(TAG,"LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString());
-                        writeLoginData();
-
-                        //reload web view instead of restarting the whole application
-//                        Intent i = getActivity().getPackageManager()
-//                                .getLaunchIntentForPackage(getActivity().getPackageName());
-//                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        startActivity(i);
+                        //save user LoginData
+                        Log.d(TAG, "LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString());
+                        LoginManager.writeLoginData(getActivity(),mUsername,mPassword); //TODO TEST THIS
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        //exit login dialog
                         LoginDialogFragment.this.getDialog().cancel();
                     }
                 });
@@ -66,24 +65,14 @@ public class LoginDialogFragment extends DialogFragment {
     }
 
     private void writeLoginData() {
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
-//        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.login_data_storage), mUsername.getText().toString() + ":" + mPassword.getText().toString());
         editor.commit();
     }
 
     public String readLoginData() {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.login_data_storage), "default oh no");
-    }
-
-    //    private void setLinkData(){
-//        OVP.TimeTableDisplay.LoginData = loadLoginData();
-//    }
-    public static void showLogin(FragmentActivity activity) {
-        DialogFragment newFragment = new LoginDialogFragment();
-        newFragment.show(activity.getSupportFragmentManager(), "login");
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
+        return sharedPref.getString(getString(R.string.login_data_storage), "default:ohno");
     }
 }

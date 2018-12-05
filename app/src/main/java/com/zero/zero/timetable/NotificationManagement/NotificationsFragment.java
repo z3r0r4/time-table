@@ -77,7 +77,7 @@ public class NotificationsFragment extends Fragment {
             tableRows.add(new TableRow(getActivity()));
         }
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
         HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
         //wait for FETCHER
@@ -108,7 +108,7 @@ public class NotificationsFragment extends Fragment {
 
     private void fetchandset(TextView textView, String Stunde) {
         ////////////////fetch web stuff
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
         HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
         //wait for FETCHER

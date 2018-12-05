@@ -41,5 +41,5 @@
     <string name="drawer_divider_title">Stuff</string>
     <string name="login_button_title">Login</string>
     <string name="settings_fragment_title">Settings</string>
-    <string name="login_data_prefs">LoginDataPrefs</string>
+    <string name="login_data_prefs_key">LoginDataPrefs</string>
 </resources>

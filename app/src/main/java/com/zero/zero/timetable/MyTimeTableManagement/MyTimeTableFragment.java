@@ -56,7 +56,7 @@ public class MyTimeTableFragment extends Fragment {
         listView.setAdapter(arrayAdapter);
 
         ////////////////fetch web stuff
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "PASSS:USER");
         HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
         //wait for FETCHER
