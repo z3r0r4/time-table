@@ -27,6 +27,10 @@ public class OVPEasyFetcher {
     }
 
     public static SubstitutionSchedule getSchedule(String url, String username, String password) {
+        if(schedule != null) {
+            return schedule;
+        }
+
         HTTPRequestTask task = new HTTPRequestTask();
         task.execute(url, username, password);
         SubstitutionSchedule result = null;
