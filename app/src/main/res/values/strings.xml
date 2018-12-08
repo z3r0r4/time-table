@@ -5,7 +5,6 @@
     <string name="login">Login</string>
     <string name="password">Passwort</string>
     <string name="Username">Benutzername</string>
-    <string name="confirm">Bestätigen</string>
     <string name="login_data_storage">USERDATA</string>
     <string name="loadingtext">Loading, . . .</string>
 

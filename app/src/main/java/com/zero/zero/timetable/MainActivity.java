@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+
+import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
 import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
@@ -48,8 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //necessary
+        OVPEasyFetcher.initializeContext(this);
+        OVPEasyFetcher.init("http://rudolph-brandes-gymnasium.de/ovp/heute/subst_001.htm", "schueler", "Did1VP-PW");
 
-        //TODO put this into a sperate class
+        //TODO put this into a separate class
         //readd Toolbar because the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
