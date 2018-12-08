@@ -16,13 +16,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+//import com.example.ovpeasyfetcher.receive.HTMLFetcher;
 import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import receive.HTMLFetcher;
+//import receive.HTMLFetcher;
 
 public class NotificationsFragment extends Fragment {
     private static final String TAG = "MainActivity";
@@ -79,21 +80,21 @@ public class NotificationsFragment extends Fragment {
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
-        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
+//        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
         //wait for FETCHER
         //should be done asynchronous
-        while (!HTMLFetcher.initialized) {
-        }
+//        while (!HTMLFetcher.initialized) {
+//        }
 
         int i = 0;
         for (TableRow ta : tableRows) {
             i++;
             TextView textView1 = new TextView(getActivity());
             TextView textView2 = new TextView(getActivity());
-            ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData_any(i + "");
-            for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
-                textView2.setText(textView2.getText() + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
-            }
+//            ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData_any(i + "");
+//            for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
+//                textView2.setText(textView2.getText() + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
+//            }
 
             textView1.setText(i + " ");
 //            fetchandset(textView2,i+"");
@@ -110,18 +111,18 @@ public class NotificationsFragment extends Fragment {
         ////////////////fetch web stuff
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
-        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
+//        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
         //wait for FETCHER
         //should be done asynchronous
-        while (!HTMLFetcher.initialized) {
-        }
+//        while (!HTMLFetcher.initialized) {
+//        }
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 //        String[] identifier = prefs.getString("list_preference_1", "").split(",");
 //        Log.i(TAG, "Fetching for Class: " + Arrays.toString(identifier));
 //        ArrayList<String[]> data = (!"Alle".equals(identifier[0])) ? HTMLFetcher.staticSchedule.getData_any(identifier) : HTMLFetcher.staticSchedule.getData();
-        ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData_any(Stunde);
-        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
-            textView.setText(textView.getText() + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
-        }
+//        ArrayList<String[]> data = HTMLFetcher.staticSchedule.getData_any(Stunde);
+//        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
+//            textView.setText(textView.getText() + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
+//        }
     }
 }

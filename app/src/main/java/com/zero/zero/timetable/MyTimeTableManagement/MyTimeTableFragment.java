@@ -20,9 +20,8 @@ import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
-import receive.HTMLFetcher;
+//import receive.HTMLFetcher;
 
 
 public class MyTimeTableFragment extends Fragment {
@@ -58,19 +57,19 @@ public class MyTimeTableFragment extends Fragment {
         ////////////////fetch web stuff
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
         String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "PASSS:USER");
-        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
+//        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
         //wait for FETCHER
         //should be done asynchronous
-        while (!HTMLFetcher.initialized) {
-        }
+//        while (!HTMLFetcher.initialized) {
+//        }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String[] identifier = prefs.getString("list_preference_1", "").split(",");
         Log.i(TAG, "Fetching for Class: " + Arrays.toString(identifier));
-        ArrayList<String[]> data = (!"Alle".equals(identifier[0])) ? HTMLFetcher.staticSchedule.getData_any(identifier) : HTMLFetcher.staticSchedule.getData();
+//        ArrayList<String[]> data = (!"Alle".equals(identifier[0])) ? HTMLFetcher.staticSchedule.getData_any(identifier) : HTMLFetcher.staticSchedule.getData();
 
-        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
-            listItems.add(Arrays.toString(it.next()).replace("[", "").replace("]", ""));
-        }
+//        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
+//            listItems.add(Arrays.toString(it.next()).replace("[", "").replace("]", ""));
+//        }
         arrayAdapter.notifyDataSetChanged();
     }
 }
