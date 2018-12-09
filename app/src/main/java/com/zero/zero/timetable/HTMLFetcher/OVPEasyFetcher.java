@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
 import com.zero.zero.timetable.HTMLFetcher.receive.HTMLFetcher;
+import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 
 import java.util.concurrent.ExecutionException;
 
@@ -97,12 +98,19 @@ public class OVPEasyFetcher {
                 progressDialog.dismiss();
             }
             if(schedule != null) {
-                schedule.log();
+//                schedule.log();
                 Log.d(TAG, "onPostExecute: Done!");
-
+                MyTimeTableFragment.setListViewContent(schedule);
                 /*
-                something like:
+                in here add something like:
 
+                YourTime_TableTableLayout.yourfunction_that_updates_the_Tablecontents(SubstitutionSchedule schedule) //schedule as parameter from on postextcute
+
+                yourfunction_that_updates_the_TableContents should update the contents of your TableLayout that holds the schedule
+
+                onPostExecute is called when the webfetch is finished and thus your tablelayout will then be filled
+
+                something like:
                 TableGenerator.initializeTable(schedule);
 
                 parse the SubstitutionSchedule to a seperate class to generate the Table when the async task is done

@@ -26,6 +26,7 @@ public class HTMLFetcher {
     private String password = "";
     private String Token = getToken();
     private boolean requiresAuthentication = true;
+    private static final String TAG = "HTMLFetcher";
 
     public HTMLFetcher(String url) {
         requiresAuthentication = false;
@@ -53,8 +54,7 @@ public class HTMLFetcher {
 
     public final void fetch() {
         try {
-            int i=0;
-            Log.d("NANI?!", "fetch: WTF");
+            Log.i(TAG,"Fetching from the UrlSource: "+this.url.toString());
             HttpURLConnection connection = (HttpURLConnection)this.url.openConnection();
 
             if (requiresAuthentication) {

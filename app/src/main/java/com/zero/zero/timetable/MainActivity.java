@@ -50,8 +50,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //necessary
-        OVPEasyFetcher.initializeContext(this);
-        OVPEasyFetcher.init("url", "username", "password");
+
+
+
 
         //TODO put this into a separate class
         //readd Toolbar because the original toolbar was removed

@@ -52,7 +52,7 @@ public class LoginDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         //save user LoginData
                         Log.d(TAG, "LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString());
-                        LoginManager.writeLoginData(getActivity(),mUsername,mPassword); //TODO TEST THIS
+                        LoginManager.writeLoginData(getActivity(),mUsername,mPassword); //TODO test this
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
