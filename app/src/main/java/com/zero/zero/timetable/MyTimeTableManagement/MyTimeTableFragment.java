@@ -1,7 +1,6 @@
 package com.zero.zero.timetable.MyTimeTableManagement;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,26 +31,34 @@ public class MyTimeTableFragment extends Fragment {
     private static View viewTimetable = null;
     private static Activity actv = null;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ////INFO MESSAGES
-        OVPEasyFetcher.initializeContext(getContext());
-        OVPEasyFetcher.init("http://"+getString(R.string.ovp_link)+"1.htm", getString(R.string.ovp_username), getString(R.string.ovp_password));
-
         Log.i(TAG, "OPEN Fragment");
         Activity activity = this.getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
             activity.setTitle(R.string.my_tt_fragment_title);
-        }
         ////INFO MESSAGES
-//        viewTimetable = inflater.inflate(R.layout.fragment_mytimetable, container, false);
+
         viewTimetable = getView(inflater, container, savedInstanceState);
-        initContext(getActivity());
-        //fetchAndSetDatatoListView(viewTimetable);
+        initActv(getActivity());
+
+        //improves performance when reopening the fragment incredibly
+        if (!OVPEasyFetcher.initialized) {
+            OVPEasyFetcher.initializeContext(getContext());
+            OVPEasyFetcher.init("http://" + getString(R.string.ovp_link) + "1.htm", getString(R.string.ovp_username), getString(R.string.ovp_password));
+        }else {
+           SubstitutionSchedule schedule = OVPEasyFetcher.getSchedule();
+           setListViewContent(schedule);
+        }
+
         return viewTimetable;
+    }
+
+    private void initActv(Activity activity) {
+        actv = activity;
     }
 
     public static void setListViewContent(SubstitutionSchedule schedule) {
@@ -79,37 +86,4 @@ public class MyTimeTableFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_mytimetable, container, false);
     }
 
-    private void initContext(Activity activity) {
-        actv = activity;
-    }
-
-
-    private void fetchAndSetDatatoListView(View viewTimetable) {
-        ListView listView = (ListView) viewTimetable.findViewById(R.id.Liste);
-
-        // Create a List from String Array elements
-        ArrayList<String> listItems = new ArrayList<String>();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
-        listView.setAdapter(arrayAdapter);
-
-        ////////////////fetch web stuff
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
-        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "PASSS:USER");
-
-//        HTMLFetcher.initializeFetcher("http://" + getString(R.string.ovp_link) + "2.htm", LoginData.split(":")[0], LoginData.split(":")[1]);
-        //wait for FETCHER
-        //should be done asynchronous
-//        while (!HTMLFetcher.initialized) {
-//        }
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String[] identifier = prefs.getString("list_preference_1", "").split(",");
-        Log.i(TAG, "Fetching for Class: " + Arrays.toString(identifier));
-//        ArrayList<String[]> data = (!"Alle".equals(identifier[0])) ? HTMLFetcher.staticSchedule.getData_any(identifier) : HTMLFetcher.staticSchedule.getData();
-
-//        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
-//            listItems.add(Arrays.toString(it.next()).replace("[", "").replace("]", ""));
-//        }
-        arrayAdapter.notifyDataSetChanged();
-    }
 }

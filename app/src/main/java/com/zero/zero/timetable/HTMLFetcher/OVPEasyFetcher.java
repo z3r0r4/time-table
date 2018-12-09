@@ -11,12 +11,12 @@ import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 
 import java.util.concurrent.ExecutionException;
 
-import static android.support.constraint.Constraints.TAG;
-
 public class OVPEasyFetcher {
     public static SubstitutionSchedule schedule = null;
+    private static String TAG = "OVPEasyFetcher";
     private static Context contextRef;
     private static ProgressDialog progressDialog;
+    public static boolean initialized = false;
 
     public static void initializeContext(Context ctx) {
         contextRef = ctx;
@@ -28,7 +28,7 @@ public class OVPEasyFetcher {
     }
 
     public static SubstitutionSchedule getSchedule(String url, String username, String password) {
-        if(schedule != null) {
+        if (schedule != null) {
             return schedule;
         }
 
@@ -43,6 +43,9 @@ public class OVPEasyFetcher {
             e.printStackTrace();
         }
         return result;
+    }
+    public static SubstitutionSchedule getSchedule(){
+        return schedule;
     }
 
     public static void init(String url, String username, String password) {
@@ -65,7 +68,7 @@ public class OVPEasyFetcher {
             if (contextRef == null) {
                 System.out.println("Context has not been initialized!");
             }
-            // display a progress dialog for good user experiance
+            // display a progress dialog for better user experience
             progressDialog = new ProgressDialog(OVPEasyFetcher.contextRef);
             progressDialog.setMessage("Please Wait");
             progressDialog.setCancelable(false);
@@ -86,7 +89,7 @@ public class OVPEasyFetcher {
                 HTMLFetcher.fetchOnInitialization = fetch_setting;
             } catch (NullPointerException e) {
                 e.printStackTrace();
-                Log.d("OVPEasyFetcher", "Couldn't fetch!");
+                Log.d(TAG, "Couldn't fetch!");
             }
 
             return schedule;
@@ -97,8 +100,9 @@ public class OVPEasyFetcher {
             if (OVPEasyFetcher.progressDialog != null) {
                 progressDialog.dismiss();
             }
-            if(schedule != null) {
+            if (schedule != null) {
 //                schedule.log();
+                initialized = true;
                 Log.d(TAG, "onPostExecute: Done!");
                 MyTimeTableFragment.setListViewContent(schedule);
                 /*
@@ -120,8 +124,6 @@ public class OVPEasyFetcher {
                 Log.d(TAG, "onPostExecute: Error while fetching!");
             }
 
-
         }
-
     }
 }

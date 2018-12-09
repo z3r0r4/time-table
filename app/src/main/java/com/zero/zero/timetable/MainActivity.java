@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                         break;
                                                     case R.id.nav_notifications:
                                                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new NotificationsFragment()).commit();
+                                                                new NotificationsFragment(),"NotificationsFragment").commit();
                                                         break;
                                                     case R.id.nav_login:
                                                         Log.i(TAG, "OPEN LoginDialog");
@@ -135,16 +135,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TabFragment()).commit();
+                        new TabFragment(),"TabFragment").commit();
                 break;
 
             case R.id.nav_timetable:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MyTimeTableFragment()).commit();
+                        new MyTimeTableFragment(),"MyTimeTableFragment").commit();
                 break;
             case R.id.nav_notifications:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NotificationsFragment()).commit();
+                        new NotificationsFragment(),"NotificationsFragment").commit();
                 break;
             case R.id.nav_login:
                 Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingsFragment()).commit();
+                        new SettingsFragment(),"SettingsFragment").commit();
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

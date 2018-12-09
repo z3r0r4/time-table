@@ -10,7 +10,7 @@ public class SubstitutionSchedule {
     private ArrayList<String[]> data = null;
     private ArrayList<String[]> infos = null;
     public Calendar calendar = null;
-
+//TODO add getData(LessonNumber)
     public SubstitutionSchedule(ArrayList<String[]> data, ArrayList<String[]> infos, String title) {
         this.data = data;
         this.title = title;
