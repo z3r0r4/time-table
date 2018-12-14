@@ -13,6 +13,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="1dp"
-        android:visibility="visible"/>
+        android:visibility="invisible"/>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:id="@+id/TableLayoutTT"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:stretchColumns="1"
+                 android:visibility="visible">
+    </TableLayout>
 
 </RelativeLayout>

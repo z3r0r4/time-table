@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
@@ -43,11 +44,8 @@ public class NotificationsFragment extends Fragment {
 
         ////INFO
         Log.i(TAG, "OPEN Fragment");
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        if (toolbar != null)
-            getActivity().setTitle(R.string.notifications_fragment_title);
+        MainActivity.setToolbarTitle(R.string.notifications_fragment_title,getActivity());
         ////INFO
-        initActv(getActivity());
 
         View viewNotifications = inflater.inflate(R.layout.fragment_notifications, container, false);
         tableLayout = viewNotifications.findViewById(R.id.TableLayout10);

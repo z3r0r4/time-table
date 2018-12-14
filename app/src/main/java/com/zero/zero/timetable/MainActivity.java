@@ -1,5 +1,6 @@
 package com.zero.zero.timetable;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-
-import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
 import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
@@ -50,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //necessary
-
-
 
 
         //TODO put this into a separate class
@@ -107,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                         break;
                                                     case R.id.nav_notifications:
                                                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new NotificationsFragment(),"NotificationsFragment").commit();
+                                                                new NotificationsFragment(), "NotificationsFragment").commit();
                                                         break;
                                                     case R.id.nav_login:
                                                         Log.i(TAG, "OPEN LoginDialog");
@@ -135,16 +132,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TabFragment(),"TabFragment").commit();
+                        new TabFragment(), "TabFragment").commit();
                 break;
 
             case R.id.nav_timetable:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MyTimeTableFragment(),"MyTimeTableFragment").commit();
+                        new MyTimeTableFragment(), "MyTimeTableFragment").commit();
                 break;
             case R.id.nav_notifications:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NotificationsFragment(),"NotificationsFragment").commit();
+                        new NotificationsFragment(), "NotificationsFragment").commit();
                 break;
             case R.id.nav_login:
                 Toast.makeText(this, "LOGIN", Toast.LENGTH_SHORT).show();
@@ -153,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingsFragment(),"SettingsFragment").commit();
+                        new SettingsFragment(), "SettingsFragment").commit();
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -170,6 +167,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        super.onBackPressed();
     }
 
+    public static void setToolbarTitle(int Title ,Activity actv) {
+        Activity activity = actv;
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        if (toolbar != null)
+            activity.setTitle(Title);
+        ////INFO MESSAGES
+    }
 }
 
 

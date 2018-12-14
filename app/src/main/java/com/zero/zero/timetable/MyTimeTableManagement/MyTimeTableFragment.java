@@ -1,27 +1,23 @@
 package com.zero.zero.timetable.MyTimeTableManagement;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
-import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
-import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 //import receive.HTMLFetcher;
 
@@ -29,61 +25,57 @@ import java.util.Iterator;
 public class MyTimeTableFragment extends Fragment {
     private final static String TAG = "MyTimeTableFragment";
     private static View viewTimetable = null;
-    private static Activity actv = null;
+    private int NumberOfLessonsPerDay = 11;
+    private TableLayout tableLayout = null;
+    private ArrayList<TableRow> tableRowsLessons = null;
+    private TableRow tableRowHeader = null;
+    private TextView[] mTextViewsHeader = null;
+    private String[] mStringsHeader = {"Stunde", "Klasse", "Kurs", "Raum", "Art", "Info"};
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ////INFO MESSAGES
         Log.i(TAG, "OPEN Fragment");
-        Activity activity = this.getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        if (toolbar != null)
-            activity.setTitle(R.string.my_tt_fragment_title);
+        MainActivity.setToolbarTitle(R.string.my_tt_fragment_title, getActivity());
         ////INFO MESSAGES
+        viewTimetable = inflater.inflate(R.layout.fragment_mytimetable, container, false);
+        tableLayout = viewTimetable.findViewById(R.id.TableLayoutTT);
+        tableLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
-        viewTimetable = getView(inflater, container, savedInstanceState);
-        initActv(getActivity());
+        //add a row for every lesson of the day and add a numbering
+        tableRowsLessons = new ArrayList<>();
+        for (int i = 0; i < NumberOfLessonsPerDay; i++) {
+            tableRowsLessons.add(new TableRow(getActivity()));
 
-        //improves performance when reopening the fragment incredibly
-        if (!OVPEasyFetcher.initialized) {
-            OVPEasyFetcher.initializeContext(getContext());
-            OVPEasyFetcher.init("http://" + getString(R.string.ovp_link) + "1.htm", getString(R.string.ovp_username), getString(R.string.ovp_password));
-        }else {
-           SubstitutionSchedule schedule = OVPEasyFetcher.getSchedule();
-           setListViewContent(schedule);
+            TextView TextViewLessonNumber = new TextView(getActivity());
+            TextViewLessonNumber.setText(i + 1 + ". Stunde");
+            tableRowsLessons.get(i).addView(TextViewLessonNumber);
         }
+        //add a indexing first line
+        tableRowHeader = new TableRow(getActivity());
+        tableRowHeader.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
+        mTextViewsHeader = new TextView[mStringsHeader.length - 1];
+        int i = 0;
+        for (TextView textView : mTextViewsHeader) {
+            textView = new TextView(getActivity());
+
+            textView.setPadding(10, 10, 10, 10);
+            textView.setText(mStringsHeader[i]);
+
+            textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 110));
+            textView.setGravity(Gravity.START);
+            tableRowHeader.addView(textView);
+            i++;
+        }
+
+        tableLayout.addView(tableRowHeader);
+        //add all rows to the TableLayout
+        for (TableRow tableRow : tableRowsLessons) {
+            tableLayout.addView(tableRow);
+        }
+
 
         return viewTimetable;
     }
-
-    private void initActv(Activity activity) {
-        actv = activity;
-    }
-
-    public static void setListViewContent(SubstitutionSchedule schedule) {
-        ListView listView = viewTimetable.findViewById(R.id.Liste);
-
-        // Create a List from String Array elements
-        ArrayList<String> listItems = new ArrayList<String>();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(actv, android.R.layout.simple_list_item_1, listItems);
-        listView.setAdapter(arrayAdapter);
-
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(actv);
-        String[] identifier = prefs.getString("list_preference_1", "").split(",");
-        Log.i(TAG, "Fetching for Class: " + Arrays.toString(identifier));
-        ArrayList<String[]> data = (!"Alle".equals(identifier[0])) ? schedule.getData_any(identifier) : schedule.getData();
-
-
-        for (Iterator<String[]> it = data.iterator(); it.hasNext(); ) {
-            listItems.add(Arrays.toString(it.next()).replace("[", "").replace("]", ""));
-        }
-        arrayAdapter.notifyDataSetChanged();
-    }
-
-    private static View getView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mytimetable, container, false);
-    }
-
 }
