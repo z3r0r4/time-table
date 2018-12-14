@@ -104,7 +104,7 @@ public class OVPEasyFetcher {
 //                schedule.log();
                 initialized = true;
                 Log.d(TAG, "onPostExecute: Done!");
-                MyTimeTableFragment.setListViewContent(schedule);
+//                MyTimeTableFragment.setListViewContent(schedule);
                 /*
                 in here add something like:
 

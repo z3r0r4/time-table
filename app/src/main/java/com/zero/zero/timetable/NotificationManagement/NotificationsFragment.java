@@ -95,7 +95,7 @@ public class NotificationsFragment extends Fragment {
 
             TextView textViewOVPContent = new TextView(getActivity());
             for (Iterator<String[]> it = LessonData.iterator(); it.hasNext(); ) {
-                textViewOVPContent.setText(textViewOVPContent.getText() + " | " + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
+                textViewOVPContent.setText(textViewOVPContent.getText() + " \n " + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
             }
 
             ta.addView(textViewOVPContent);
