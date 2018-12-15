@@ -65,13 +65,10 @@ public class NotificationsFragment extends Fragment {
             ta.addView(textViewLessonNumber);
             tableLayout.addView(ta);
         }
-        if (!OVPEasyFetcherToday.initialized) {
-            OVPEasyFetcherToday.initializeContext(getContext());
-            OVPEasyFetcherToday.init("http://" + getString(R.string.ovp_link) + "1.htm", getString(R.string.ovp_username), getString(R.string.ovp_password));
-        } else {
-            SubstitutionSchedule schedule = OVPEasyFetcherToday.getSchedule();
-            setTableContent(schedule);
-        }
+
+            //The static context only needs to be initialized once
+            //OVPEasyFetcherToday.initializeContext(getContext());
+
         return viewNotifications;
     }
 

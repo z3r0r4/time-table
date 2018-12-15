@@ -12,11 +12,12 @@ import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
 import java.util.concurrent.ExecutionException;
 
 public class OVPEasyFetcher {
-    public static SubstitutionSchedule schedule = null;
+    public SubstitutionSchedule schedule = null;
     private static String TAG = "OVPEasyFetcher";
     private static Context contextRef;
     private static ProgressDialog progressDialog;
-    public static boolean initialized = false;
+
+    public OVPEasyFetcher() {}
 
     public static void initializeContext(Context ctx) {
         contextRef = ctx;
@@ -24,10 +25,9 @@ public class OVPEasyFetcher {
 
     public static void clearContext() {
         contextRef = null;
-        progressDialog = null;
-    }
+        progressDialog = null; }
 
-    public static SubstitutionSchedule getSchedule(String url, String username, String password) {
+    public SubstitutionSchedule getSchedule(String url, String username, String password) {
         if (schedule != null) {
             return schedule;
         }
@@ -36,7 +36,7 @@ public class OVPEasyFetcher {
         task.execute(url, username, password);
         SubstitutionSchedule result = null;
         try {
-            result = OVPEasyFetcher.schedule = task.get();
+            result = this.schedule = task.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -44,16 +44,22 @@ public class OVPEasyFetcher {
         }
         return result;
     }
-    public static SubstitutionSchedule getSchedule(){
-        return schedule;
+
+    public SubstitutionSchedule getSchedule(){
+        return this.schedule;
     }
 
-    public static void init(String url, String username, String password) {
+    public void init(String url, String username, String password, MyTimeTableFragment TimeTableRef) {
         HTTPRequestTask task = new HTTPRequestTask();
         task.execute(url, username, password);
 
         try {
-            OVPEasyFetcher.schedule = task.get();
+            this.schedule = task.get();
+            if(this.schedule != null) {
+                TimeTableRef.fill(this.schedule);
+            } else {
+                Log.d(TAG, "The SubstitutionSchedule couldn't be received!");
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -61,18 +67,14 @@ public class OVPEasyFetcher {
         }
     }
 
-    private static class HTTPRequestTask extends AsyncTask<String, Integer, SubstitutionSchedule> {
+    private class HTTPRequestTask extends AsyncTask<String, Integer, SubstitutionSchedule> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             if (contextRef == null) {
-                System.out.println("Context has not been initialized!");
+                Log.d(TAG, "Context has not been initialized!"); } else {
+
             }
-            // display a progress dialog for better user experience
-            progressDialog = new ProgressDialog(OVPEasyFetcher.contextRef);
-            progressDialog.setMessage("Please Wait");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
         }
 
         @Override
@@ -101,24 +103,7 @@ public class OVPEasyFetcher {
                 progressDialog.dismiss();
             }
             if (schedule != null) {
-//                schedule.log();
-                initialized = true;
                 Log.d(TAG, "onPostExecute: Done!");
-//                MyTimeTableFragment.setListViewContent(schedule);
-                /*
-                in here add something like:
-
-                YourTime_TableTableLayout.yourfunction_that_updates_the_Tablecontents(SubstitutionSchedule schedule) //schedule as parameter from on postextcute
-
-                yourfunction_that_updates_the_TableContents should update the contents of your TableLayout that holds the schedule
-
-                onPostExecute is called when the webfetch is finished and thus your tablelayout will then be filled
-
-                something like:
-                TableGenerator.initializeTable(schedule);
-
-                parse the SubstitutionSchedule to a seperate class to generate the Table when the async task is done
-                */
 
             } else {
                 Log.d(TAG, "onPostExecute: Error while fetching!");
