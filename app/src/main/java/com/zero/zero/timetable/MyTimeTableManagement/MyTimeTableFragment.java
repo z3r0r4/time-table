@@ -17,8 +17,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
+import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
+
+import java.util.ArrayList;
 
 //import receive.HTMLFetcher;
 
@@ -81,18 +85,29 @@ public class MyTimeTableFragment extends Fragment {
             TextViewLessonNumber.setGravity(Gravity.CENTER);
 
             tableRowsLessons[i].setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-            tableRowsLessons[i].setMinimumHeight(100);
+//            tableRowsLessons[i].setMinimumHeight(100);
             tableRowsLessons[i].addView(TextViewLessonNumber);
             tableLayout.addView(tableRowsLessons[i]);
         }
 //        setLesson(1, new String[]{"10", "20", "30", "40", "50", "60"});
 //        setLesson(1, new String[]{"11", "21", "31", "41", "51", "61"});
 //        setLesson(1, new String[]{"12", "22", "32", "42", "52", "62"});
-        setLesson(1, new String[]{"A", "B", "C", "D", "E", "F"});
-        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
-        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
-        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
-        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
+//        setLesson(1, new String[]{"A", "B", "C", "D", "E", "F"});
+//        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
+//        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
+//        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
+//        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
+
+        //----Testing of OVPEasyFetcher----//
+        OVPEasyFetcher.initializeContext(getContext());
+        OVPEasyFetcher fetcher = new OVPEasyFetcher();
+        if (fetcher.schedule == null) {
+            fetcher.init("http://" + getString(R.string.ovp_link) + "1.htm", getString(R.string.ovp_username), getString(R.string.ovp_password), this);
+        } else {
+            fillContent(fetcher.schedule);
+        }
+        //----Testing of OVPEasyFetcher----//
+
 
         return viewTimetable;
     }
@@ -102,7 +117,7 @@ public class MyTimeTableFragment extends Fragment {
             if (i == 0) {
                 if (tableRowsLessons[LessonNumber - 1].getChildAt(i + 1) == null) {
                     TextView textView = new TextView(getActivity());
-                    textView.setText(ScheduleEntry[i] + i + "new");
+                    textView.setText(ScheduleEntry[i]);
                     textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
                     textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
                     textView.setGravity(Gravity.CENTER);
@@ -110,12 +125,12 @@ public class MyTimeTableFragment extends Fragment {
                     tableRowsLessons[LessonNumber - 1].addView(textView);
                 } else if (i == 0) {
                     TextView oldTextView = (TextView) tableRowsLessons[LessonNumber - 1].getChildAt(i + 1);
-                    oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i] + i);
+                    oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i]);
                 }
             } else if (i > 1) {
                 if (tableRowsLessons[LessonNumber - 1].getChildAt(i) == null) {
                     TextView textView = new TextView(getActivity());
-                    textView.setText(ScheduleEntry[i] + i + "new");
+                    textView.setText(ScheduleEntry[i]);
                     textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
                     textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
                     textView.setGravity(Gravity.CENTER);
@@ -123,7 +138,7 @@ public class MyTimeTableFragment extends Fragment {
                     tableRowsLessons[LessonNumber - 1].addView(textView);
                 } else if (i > 1) {
                     TextView oldTextView = (TextView) tableRowsLessons[LessonNumber - 1].getChildAt(i);
-                    oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i] + i);
+                    oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i]);
                 }
             }
         }
@@ -131,5 +146,22 @@ public class MyTimeTableFragment extends Fragment {
 
     public void setInfo() {
 
+    }
+
+    public void fillContent(SubstitutionSchedule schedule) {
+        fill(schedule, "5");
+        fill(schedule, "6");
+        fill(schedule, "7");
+        fill(schedule, "8");
+        fill(schedule, "9");
+    }
+
+    public void fill(SubstitutionSchedule schedule, String identifier) {
+        for (int i = 1; i <= 10; i++) {
+            ArrayList<String[]> data = schedule.getLessonByLevel(Integer.toString(i), identifier);
+            if (data.size() != 0) {
+                this.setLesson(i, data.get(0));
+            }
+        }
     }
 }

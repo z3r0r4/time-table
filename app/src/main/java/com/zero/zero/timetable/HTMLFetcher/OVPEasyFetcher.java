@@ -56,7 +56,7 @@ public class OVPEasyFetcher {
         try {
             this.schedule = task.get();
             if(this.schedule != null) {
-//                TimeTableRef.fill(this.schedule);
+                TimeTableRef.fillContent(this.schedule);
             } else {
                 Log.d(TAG, "The SubstitutionSchedule couldn't be received!");
             }
@@ -73,7 +73,6 @@ public class OVPEasyFetcher {
             super.onPreExecute();
             if (contextRef == null) {
                 Log.d(TAG, "Context has not been initialized!"); } else {
-
             }
         }
 
@@ -104,7 +103,6 @@ public class OVPEasyFetcher {
             }
             if (schedule != null) {
                 Log.d(TAG, "onPostExecute: Done!");
-
             } else {
                 Log.d(TAG, "onPostExecute: Error while fetching!");
             }
