@@ -79,37 +79,69 @@ public class MyTimeTableFragment extends Fragment {
             tableLayout.addView(tableRowsLessons[i]);
         }
 
-        //----Testing of OVPEasyFetcher----//
-        OVPEasyFetcher.initializeContext(getContext());
-
-        OVPEasyFetcher fetcher = new OVPEasyFetcher();
-        if(fetcher.schedule == null) {
-            fetcher.init("url", "username", "password", this);
-        } else {
-            fill(fetcher.schedule);
-        }
 
         //----Testing of OVPEasyFetcher----//
+        //OVPEasyFetcher.initializeContext(getContext());
+
+        //OVPEasyFetcher fetcher = new OVPEasyFetcher();
+        //if(fetcher.schedule == null) {
+          //  fetcher.init("url", "username", "password", this);
+        //} else {
+       //     fill(fetcher.schedule);
+       // }
+
+        //----Testing of OVPEasyFetcher----//
+
+//        setLesson(1, new String[]{"10", "20", "30", "40", "50", "60"});
+//        setLesson(1, new String[]{"11", "21", "31", "41", "51", "61"});
+//        setLesson(1, new String[]{"12", "22", "32", "42", "52", "62"});
+        setLesson(1, new String[]{"A", "B", "C", "D", "E", "F"});
+        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
+        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
 
         return viewTimetable;
     }
 
-    public void fill(SubstitutionSchedule schedule) {
-        for(int i=1; i<=10; i++) {
-            ArrayList<String[]> data = schedule.getLessonByLevel(Integer.toString(i), "5");
-            if(data.size() != 0) {
-                this.setLesson(i, data.get(0));
-            }
-        }
-    }
 
+//     public void fill(SubstitutionSchedule schedule) {
+//         for(int i=1; i<=10; i++) {
+//             ArrayList<String[]> data = schedule.getLessonByLevel(Integer.toString(i), "5");
+//             if(data.size() != 0) {
+//                 this.setLesson(i, data.get(0));
+//             }
+//         }
+// }
+  
     public void setLesson(int LessonNumber, String[] ScheduleEntry) {
+        for (int i = 0; i < ScheduleEntry.length; i++) {
+            if (i == 0) {
+                if (tableRowsLessons[LessonNumber - 1].getChildAt(i + 1) == null) {
+                    TextView textView = new TextView(getActivity());
+                    textView.setText(ScheduleEntry[i] + i + "new");
+                    textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
+                    textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+                    textView.setGravity(Gravity.CENTER);
 
-        for (String s : ScheduleEntry) {
-            TextView textView = new TextView(getActivity());
-            textView.setText(s);
-            if(LessonNumber - 1 < tableRowsLessons.length && !ScheduleEntry[1].equals(s))
-                tableRowsLessons[LessonNumber - 1].addView(textView);
+                    tableRowsLessons[LessonNumber - 1].addView(textView);
+                } else if (i == 0) {
+                    TextView oldTextView = (TextView) tableRowsLessons[LessonNumber - 1].getChildAt(i + 1);
+                    oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i] + i);
+                }
+            } else if (i > 1) {
+                if (tableRowsLessons[LessonNumber - 1].getChildAt(i) == null) {
+                    TextView textView = new TextView(getActivity());
+                    textView.setText(ScheduleEntry[i] + i + "new");
+                    textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
+                    textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+                    textView.setGravity(Gravity.CENTER);
+
+                    tableRowsLessons[LessonNumber - 1].addView(textView);
+                } else if (i > 1) {
+                    TextView oldTextView = (TextView) tableRowsLessons[LessonNumber - 1].getChildAt(i);
+                    oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i] + i);
+                }
+
+            }
         }
     }
 }
