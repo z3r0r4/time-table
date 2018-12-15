@@ -91,32 +91,34 @@ public class MyTimeTableFragment extends Fragment {
         setLesson(1, new String[]{"A", "B", "C", "D", "E", "F"});
         setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
         setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
-        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
-        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
 
         return viewTimetable;
     }
 
     public void setLesson(int LessonNumber, String[] ScheduleEntry) {
-        for (int i = 1; i < ScheduleEntry.length-1; i++) {
+        for (int i = 0; i < ScheduleEntry.length; i++) {
+            if (i == 0) {
+                if (tableRowsLessons[LessonNumber - 1].getChildAt(i + 1) == null) {
+                    TextView textView = new TextView(getActivity());
+                    textView.setText(ScheduleEntry[i] + i + "new");
+                    textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
+                    textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+                    textView.setGravity(Gravity.CENTER);
 
-
-            if (tableRowsLessons[LessonNumber - 1].getChildAt(i) == null) {
-                TextView textView = new TextView(getActivity());
-                if (i == 0)
-                    textView.setText(ScheduleEntry[i]);
-                else if (i > 1)
-                    textView.setText(ScheduleEntry[i + 1]);
-                textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-                textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-                textView.setGravity(Gravity.CENTER);
-
-                if (LessonNumber - 1 < tableRowsLessons.length && i != 1)
                     tableRowsLessons[LessonNumber - 1].addView(textView);
-            } else {
-                if (i == 0) {
+                } else if (i == 0) {
                     TextView oldTextView = (TextView) tableRowsLessons[LessonNumber - 1].getChildAt(i + 1);
                     oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i] + i);
+                }
+            } else if (i > 1) {
+                if (tableRowsLessons[LessonNumber - 1].getChildAt(i) == null) {
+                    TextView textView = new TextView(getActivity());
+                    textView.setText(ScheduleEntry[i] + i + "new");
+                    textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
+                    textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+                    textView.setGravity(Gravity.CENTER);
+
+                    tableRowsLessons[LessonNumber - 1].addView(textView);
                 } else if (i > 1) {
                     TextView oldTextView = (TextView) tableRowsLessons[LessonNumber - 1].getChildAt(i);
                     oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i] + i);
