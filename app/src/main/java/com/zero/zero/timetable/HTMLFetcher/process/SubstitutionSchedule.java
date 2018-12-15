@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 public class SubstitutionSchedule {
+    public static boolean convertOnInitialization = true;
     private String title = "";
     private ArrayList<String[]> data = null;
     private ArrayList<String[]> infos = null;
     public Calendar calendar = null;
-//TODO add getData(LessonNumber)
+
     public SubstitutionSchedule(ArrayList<String[]> data, ArrayList<String[]> infos, String title) {
         this.data = data;
         this.title = title;
         this.infos = infos;
         this.calendar = Calendar.getInstance();
         calendar = Calendar.getInstance();
+        if(SubstitutionSchedule.convertOnInitialization) {
+            this.convertSubjectsS1();
+        }
     }
 
     public static String stringify(ArrayList<String[]> data, int index) {
@@ -86,6 +91,18 @@ public class SubstitutionSchedule {
         return result;
     }
 
+    public ArrayList<String[]> getLessonByLevel(String Lesson, String Level) {
+        ArrayList<String[]> result = new ArrayList<String[]>();
+        Iterator<String[]> dataIterator = data.iterator();
+        while (dataIterator.hasNext()) {
+            String[] row = dataIterator.next();
+            if (row[1].concat("-").matches(Lesson+"\\D") && row[0].contains(Level)) {
+                result.add(row);
+            }
+        }
+        return result;
+    }
+
     public String stringify(String Identifier) {
         String result = new String();
         ArrayList<String[]> data = getData(Identifier);
@@ -137,6 +154,57 @@ public class SubstitutionSchedule {
 
     public float daysSinceLastUpdate() {
         return -this.calendar.compareTo(Calendar.getInstance()) / 86400;
+    }
+
+    private void convertSubjectsS1() {
+        for(int i=0; i<data.size(); i++) {
+            String[] subdata = data.get(i);
+            switch(subdata[2]) {
+                case "D":
+                   subdata[2] = "DEUTSCH";
+                    break;
+                case "M":
+                    subdata[2] = "MATHEMATIK";
+                    break;
+                case "E":
+                    subdata[2] = "ENGLISCH";
+                    break;
+                case "SP":
+                    subdata[2] = "SPORT";
+                    break;
+                case "RL":
+                    subdata[2] = "RELIGION";
+                    break;
+                case "F":
+                    subdata[2] = "FRANZÖSISCH";
+                    break;
+                case "PPL":
+                    subdata[2] = "PHILOSOPHIE";
+                    break;
+                case "EK":
+                    subdata[2] = "ERDKUNDE";
+                    break;
+                case "B":
+                    subdata[2] = "BIOLOGIE";
+                    break;
+                case "CH":
+                    subdata[2] = "CHEMIE";
+                    break;
+                case "PHY":
+                    subdata[2] = "PHYSIK";
+                    break;
+                case "LA":
+                    subdata[2] = "LATEIN";
+                    break;
+                case "MU":
+                    subdata[2] = "MUSIK";
+                    break;
+                case "K":
+                    subdata[2] = "KUNST";
+                    break;
+            }
+        }
+
     }
 
 }
