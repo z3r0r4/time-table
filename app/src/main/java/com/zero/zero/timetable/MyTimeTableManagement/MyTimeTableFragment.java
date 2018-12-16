@@ -1,5 +1,6 @@
 package com.zero.zero.timetable.MyTimeTableManagement;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -89,14 +91,7 @@ public class MyTimeTableFragment extends Fragment {
             tableRowsLessons[i].addView(TextViewLessonNumber);
             tableLayout.addView(tableRowsLessons[i]);
         }
-//        setLesson(1, new String[]{"10", "20", "30", "40", "50", "60"});
-//        setLesson(1, new String[]{"11", "21", "31", "41", "51", "61"});
-//        setLesson(1, new String[]{"12", "22", "32", "42", "52", "62"});
-//        setLesson(1, new String[]{"A", "B", "C", "D", "E", "F"});
-//        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
-//        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
-//        setLesson(1, new String[]{"A1", "B1", "C1", "D1", "E1", "F1"});
-//        setLesson(1, new String[]{"A2", "B2", "C2", "D2", "E2", "F2"});
+
 
         //----Testing of OVPEasyFetcher----//
         OVPEasyFetcher.initializeContext(getContext());
@@ -149,11 +144,12 @@ public class MyTimeTableFragment extends Fragment {
     }
 
     public void fillContent(SubstitutionSchedule schedule) {
-        fill(schedule, "5");
-        fill(schedule, "6");
-        fill(schedule, "7");
-        fill(schedule, "8");
-        fill(schedule, "9");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String[] identifiers = prefs.getString("list_preference_1", "Q2").split(",");
+        if ((!"Alle".equals(identifiers[0])))
+            for (String identifier : identifiers)
+                fill(schedule, identifier);
+        else fill(schedule, "5");
     }
 
     public void fill(SubstitutionSchedule schedule, String identifier) {

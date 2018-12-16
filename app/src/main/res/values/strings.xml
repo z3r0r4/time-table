@@ -29,6 +29,11 @@
         <item>GE</item>
         <item>ENG-G12</item>
     </string-array>
+    <string-array name="multi_select_list_preference_entryvalues_Kurse">
+        <item>DE</item>
+        <item>GE</item>
+        <item>ENG-G12</item>
+    </string-array>
 
 
     <string name="tab2title">Morgen</string>

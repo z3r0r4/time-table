@@ -15,6 +15,7 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.zero.zero.timetable.LoginManagement.LoginManager;
 import com.zero.zero.timetable.R;
 
 //TODO Turn this into a super class
@@ -29,7 +30,7 @@ public class Tab1Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         final WebView TimeTable1 = (WebView) view.findViewById(R.id.Table1);
         TT1 = TimeTable1;
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
+
         final TextView txtview = (TextView) view.findViewById(R.id.tV1);
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pB1);
 
@@ -52,7 +53,9 @@ public class Tab1Fragment extends Fragment {
             }
         });
 
-        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
+//        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
+//        String LoginData = sharedPref.getString(getString(R.string.login_data_storage), "defaultNOUSERDATASPECIFIED");
+        String LoginData = LoginManager.readLoginData(getContext());
         TimeTableDisplay.ViewOVP(TimeTable1, view, "http://" + LoginData + "@" + getString(R.string.ovp_link), 1);
 
         return view;
