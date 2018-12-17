@@ -44,68 +44,10 @@ public class NotificationsFragment extends Fragment {
 
         ////INFO
         Log.i(TAG, "OPEN Fragment");
-        MainActivity.setToolbarTitle(R.string.notifications_fragment_title,getActivity());
+        MainActivity.setToolbarTitle(R.string.notifications_fragment_title, getActivity());
         ////INFO
 
         View viewNotifications = inflater.inflate(R.layout.fragment_notifications, container, false);
-        tableLayout = viewNotifications.findViewById(R.id.TableLayout10);
-        tableLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-
-        tableRows = new ArrayList<>();
-        for (int i = 0; i < NumberOfLessonsPerDay; i++) {
-            tableRows.add(new TableRow(getActivity()));
-        }
-
-        int i = 0;
-        for (TableRow ta : tableRows) {
-            i++;
-            TextView textViewLessonNumber = new TextView(getActivity());
-
-            textViewLessonNumber.setText(i + ".");
-            ta.addView(textViewLessonNumber);
-            tableLayout.addView(ta);
-        }
-
-            //The static context only needs to be initialized once
-            //OVPEasyFetcherToday.initializeContext(getContext());
-
         return viewNotifications;
-    }
-
-    private void initActv(Activity activity) {
-        actv = activity;
-    }
-
-    private void setTableContent(SubstitutionSchedule schedule) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(actv);
-        String[] identifier = prefs.getString("list_preference_1", "").split(",");
-        Log.i(TAG, "Fetching for Class: " + Arrays.toString(identifier));
-
-        ArrayList<String[]> Substitutiondata = (!"Alle".equals(identifier[0])) ? schedule.getData_any(identifier) : schedule.getData();
-
-        int i = 0;
-        for (TableRow ta : tableRows) {
-            i++;
-            ArrayList<String[]> LessonData = getData(Substitutiondata, i + "");
-
-            TextView textViewOVPContent = new TextView(getActivity());
-            for (Iterator<String[]> it = LessonData.iterator(); it.hasNext(); ) {
-                textViewOVPContent.setText(textViewOVPContent.getText() + " \n " + Arrays.toString(it.next()).replace("[", "").replace("]", ""));
-            }
-
-            ta.addView(textViewOVPContent);
-
-        }
-    }
-
-    public ArrayList<String[]> getData(ArrayList<String[]> data, String Identifier) {
-        ArrayList<String[]> result = new ArrayList<String[]>();
-        Iterator<String[]> dataIterator = data.iterator();
-        while (dataIterator.hasNext()) {
-            String[] row = dataIterator.next();
-            if (Arrays.asList(row).contains(Identifier))
-                result.add(row);
-        }
-        return result;
     }
 }

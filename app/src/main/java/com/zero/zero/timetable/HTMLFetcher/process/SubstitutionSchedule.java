@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.regex.Pattern;
 
 public class SubstitutionSchedule {
     public static boolean convertOnInitialization = true;
@@ -19,7 +18,7 @@ public class SubstitutionSchedule {
         this.infos = infos;
         this.calendar = Calendar.getInstance();
         calendar = Calendar.getInstance();
-        if(SubstitutionSchedule.convertOnInitialization) {
+        if (SubstitutionSchedule.convertOnInitialization) {
             this.convertSubjectsS1();
         }
     }
@@ -96,7 +95,17 @@ public class SubstitutionSchedule {
         Iterator<String[]> dataIterator = data.iterator();
         while (dataIterator.hasNext()) {
             String[] row = dataIterator.next();
-            if (row[1].concat("-").matches(Lesson+"\\D") && row[0].contains(Level)) {
+            String[] split_row = row[1].split(" - ");
+            boolean targetLessonIncluded = false;
+
+            for (int i = 0; i < split_row.length; i++) {
+                if (split_row[i].equals(Lesson)) {
+                    targetLessonIncluded = true;
+                    break;
+                }
+            }
+
+            if (targetLessonIncluded && row[0].contains(Level)) {
                 result.add(row);
             }
         }
@@ -157,11 +166,11 @@ public class SubstitutionSchedule {
     }
 
     private void convertSubjectsS1() {
-        for(int i=0; i<data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             String[] subdata = data.get(i);
-            switch(subdata[2]) {
+            switch (subdata[2]) {
                 case "D":
-                   subdata[2] = "DEUTSCH";
+                    subdata[2] = "DEUTSCH";
                     break;
                 case "M":
                     subdata[2] = "MATHEMATIK";
