@@ -17,18 +17,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+
 import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
 import com.zero.zero.timetable.MainActivity;
+
+
 import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
-//import com.example.ovpeasyfetcher.receive.HTMLFetcher;
-
-//import receive.HTMLFetcher;
 
 public class NotificationsFragment extends Fragment {
     private static final String TAG = "NotificationsFragment";

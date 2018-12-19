@@ -29,7 +29,6 @@ import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
 
-
 //TODO use tabfragment to show both days
 
 public class MyTimeTableFragment extends Fragment {
@@ -187,6 +186,7 @@ public class MyTimeTableFragment extends Fragment {
                 this.setLesson(i, data);
             }
         }
+
     }
 
     public void setInfo(SubstitutionSchedule schedule) {
