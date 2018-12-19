@@ -19,7 +19,6 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
@@ -127,19 +126,18 @@ public class MyTimeTableFragment extends Fragment {
                 textView.setPadding(10, 10, 10, 10);
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setMaxLines(ScheduleEntries.size()); //Doesnt work because setLesson might be called more than one on the same LessonNumber
-                //TODO FIX this; it doesnt do anythign there is always only one line / only if integer is parsed there is more than one line
+                //TODO FIX this; it doesnt do anything there is always only one line / only if integer is parsed there is more than one line
                 textView.setGravity(Gravity.CENTER);//TODO match all the different textviwe heights to each other
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!textView.getText().equals(" ")) {
+                        if (!textView.getText().equals(" ")) {
                             AlertDialog infoDialog = new AlertDialog.Builder(getContext())
                                     .setMessage(textView.getText())
                                     .setCancelable(true)
-                                  .create();
+                                    .create();
                             infoDialog.show();
                         }
-//                        Toast.makeText(getActivity(), textView.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

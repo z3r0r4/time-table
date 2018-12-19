@@ -1,28 +1,19 @@
 package com.zero.zero.timetable.NotificationManagement;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
-
 
 import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
-import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
 import com.zero.zero.timetable.MainActivity;
-
-
 import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;

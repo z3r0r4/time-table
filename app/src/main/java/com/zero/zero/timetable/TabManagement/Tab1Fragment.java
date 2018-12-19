@@ -1,7 +1,5 @@
 package com.zero.zero.timetable.TabManagement;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,7 +38,7 @@ public class Tab1Fragment extends Fragment {
                     TimeTable1.setVisibility(WebView.INVISIBLE);
                     progressBar.setVisibility(ProgressBar.VISIBLE);
                     txtview.setVisibility(View.VISIBLE);
-                    Log.v(TAG,"Loading " + TimeTable1.getProgress() + "% done");
+                    Log.v(TAG, "Loading " + TimeTable1.getProgress() + "% done");
                 }
 
                 progressBar.setProgress(progress);
@@ -48,7 +46,7 @@ public class Tab1Fragment extends Fragment {
                     TimeTable1.setVisibility(WebView.VISIBLE);
                     progressBar.setVisibility(ProgressBar.GONE);
                     txtview.setVisibility(View.GONE);
-                    Log.v(TAG,"FINISHED Loading");
+                    Log.v(TAG, "FINISHED Loading");
                 }
             }
         });

@@ -1,7 +1,6 @@
 package com.zero.zero.timetable;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 
 import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
 import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
@@ -79,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerToggle.syncState();
 
 
-
         //CHANGE THIS TO START INTO THE SPECIFIED FRAGMENT
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -91,9 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          * USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
          * **/
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
-            // https://stackoverflow.com/questions/18343018/optimizing-drawer-and-activity-launching-speed
-            // https://stackoverflow.com/questions/24539516/android-java-loading-fragments-lagless
+                                            //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
+                                            // https://stackoverflow.com/questions/18343018/optimizing-drawer-and-activity-launching-speed
+                                            // https://stackoverflow.com/questions/24539516/android-java-loading-fragments-lagless
                                             @Override
                                             public void onDrawerSlide(View drawerView, float slideOffset) {
                                             }
