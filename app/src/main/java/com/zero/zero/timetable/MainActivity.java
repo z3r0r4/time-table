@@ -76,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+
+
+        //CHANGE THIS TO START INTO THE SPECIFIED FRAGMENT
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MyTimeTableFragment()).commit();
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          * USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
          * **/
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
+            // https://stackoverflow.com/questions/18343018/optimizing-drawer-and-activity-launching-speed
+            // https://stackoverflow.com/questions/24539516/android-java-loading-fragments-lagless
                                             @Override
                                             public void onDrawerSlide(View drawerView, float slideOffset) {
                                             }
@@ -104,25 +110,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 switch (clickedNavItem) {
                                                     case R.id.nav_ovp:
                                                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new TabFragment()).commit();
+                                                                new TabFragment(), "TabFragment").commit();
                                                         break;
 
                                                     case R.id.nav_timetable:
                                                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new MyTimeTableFragment()).commit();
+                                                                new MyTimeTableFragment(), "MyTimeTableFragment").commit();
                                                         break;
                                                     case R.id.nav_notifications:
                                                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                                                 new NotificationsFragment(), "NotificationsFragment").commit();
                                                         break;
                                                     case R.id.nav_login:
+                                                        Toast.makeText(MainActivity.this, "LOGIN", Toast.LENGTH_SHORT).show();
                                                         Log.i(TAG, "OPEN LoginDialog");
                                                         LoginDialogFragment.showLogin(MainActivity.this);
                                                         break;
-                                                    //doesnt work yet
                                                     case R.id.nav_settings:
-                                                        Intent intent = new Intent(MainActivity.this, SettingsFragment.class);
-                                                        startActivity(intent);
+                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                                                new SettingsFragment(), "SettingsFragment").commit();
                                                         break;
                                                 }
                                             }

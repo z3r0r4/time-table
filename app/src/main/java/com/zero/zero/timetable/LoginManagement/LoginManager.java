@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.EditText;
 
-import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 
 //TODO use this everywhere
 public class LoginManager {
+    private static final String TAG = "LoginManager";
     private static Context ctx = null;
 
     protected static void writeLoginData(Context context, EditText mUsername, EditText mPassword) {
@@ -20,8 +20,7 @@ public class LoginManager {
     }
 
     public static String readLoginData(Context context) {
-        if (ctx==null)
-            ctx = context;
+        if (ctx == null) ctx = context;
         SharedPreferences sharedPref = ctx.getSharedPreferences(ctx.getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
 
         return sharedPref.getString(ctx.getString(R.string.login_data_storage), "default:ohno");

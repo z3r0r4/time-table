@@ -117,18 +117,19 @@ public class MyTimeTableFragment extends Fragment {
         return viewTimetable;
     }
 
-    public void setLesson(int LessonNumber, ArrayList<String[]> ScheduleEntrys) {
-        for (String[] ScheduleEntry : ScheduleEntrys)
+    public void setLesson(int LessonNumber, ArrayList<String[]> ScheduleEntries) {
+        for (String[] ScheduleEntry : ScheduleEntries)
             for (int i = 0; i < ScheduleEntry.length; i++) {
                 final TextView textView = new TextView(getActivity());
-//              TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1); //TODO Display the complete info Text with a dialog
+//              TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
 //              params.setMargins(1, 1, 1, 1);
                 textView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
                 textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
                 textView.setPadding(10, 10, 10, 10);
                 textView.setEllipsize(TextUtils.TruncateAt.END);
-                textView.setMaxLines(ScheduleEntrys.size());
-                textView.setGravity(Gravity.CENTER);
+                textView.setMaxLines(ScheduleEntries.size()); //Doesnt work because setLesson might be called more than one on the same LessonNumber
+                //TODO FIX this; it doesnt do anythign there is always only one line / only if integer is parsed there is more than one line
+                textView.setGravity(Gravity.CENTER);//TODO match all the different textviwe heights to each other
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -162,7 +163,6 @@ public class MyTimeTableFragment extends Fragment {
                         oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i]);
                     }
                 }
-
             }
     }
 
