@@ -5,7 +5,6 @@
     <string name="login">Login</string>
     <string name="password">Passwort</string>
     <string name="Username">Benutzername</string>
-    <string name="confirm">Bestätigen</string>
     <string name="login_data_storage">USERDATA</string>
     <string name="loadingtext">Loading, . . .</string>
 
@@ -26,6 +25,11 @@
     </string-array>
 
     <string-array name="multi_select_list_preference_entries_Kurse">
+        <item>DE</item>
+        <item>GE</item>
+        <item>ENG-G12</item>
+    </string-array>
+    <string-array name="multi_select_list_preference_entryvalues_Kurse">
         <item>DE</item>
         <item>GE</item>
         <item>ENG-G12</item>

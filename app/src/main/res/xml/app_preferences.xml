@@ -17,7 +17,7 @@
     <MultiSelectListPreference
         android:enabled="false"
         android:entries="@array/multi_select_list_preference_entries_Kurse"
-        android:entryValues="@array/multi_select_list_preference_entries_Kurse"
+        android:entryValues="@array/multi_select_list_preference_entryvalues_Kurse"
         android:key="multi_select_list_preference_1"
         android:summary="Wähle deine Kurse"
         android:title="Kurswahl"
