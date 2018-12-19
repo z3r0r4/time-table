@@ -22,13 +22,14 @@ import android.widget.TextView;
 
 import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.LoginManagement.LoginManager;
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 
 import java.util.ArrayList;
 
-//import receive.HTMLFetcher;
 
+//TODO use tabfragment to show both days
 
 public class MyTimeTableFragment extends Fragment {
     private final static String TAG = "MyTimeTableFragment";
@@ -55,25 +56,25 @@ public class MyTimeTableFragment extends Fragment {
 
         viewTimetable = inflater.inflate(R.layout.fragment_mytimetable, container, false);
         viewTimetable.setPadding(10, 10, 10, 10);
-        TextInfo = viewTimetable.findViewById(R.id.textView2);//TODO rename id
+        TextInfo = viewTimetable.findViewById(R.id.textViewInfo);
+
         tableLayout = viewTimetable.findViewById(R.id.TableLayoutTT);
         tableLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         tableLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-//        tableLayout.setBackgroundColor(Color.BLACK);
 
         //add a indexing first line
         tableRowHeader = new TableRow(getActivity());
         tableRowHeader.setBackgroundColor(Color.BLACK);
-//        tableRowHeader.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
+//        tableRowHeader.setLayoutParams(new TableLayout.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT,1));// align this row with all the other rows FIXED!: added LayoutParams to TextViewLessonNumber!
         mTextViewsHeader = new TextView[mStringsHeader.length];
 
         for (int i = 0; i < mTextViewsHeader.length; i++) {
             mTextViewsHeader[i] = new TextView(getActivity());
-            mTextViewsHeader[i].setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.5f));
+            mTextViewsHeader[i].setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
 
             mTextViewsHeader[i].setPadding(0, 10, 10, 10);
             mTextViewsHeader[i].setText(mStringsHeader[i]);
-            mTextViewsHeader[i].setTypeface(Typeface.DEFAULT_BOLD);
+//            mTextViewsHeader[i].setTypeface(Typeface.DEFAULT_BOLD);
             mTextViewsHeader[i].setTextColor(Color.WHITE);
             mTextViewsHeader[i].setGravity(Gravity.CENTER);
 
@@ -87,13 +88,13 @@ public class MyTimeTableFragment extends Fragment {
 
         for (int i = 0; i < tableRowsLessons.length; i++) {
             tableRowsLessons[i] = new TableRow(getActivity());
-//            tableRowsLessons[i].setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-//            tableRowsLessons[i].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT,1));
+            tableRowsLessons[i].setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
             TextViewLessonNumber = new TextView(getActivity());
-//            TextViewLessonNumber.setLayoutParams( new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT,1));
+            TextViewLessonNumber.setLayoutParams( new  TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
+
             TextViewLessonNumber.setText(i + 1 + ".");
-            TextViewLessonNumber.setPadding(10, 10, 10, 10);
-            TextViewLessonNumber.setGravity(Gravity.CENTER);
+            TextViewLessonNumber.setPadding(30, 10, 0, 10);
+            TextViewLessonNumber.setGravity(Gravity.START);
 
             tableRowsLessons[i].addView(TextViewLessonNumber);
             tableLayout.addView(tableRowsLessons[i]);
@@ -104,7 +105,8 @@ public class MyTimeTableFragment extends Fragment {
         OVPEasyFetcher.initializeContext(getContext());
         OVPEasyFetcher fetcher = new OVPEasyFetcher();
         if (fetcher.schedule == null) {
-            fetcher.init("http://" + getString(R.string.ovp_link) + "1.htm", getString(R.string.ovp_username), getString(R.string.ovp_password), this);
+            String[] LoginData = LoginManager.readLoginData(getContext()).split(":");
+            fetcher.init("http://" + getString(R.string.ovp_link) + "1.htm",LoginData[0], LoginData[1], this);
         } else {
             fillContent(fetcher.schedule);
         }
@@ -120,8 +122,8 @@ public class MyTimeTableFragment extends Fragment {
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setMaxLines(ScheduleEntrys.size());
                 textView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-                TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.5f); //TODO Display the complete info Text
-                params.setMargins(1, 1, 1, 1);
+                TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1); //TODO Display the complete info Text with a dialog
+//                params.setMargins(1, 1, 1, 1);
                 textView.setLayoutParams(params);
                 textView.setPadding(10, 10, 10, 10);
                 textView.setGravity(Gravity.CENTER);
@@ -149,8 +151,8 @@ public class MyTimeTableFragment extends Fragment {
             }
 //        ((TableLayout) tableRowsLessons[LessonNumber - 1].getParent()).removeView(tableRowsLessons[LessonNumber - 1]);
 //        tableLayout.addView(tableRowsLessons[LessonNumber - 1], LessonNumber - 1);
-        ((TableLayout) tableRowHeader.getParent()).removeView(tableRowHeader);
-        tableLayout.addView(tableRowHeader, 0);
+//        ((TableLayout) tableRowHeader.getParent()).removeView(tableRowHeader);
+//        tableLayout.addView(tableRowHeader, 0);
 
     }
 
@@ -181,5 +183,4 @@ public class MyTimeTableFragment extends Fragment {
     public void setInfo(SubstitutionSchedule schedule) {
         TextInfo.setText(schedule.getTitle());
     }
-
 }

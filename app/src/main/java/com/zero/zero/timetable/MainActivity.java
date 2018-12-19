@@ -21,21 +21,30 @@ import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
 import com.zero.zero.timetable.SettingManagement.SettingsFragment;
 import com.zero.zero.timetable.TabManagement.TabFragment;
 
-
+//TODO add error messages for everything
 //FINISHED: make it necessary to input the password instead of hardcoding it
 //FINISHED reload webview better plz
 //REFACTOR so that it can be used in every tabfragment
 //refractor
 //FINISHED add a drawer space for all differnet kind of stuff
 //FINISHED translate all the shorts to actual names
-//WORKING ON IT add the own timetable to autoshow those lessons that are canceled
+
+//improve reloading of webview
+//improve loading of fragments (splashscreen maybe)
+
+//add the own timetable to autoshow those lessons that are canceled
+//add a storage layout space or whatever to store the data
+//add a converter
+//extract all courses from the Q2 plan
+//make the user chose which courses he is taking
+
 //automagically notify when the plan is updated and if one of my lessons is canceled
 
-//WORKING ON IT add information about current date and week on top of the app or in info space
+//FINISHED add information about current date and week on top of the app or in info space
 
 //ideas: merge the automatic timetable creator (maybe ocr maybe file based) with this ovp. then save the created timetable and mark the lessons that are canceled
 // or substitute lessons
-//
+
 //future: add controller for grades and homework and plan for exams
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -167,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        super.onBackPressed();
     }
 
-    public static void setToolbarTitle(int Title ,Activity actv) {
+    public static void setToolbarTitle(int Title, Activity actv) {
         Activity activity = actv;
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         if (toolbar != null)

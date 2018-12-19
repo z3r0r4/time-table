@@ -22,13 +22,6 @@ public class LoginDialogFragment extends DialogFragment {
     private EditText mUsername = null;
     private EditText mPassword = null;
 
-    //    private void setLinkData(){
-//        OVP.TimeTableDisplay.LoginData = loadLoginData();
-//    }
-    public static void showLogin(FragmentActivity activity) {
-        DialogFragment newFragment = new LoginDialogFragment();
-        newFragment.show(activity.getSupportFragmentManager(), "login");
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -52,7 +45,7 @@ public class LoginDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         //save user LoginData
                         Log.d(TAG, "LoginData set to: " + mUsername.getText().toString() + ":" + mPassword.getText().toString());
-                        LoginManager.writeLoginData(getActivity(),mUsername,mPassword);
+                        LoginManager.writeLoginData(getActivity(), mUsername, mPassword);
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -64,15 +57,8 @@ public class LoginDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    private void writeLoginData() {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.login_data_storage), mUsername.getText().toString() + ":" + mPassword.getText().toString());
-        editor.commit();
-    }
-
-    public String readLoginData() {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.login_data_storage), "default:ohno");
+    public static void showLogin(FragmentActivity activity) {
+        DialogFragment newFragment = new LoginDialogFragment();
+        newFragment.show(activity.getSupportFragmentManager(), "login");
     }
 }
