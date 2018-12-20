@@ -6,7 +6,6 @@ import android.widget.EditText;
 
 import com.zero.zero.timetable.R;
 
-//TODO use this everywhere
 public class LoginManager {
     private static final String TAG = "LoginManager";
     private static Context ctx = null;

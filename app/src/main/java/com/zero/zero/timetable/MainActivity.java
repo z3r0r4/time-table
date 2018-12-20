@@ -24,14 +24,14 @@ import com.zero.zero.timetable.TabManagement.TabFragment;
 //FINISHED: make it necessary to input the password instead of hardcoding it
 //FINISHED reload webview better plz
 //REFACTOR so that it can be used in every tabfragment
-//refractor
+//refactor
 //FINISHED add a drawer space for all differnet kind of stuff
 //FINISHED translate all the shorts to actual names
 
 //improve reloading of webview
 //improve loading of fragments (splashscreen maybe)
 
-//add the own timetable to autoshow those lessons that are canceled
+//add the own timetable to auto-show those lessons that are canceled
 //add a storage layout space or whatever to store the data
 //add a converter
 //extract all courses from the Q2 plan
@@ -87,52 +87,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /**
          * USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
          * **/
-        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-                                            //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
-                                            // https://stackoverflow.com/questions/18343018/optimizing-drawer-and-activity-launching-speed
-                                            // https://stackoverflow.com/questions/24539516/android-java-loading-fragments-lagless
-                                            @Override
-                                            public void onDrawerSlide(View drawerView, float slideOffset) {
-                                            }
+        mDrawerLayout.addDrawerListener(
+                new DrawerLayout.DrawerListener() {
+                    //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
+                    // https://stackoverflow.com/questions/18343018/optimizing-drawer-and-activity-launching-speed
+                    // https://stackoverflow.com/questions/24539516/android-java-loading-fragments-lagless
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                    }
 
-                                            @Override
-                                            public void onDrawerOpened(View drawerView) {
-                                            }
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                    }
 
-                                            @Override
-                                            public void onDrawerStateChanged(int newState) {
-                                            }
+                    @Override
+                    public void onDrawerStateChanged(int newState) {
+                    }
 
-                                            @Override
-                                            public void onDrawerClosed(View drawerView) {
-                                                //Set your new fragment here
-                                                switch (clickedNavItem) {
-                                                    case R.id.nav_ovp:
-                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new TabFragment(), "TabFragment").commit();
-                                                        break;
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        //Set your new fragment here
+                        switch (clickedNavItem) {
+                            case R.id.nav_ovp:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new TabFragment(), "TabFragment").commit();
+                                break;
 
-                                                    case R.id.nav_timetable:
-                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new MyTimeTableFragment(), "MyTimeTableFragment").commit();
-                                                        break;
-                                                    case R.id.nav_notifications:
-                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new NotificationsFragment(), "NotificationsFragment").commit();
-                                                        break;
-                                                    case R.id.nav_login:
-                                                        Toast.makeText(MainActivity.this, "LOGIN", Toast.LENGTH_SHORT).show();
-                                                        Log.i(TAG, "OPEN LoginDialog");
-                                                        LoginDialogFragment.showLogin(MainActivity.this);
-                                                        break;
-                                                    case R.id.nav_settings:
-                                                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                                new SettingsFragment(), "SettingsFragment").commit();
-                                                        break;
-                                                }
-                                            }
-                                        }
-
+                            case R.id.nav_timetable:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new MyTimeTableFragment(), "MyTimeTableFragment").commit();
+                                break;
+                            case R.id.nav_notifications:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new NotificationsFragment(), "NotificationsFragment").commit();
+                                break;
+                            case R.id.nav_login:
+                                Toast.makeText(MainActivity.this, "LOGIN", Toast.LENGTH_SHORT).show();
+                                Log.i(TAG, "OPEN LoginDialog");
+                                LoginDialogFragment.showLogin(MainActivity.this);
+                                break;
+                            case R.id.nav_settings:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new SettingsFragment(), "SettingsFragment").commit();
+                                break;
+                        }
+                    }
+                }
         );
     }
 

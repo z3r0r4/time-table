@@ -127,7 +127,7 @@ public class MyTimeTableFragment extends Fragment {
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setMaxLines(ScheduleEntries.size()); //Doesnt work because setLesson might be called more than one on the same LessonNumber
                 //TODO FIX this; it doesnt do anything there is always only one line / only if integer is parsed there is more than one line
-                textView.setGravity(Gravity.CENTER);//TODO match all the different textviwe heights to each other
+                textView.setGravity(Gravity.CENTER);//TODO match all the different textview heights to each other
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
