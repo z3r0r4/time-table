@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-//        clickedNavItem = menuItem.getItemId(); // USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
+        clickedNavItem = menuItem.getItemId(); // USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
