@@ -17,12 +17,15 @@ import com.zero.zero.timetable.R;
 //TODO add same features as in Tab1
 public class Tab2Fragment extends Fragment {
     private static final String TAG = "Tab2Fragment";
+    private static WebView sTimeTable2 = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final View view;
+        String loginData;
 
-        View view = inflater.inflate(R.layout.fragment_tab2, container, false);
+        view = inflater.inflate(R.layout.fragment_tab2, container, false);
         WebView TimeTable2 = (WebView) view.findViewById(R.id.Table2);
 
         String LoginData = LoginManager.readLoginData(getContext());

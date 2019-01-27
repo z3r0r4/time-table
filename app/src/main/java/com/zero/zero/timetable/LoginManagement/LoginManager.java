@@ -8,20 +8,39 @@ import com.zero.zero.timetable.R;
 
 public class LoginManager {
     private static final String TAG = "LoginManager";
-    private static Context ctx = null;
+
+    private static Context sCtx = null;
 
     protected static void writeLoginData(Context context, EditText mUsername, EditText mPassword) {
-        ctx = context;
-        SharedPreferences sharedPref = ctx.getSharedPreferences(ctx.getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(ctx.getString(R.string.login_data_storage), mUsername.getText().toString() + ":" + mPassword.getText().toString());
+        sCtx = context;
+
+        final String userData;
+        final SharedPreferences sharedPref;
+        final SharedPreferences.Editor editor;
+
+        userData = mUsername.getText().toString().
+                concat(":").
+                concat(mPassword.getText().toString());
+
+        sharedPref = sCtx.getSharedPreferences(
+                sCtx.getString(R.string.login_data_prefs_key),
+                Context.MODE_PRIVATE);
+
+        editor = sharedPref.edit();
+        editor.putString(
+                sCtx.getString(R.string.login_data_storage),
+                userData);
         editor.commit();
     }
 
     public static String readLoginData(Context context) {
-        if (ctx == null) ctx = context;
-        SharedPreferences sharedPref = ctx.getSharedPreferences(ctx.getString(R.string.login_data_prefs_key), Context.MODE_PRIVATE);
+        if (sCtx == null) {
+            sCtx = context;
+        }
+        final SharedPreferences sharedPref = sCtx.getSharedPreferences(
+                sCtx.getString(R.string.login_data_prefs_key),
+                Context.MODE_PRIVATE);
 
-        return sharedPref.getString(ctx.getString(R.string.login_data_storage), "default:ohno");
+        return sharedPref.getString(sCtx.getString(R.string.login_data_storage), "default:ohno");
     }
 }

@@ -49,7 +49,7 @@ public class TabFragment extends Fragment {
         syncfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tab1Fragment.reload();
+                TimeTable1Fragment.reload();
             }
         });
 
@@ -61,7 +61,7 @@ public class TabFragment extends Fragment {
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), getString(R.string.tab1title));
+        adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title));
         adapter.addFragment(new Tab2Fragment(), getString(R.string.tab2title));
         viewPager.setAdapter(adapter);
     }
