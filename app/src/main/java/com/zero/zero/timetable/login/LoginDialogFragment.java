@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.LoginManagement;
+package com.zero.zero.timetable.login;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,7 +16,6 @@ import com.zero.zero.timetable.R;
 
 public class LoginDialogFragment extends DialogFragment {
     private static final String TAG = "LoginDialog";
-    private final String USERDATA = "";
     private EditText mUsername = null;
     private EditText mPassword = null;
 

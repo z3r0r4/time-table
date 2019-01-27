@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.TabManagement;
+package com.zero.zero.timetable.tabs;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zero.zero.timetable.R;
-import com.zero.zero.timetable.TabManagement.timeTableFragment.TimeTable1Fragment;
-import com.zero.zero.timetable.TabManagement.timeTableFragment.TimeTable2Fragment;
+import com.zero.zero.timetable.tabs.timetable_webview.TimeTable1Fragment;
+import com.zero.zero.timetable.tabs.timetable_webview.TimeTable2Fragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.TabManagement.timeTableFragment;
+package com.zero.zero.timetable.tabs.timetable_webview;
 
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.zero.zero.timetable.LoginManagement.LoginManager;
+import com.zero.zero.timetable.login.LoginManager;
 import com.zero.zero.timetable.R;
 
 public class TimeTableFragment extends Fragment {
@@ -74,13 +74,10 @@ public class TimeTableFragment extends Fragment {
     }
 
     protected String getLoginData() {
-        String loginData;
-        loginData = "http://";
-        loginData = loginData.concat(LoginManager.readLoginData(getContext()));
-        loginData = loginData.concat("@");
-        loginData = loginData.concat(getString(R.string.ovp_link));
-        loginData = loginData.concat(mTimeTableId + ".htm");
-        System.out.println("LOGINDATA: "+loginData);
-        return loginData;
+        return "http://".
+            concat(LoginManager.readLoginData(getContext())).
+            concat("@").
+            concat(getString(R.string.ovp_link)).
+            concat(mTimeTableId + ".htm");
     }
 }

@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.SettingManagement;
+package com.zero.zero.timetable.settings;
 
 import android.os.Bundle;
 import android.support.v14.preference.MultiSelectListPreference;

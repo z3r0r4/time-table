@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.HTMLFetcher.process;
+package com.zero.zero.timetable.hmtl_fetcher.process;
 
 public class SimpleBase64Encoder {
 

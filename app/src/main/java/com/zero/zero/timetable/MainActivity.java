@@ -14,11 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.zero.zero.timetable.LoginManagement.LoginDialogFragment;
-import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
-import com.zero.zero.timetable.NotificationManagement.NotificationsFragment;
-import com.zero.zero.timetable.SettingManagement.SettingsFragment;
-import com.zero.zero.timetable.TabManagement.TabFragment;
+import com.zero.zero.timetable.login.LoginDialogFragment;
+import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
+import com.zero.zero.timetable.notifications.NotificationsFragment;
+import com.zero.zero.timetable.settings.SettingsFragment;
+import com.zero.zero.timetable.tabs.TabFragment;
 
 //TODO add error messages for everything
 //FINISHED: make it necessary to input the password instead of hardcoding it

@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.MyTimeTableManagement;
+package com.zero.zero.timetable.mytimetable;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,9 +20,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
-import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
-import com.zero.zero.timetable.LoginManagement.LoginManager;
+import com.zero.zero.timetable.hmtl_fetcher.OVPEasyFetcher;
+import com.zero.zero.timetable.hmtl_fetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.login.LoginManager;
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 

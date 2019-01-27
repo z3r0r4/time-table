@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.LoginManagement;
+package com.zero.zero.timetable.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -42,14 +42,5 @@ public class LoginManager {
                 Context.MODE_PRIVATE);
 
         return sharedPref.getString(sCtx.getString(R.string.login_data_storage), "default:ohno");
-    }
-
-    public static String getFullLink(Context context) {
-        String loginData;
-        loginData = "http://";
-        loginData = loginData.concat(LoginManager.readLoginData(context));
-        loginData = loginData.concat("@");
-        //loginData = loginData.concat(getString(R.string.ovp_link));
-        return loginData;
     }
 }

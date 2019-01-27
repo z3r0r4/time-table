@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.NotificationManagement;
+package com.zero.zero.timetable.notifications;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-import com.zero.zero.timetable.HTMLFetcher.OVPEasyFetcher;
+import com.zero.zero.timetable.hmtl_fetcher.OVPEasyFetcher;
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 

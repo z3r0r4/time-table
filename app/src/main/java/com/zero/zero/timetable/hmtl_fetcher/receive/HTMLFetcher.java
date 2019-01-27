@@ -1,10 +1,10 @@
-package com.zero.zero.timetable.HTMLFetcher.receive;
+package com.zero.zero.timetable.hmtl_fetcher.receive;
 
 import android.util.Log;
 
-import com.zero.zero.timetable.HTMLFetcher.process.DataExtractor;
-import com.zero.zero.timetable.HTMLFetcher.process.SimpleBase64Encoder;
-import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.hmtl_fetcher.process.DataExtractor;
+import com.zero.zero.timetable.hmtl_fetcher.process.SimpleBase64Encoder;
+import com.zero.zero.timetable.hmtl_fetcher.process.SubstitutionSchedule;
 
 import java.io.BufferedReader;
 import java.io.IOException;
