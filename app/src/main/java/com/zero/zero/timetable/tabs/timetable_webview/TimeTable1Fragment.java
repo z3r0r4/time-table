@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.TabManagement.timeTableFragment;
+package com.zero.zero.timetable.tabs.timetable_webview;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.zero.zero.timetable.R;
-import com.zero.zero.timetable.TabManagement.TimeTableDisplay;
+import com.zero.zero.timetable.tabs.TimeTableDisplay;
 
 public class TimeTable1Fragment extends TimeTableFragment {
 
-    private static final String TAG = "TimeTable2Fragment";
+    private static final String TAG = "TimeTable1Fragment";
     private static WebView sTimeTable = null;
 
     @Nullable
@@ -28,7 +28,7 @@ public class TimeTable1Fragment extends TimeTableFragment {
 
         initializeWebView(view);
 
-        TimeTableDisplay.ViewOVP(mTimeTable, view, getLoginData(), mTimeTableId);
+        TimeTableDisplay.ViewOVP(mTimeTable, view, getLoginData());
 
         sTimeTable = mTimeTable;
 
