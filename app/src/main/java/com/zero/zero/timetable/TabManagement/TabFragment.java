@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zero.zero.timetable.R;
+import com.zero.zero.timetable.TabManagement.timeTableFragment.TimeTable1Fragment;
+import com.zero.zero.timetable.TabManagement.timeTableFragment.TimeTable2Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class TabFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
         adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title));
-        adapter.addFragment(new Tab2Fragment(), getString(R.string.tab2title));
+        adapter.addFragment(new TimeTable2Fragment(), getString(R.string.tab2title));
         viewPager.setAdapter(adapter);
     }
 

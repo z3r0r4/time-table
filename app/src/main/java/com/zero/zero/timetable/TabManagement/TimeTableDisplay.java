@@ -12,16 +12,16 @@ public class TimeTableDisplay {
 
     //TODO check if internet is available and add error messages as toast with alternative actions if not
     public static void ViewOVP(WebView TimeTable, View view, String LoginData, int i) {
-        switch (i) {
-            case 1:
-                OVP_link = LoginData + "1.htm";
-                break;
-            case 2:
-                OVP_link = LoginData + "2.htm";
-                break;
-        }
-        Log.d(TAG, "LOADING Website: " + OVP_link);
-        TimeTable.loadUrl(OVP_link);
+//        switch (i) {
+//            case 1:
+//                OVP_link = LoginData + "1.htm";
+//                break;
+//            case 2:
+//                OVP_link = LoginData + "2.htm";
+//                break;
+//        }
+        Log.d(TAG, "LOADING Website: " + LoginData);
+        TimeTable.loadUrl(LoginData);
 
         //TODO make webview zoom relative to display width
 

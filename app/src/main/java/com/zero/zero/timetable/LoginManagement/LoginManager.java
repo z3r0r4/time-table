@@ -43,4 +43,13 @@ public class LoginManager {
 
         return sharedPref.getString(sCtx.getString(R.string.login_data_storage), "default:ohno");
     }
+
+    public static String getFullLink(Context context) {
+        String loginData;
+        loginData = "http://";
+        loginData = loginData.concat(LoginManager.readLoginData(context));
+        loginData = loginData.concat("@");
+        //loginData = loginData.concat(getString(R.string.ovp_link));
+        return loginData;
+    }
 }
