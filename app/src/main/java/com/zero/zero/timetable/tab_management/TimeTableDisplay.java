@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.tabs;
+package com.zero.zero.timetable.tab_management;
 
 import android.util.Log;
 import android.view.View;

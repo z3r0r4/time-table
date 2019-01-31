@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.tabs.timetable_webview;
+package com.zero.zero.timetable.tab_management.timetable_webview;
 
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,8 +8,8 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.zero.zero.timetable.login.LoginManager;
 import com.zero.zero.timetable.R;
+import com.zero.zero.timetable.login.LoginManager;
 
 public class TimeTableFragment extends Fragment {
     private static final String TAG = "TimeTableFragment";
@@ -37,7 +37,7 @@ public class TimeTableFragment extends Fragment {
     }
 
     protected void initializeWebView(View reference) {
-        mTimeTable = (WebView) reference.findViewById(mWebViewId);
+        mTimeTable = reference.findViewById(mWebViewId);
 
         if(!mHasLoadingScreen) {
             return;
@@ -46,8 +46,8 @@ public class TimeTableFragment extends Fragment {
         final TextView textView;
         final ProgressBar progressBar;
 
-        textView = (TextView) reference.findViewById(mTextViewId);
-        progressBar = (ProgressBar) reference.findViewById(mProgressBarId);
+        textView = reference.findViewById(mTextViewId);
+        progressBar = reference.findViewById(mProgressBarId);
 
         mTimeTable.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {

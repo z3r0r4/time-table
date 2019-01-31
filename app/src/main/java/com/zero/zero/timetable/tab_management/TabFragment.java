@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.tabs;
+package com.zero.zero.timetable.tab_management;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zero.zero.timetable.R;
-import com.zero.zero.timetable.tabs.timetable_webview.TimeTable1Fragment;
-import com.zero.zero.timetable.tabs.timetable_webview.TimeTable2Fragment;
+import com.zero.zero.timetable.tab_management.timetable_webview.TimeTable1Fragment;
+import com.zero.zero.timetable.tab_management.timetable_webview.TimeTable2Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class TabFragment extends Fragment {
 
         Log.i(TAG, "OPEN Fragment");
         Activity activity = this.getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
         if (toolbar != null) {
             activity.setTitle(R.string.ovp_fragment_title);
         }
@@ -41,13 +41,13 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fixtures_new_tabs, container, false);
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) view.findViewById(R.id.result_tabs);
+        TabLayout tabs = view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
-        FloatingActionButton syncfab = (FloatingActionButton) view.findViewById(R.id.sync_btn);
+        FloatingActionButton syncfab = view.findViewById(R.id.sync_btn);
         syncfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

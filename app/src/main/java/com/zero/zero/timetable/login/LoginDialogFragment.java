@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -13,6 +15,10 @@ import android.widget.EditText;
 
 import com.zero.zero.timetable.R;
 
+/**
+ * Info: I Like this class, don't have to change anything in my opinion. Well done!
+ * Info: Or did i already refactor this class..? I don't now anymore xD
+ */
 
 public class LoginDialogFragment extends DialogFragment {
     private static final String TAG = "LoginDialog";
@@ -23,17 +29,17 @@ public class LoginDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
 
         // Inflate the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        View mView = inflater.inflate(R.layout.dialog_login, null);
+        final View mView = inflater.inflate(R.layout.dialog_login, null);
         //add buttons to get
 
-        mUsername = (EditText) mView.findViewById(R.id.etUsername);
-        mPassword = (EditText) mView.findViewById(R.id.etPassword);
+        mUsername = mView.findViewById(R.id.etUsername);
+        mPassword = mView.findViewById(R.id.etPassword);
         // Set the layout for the dialog
         builder.setView(mView)
                 // Add action buttons
@@ -55,7 +61,7 @@ public class LoginDialogFragment extends DialogFragment {
     }
 
     public static void showLogin(FragmentActivity activity) {
-        DialogFragment newFragment = new LoginDialogFragment();
+        final DialogFragment newFragment = new LoginDialogFragment();
         newFragment.show(activity.getSupportFragmentManager(), "login");
     }
 }

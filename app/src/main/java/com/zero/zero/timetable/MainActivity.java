@@ -18,7 +18,7 @@ import com.zero.zero.timetable.login.LoginDialogFragment;
 import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 import com.zero.zero.timetable.notifications.NotificationsFragment;
 import com.zero.zero.timetable.settings.SettingsFragment;
-import com.zero.zero.timetable.tabs.TabFragment;
+import com.zero.zero.timetable.tab_management.TabFragment;
 
 //TODO add error messages for everything
 //FINISHED: make it necessary to input the password instead of hardcoding it
@@ -56,12 +56,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //necessary
-//        OVPEasyFetcher.initializeContext(this);
+        //OVPEasyFetcher.initializeContext(this);
 
 
         //TODO put this into a separate class
-        //readd Toolbar because the original toolbar was removed
+        //read Toolbar because the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -87,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /**
          * USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
          * **/
+            initializeDrawerListener();
+    }
+
+    private void initializeDrawerListener() {
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
                     //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
@@ -137,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     /**
-     * USE THIS IF DRAWER DOESNT LAG
+     * USE THIS IF DRAWER DOESN'T LAG
      **/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -183,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static void setToolbarTitle(int Title, Activity actv) {
         Activity activity = actv;
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
         if (toolbar != null)
             activity.setTitle(Title);
         ////INFO MESSAGES

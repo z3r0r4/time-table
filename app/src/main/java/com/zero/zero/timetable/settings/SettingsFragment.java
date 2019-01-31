@@ -12,34 +12,51 @@ import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 //Dynamically add the Subjects
 
+/**
+ * INFO: I don't think that there's a need to separate the initialization of the "Preferences" ATM.
+ */
+
 public class SettingsFragment extends PreferenceFragmentCompat {
     private final static String TAG = "SettingsFragment";
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
-        //INFO
+        final MultiSelectListPreference multiSelectListPreference;
+        final SwitchPreference switchPreference;
+        final ListPreference listPreference;
+
+        //TODO: If this listener won't be re-assigned, set it to final
+        Preference.OnPreferenceChangeListener multi_listener;
+
+        //---INFO---//
         Log.i(TAG, "OPEN Fragment");
         MainActivity.setToolbarTitle(R.string.settings_fragment_title, getActivity());
-        //INFO
+        //---INFO---//
 
         // Load the Preferences from the XML file
         addPreferencesFromResource(R.xml.app_preferences);
 
-        //Set Entries of MultiSelectListPreference !!!THE USED PACKAGE IS VERY IMPORTANT!!!
-        final MultiSelectListPreference multiSelectListPreference = (MultiSelectListPreference) findPreference("multi_select_list_preference_1");
+        /*
+        IMPORTANT:
+        Set Entries of MultiSelectListPreference !!!THE USED PACKAGE IS VERY IMPORTANT!!!
+        */
+        multiSelectListPreference = (MultiSelectListPreference) findPreference("multi_select_list_preference_1");
         //multiSelectListPreference.setEntries(new String[]{"F", "this"});
-        Preference.OnPreferenceChangeListener multilistener = new Preference.OnPreferenceChangeListener() {
+
+        multi_listener = new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Log.d(TAG, "MultiSelectListPreference_1 Selected: " + newValue);
                 return true;
             }
         };
-        multiSelectListPreference.setOnPreferenceChangeListener(multilistener);
+        multiSelectListPreference.setOnPreferenceChangeListener(multi_listener);
 
 
         //Use ID "switch_preference_1" of the SwitchPreference XML object in app_preferences.xml to init a local SwitchPreference Object
-        final SwitchPreference switchPreference = (SwitchPreference) findPreference("switch_preference_1");
+        switchPreference = (SwitchPreference) findPreference("switch_preference_1");
+
+        //TODO: Define what "Stuff" means!
         //Do Stuff when the Switch is flipped
         switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -54,10 +71,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         //Use ID "list_preference_1" of the ListPreference XML object in app_preferences.xml to init a local ListPreference Object
-        final ListPreference listPreference = (ListPreference) findPreference("list_preference_1");
+        listPreference = (ListPreference) findPreference("list_preference_1");
         //Set the ListPreference Value to the first entry if nothing is selected
-        if (listPreference.getValue() == null)
+        if (listPreference.getValue() == null) {
             listPreference.setValueIndex(0);
+        }
+        //TODO: Define what "Stuff" means!
         //Do Stuff when the selected Value of the ListPreference is changed
         Preference.OnPreferenceChangeListener listener = new Preference.OnPreferenceChangeListener() {
             @Override

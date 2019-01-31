@@ -21,11 +21,12 @@ import java.util.ArrayList;
 
 public class NotificationsFragment extends Fragment {
     private static final String TAG = "NotificationsFragment";
-    private int NumberOfLessonsPerDay = 11;
-    private ArrayList<TableRow> tableRows = null;
-    private TableLayout tableLayout = null;
-    private Activity actv = null;
-    private OVPEasyFetcher OVPEasyFetcherToday = null;
+    //TODO: Delete or use unused variables
+    //private int mNumberOfLessonsPerDay = 11;
+    //private ArrayList<TableRow> mTableRows = null;
+    //private TableLayout mTableLayout = null;
+    //private Activity mActivitv = null;
+    //private OVPEasyFetcher mOVPEasyFetcherToday = null;
 
     @Nullable
     @Override

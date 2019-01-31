@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.tabs.timetable_webview;
+package com.zero.zero.timetable.tab_management.timetable_webview;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.zero.zero.timetable.R;
-import com.zero.zero.timetable.tabs.TimeTableDisplay;
+import com.zero.zero.timetable.tab_management.TimeTableDisplay;
 
 public class TimeTable1Fragment extends TimeTableFragment {
 
