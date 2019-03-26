@@ -12,7 +12,7 @@ public class SubstitutionSchedule {
     private ArrayList<String[]> infos;
     private Calendar calendar;
 
-    private SubstitutionSchedule(ArrayList<String[]> data, ArrayList<String[]> infos, String title) {
+    protected SubstitutionSchedule(ArrayList<String[]> data, ArrayList<String[]> infos, String title) {
         this.data = data;
         this.title = title;
         this.infos = infos;
