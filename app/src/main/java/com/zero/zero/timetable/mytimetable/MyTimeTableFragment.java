@@ -81,7 +81,8 @@ public class MyTimeTableFragment extends Fragment {
         mTableRowHeader.setBackgroundColor(Color.BLACK);
         //align this row with all the other rows FIXED!: added LayoutParams to TextViewLessonNumber!
 
-        for (String Header : mStringsHeader) {//TODO improve speed by removing init of textview in loop
+        for (String Header : mStringsHeader) {
+            //TODO improve speed by removing init of textview in loop
             final TextView header = new TextView(getActivity());
 
             header.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
@@ -172,9 +173,8 @@ public class MyTimeTableFragment extends Fragment {
         lesson.setPadding(10, 10, 10, 10);
         lesson.setEllipsize(TextUtils.TruncateAt.END);
         lesson.setMaxLines(scheduleEntries);
-        //WARNING: Doesn't work because setLesson might be called more than one on the same LessonNumber
-        //TODO: FIX this; it doesn't do anything there is always only one line / only if integer is parsed there is more than one line
-        //TODO: match all the different TextView heights to each other
+        //WARNING: Doesn't work because setLesson might be called more than one on the same LessonNumber //TODO: FIX this; it doesn't do anything there is always only one line / only if integer is parsed there is more than one line
+        //TODO: Table only shows one line FIX! match all the different TextView heights to each other
         lesson.setGravity(Gravity.CENTER);
 
         return lesson;
@@ -213,7 +213,7 @@ public class MyTimeTableFragment extends Fragment {
         OVPEasyFetcher fetcher = new OVPEasyFetcher();
         if (fetcher.schedule == null) {
             String[] LoginData = LoginManager.readLoginData(getContext()).split(":");
-            fetcher.init("http://" + getString(R.string.ovp_link) + "1.htm",
+            fetcher.init("http://" + getString(R.string.ovp_link) + "2.htm",
                     LoginData[0],
                     LoginData[1],
                     this);

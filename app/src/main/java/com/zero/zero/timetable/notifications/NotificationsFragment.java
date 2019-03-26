@@ -21,12 +21,6 @@ import java.util.ArrayList;
 
 public class NotificationsFragment extends Fragment {
     private static final String TAG = "NotificationsFragment";
-    //TODO: Delete or use unused variables
-    //private int mNumberOfLessonsPerDay = 11;
-    //private ArrayList<TableRow> mTableRows = null;
-    //private TableLayout mTableLayout = null;
-    //private Activity mActivitv = null;
-    //private OVPEasyFetcher mOVPEasyFetcherToday = null;
 
     @Nullable
     @Override

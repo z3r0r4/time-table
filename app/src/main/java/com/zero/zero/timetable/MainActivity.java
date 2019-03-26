@@ -1,6 +1,8 @@
 package com.zero.zero.timetable;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.zero.zero.timetable.login.LoginDialogFragment;
@@ -20,7 +21,6 @@ import com.zero.zero.timetable.notifications.NotificationsFragment;
 import com.zero.zero.timetable.settings.SettingsFragment;
 import com.zero.zero.timetable.tab_management.TabFragment;
 
-//TODO add error messages for everything
 //FINISHED: make it necessary to input the password instead of hardcoding it
 //FINISHED reload webview better plz
 //REFACTOR so that it can be used in every tabfragment
@@ -45,28 +45,27 @@ import com.zero.zero.timetable.tab_management.TabFragment;
 // or substitute lessons
 
 //future: add controller for grades and homework and plan for exams
-
+//TODO fix references to Context
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
     private DrawerLayout mDrawerLayout;
+    private static Context MainContext;
     private int clickedNavItem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //necessary
-        //OVPEasyFetcher.initializeContext(this);
+        MainContext = this;
 
 
-        //TODO put this into a separate class
-        //read Toolbar because the original toolbar was removed
+        //read Toolbar (Bar at top) because the original toolbar was removed
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //add a drawer
+        //TODO put this into a separate class
+        //declare a drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
         //add a navigationbar into the drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -77,73 +76,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-
         //CHANGE THIS TO START INTO THE SPECIFIED FRAGMENT
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MyTimeTableFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_timetable);
         }
-
-        /**
-         * USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
-         * **/
-            initializeDrawerListener();
     }
 
-    private void initializeDrawerListener() {
-        mDrawerLayout.addDrawerListener(
-                new DrawerLayout.DrawerListener() {
-                    //TODO show splash loading screen when fragment is selected | show fragement when drawer is fully closed
-                    // https://stackoverflow.com/questions/18343018/optimizing-drawer-and-activity-launching-speed
-                    // https://stackoverflow.com/questions/24539516/android-java-loading-fragments-lagless
-                    @Override
-                    public void onDrawerSlide(View drawerView, float slideOffset) {
-                    }
-
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                    }
-
-                    @Override
-                    public void onDrawerStateChanged(int newState) {
-                    }
-
-                    @Override
-                    public void onDrawerClosed(View drawerView) {
-                        //Set your new fragment here
-                        switch (clickedNavItem) {
-                            case R.id.nav_ovp:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new TabFragment(), "TabFragment").commit();
-                                break;
-
-                            case R.id.nav_timetable:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new MyTimeTableFragment(), "MyTimeTableFragment").commit();
-                                break;
-                            case R.id.nav_notifications:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new NotificationsFragment(), "NotificationsFragment").commit();
-                                break;
-                            case R.id.nav_login:
-                                Toast.makeText(MainActivity.this, "LOGIN", Toast.LENGTH_SHORT).show();
-                                Log.i(TAG, "OPEN LoginDialog");
-                                LoginDialogFragment.showLogin(MainActivity.this);
-                                break;
-                            case R.id.nav_settings:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                        new SettingsFragment(), "SettingsFragment").commit();
-                                break;
-                        }
-                    }
-                }
-        );
-    }
-
-    /**
-     * USE THIS IF DRAWER DOESN'T LAG
-     **/
+    //TODO improve loading of Fragments to supress laggs
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -183,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
-//        super.onBackPressed();
     }
 
     public static void setToolbarTitle(int Title, Activity actv) {
@@ -191,8 +131,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
         if (toolbar != null)
             activity.setTitle(Title);
-        ////INFO MESSAGES
     }
+  public static Context getContext(){
+        return MainContext;
+  }
+
 }
 
 

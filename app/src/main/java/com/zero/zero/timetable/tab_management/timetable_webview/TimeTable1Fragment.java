@@ -10,11 +10,8 @@ import android.webkit.WebView;
 
 import com.zero.zero.timetable.R;
 import com.zero.zero.timetable.tab_management.TimeTableDisplay;
-
+//TODO replace with inline implementation of TTFragment
 public class TimeTable1Fragment extends TimeTableFragment {
-
-    private static final String TAG = "TimeTable1Fragment";
-    private static WebView sTimeTable = null;
 
     @Nullable
     @Override
@@ -28,15 +25,9 @@ public class TimeTable1Fragment extends TimeTableFragment {
 
         initializeWebView(view);
 
-        TimeTableDisplay.ViewOVP(mTimeTable, view, getLoginData());
-
-        sTimeTable = mTimeTable;
+        TimeTableDisplay.ViewOVP(mTimeTable, getLoginData());
 
         return view;
     }
 
-    public static void reload() {
-        sTimeTable.loadUrl("about:blank");
-        sTimeTable.reload();
-    }
 }

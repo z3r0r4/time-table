@@ -1,6 +1,5 @@
 package com.zero.zero.timetable.tab_management;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -8,15 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
 import com.zero.zero.timetable.tab_management.timetable_webview.TimeTable1Fragment;
 import com.zero.zero.timetable.tab_management.timetable_webview.TimeTable2Fragment;
+import com.zero.zero.timetable.tab_management.timetable_webview.TimeTableFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +29,10 @@ public class TabFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        Log.i(TAG, "OPEN Fragment");
-        Activity activity = this.getActivity();
-        Toolbar toolbar = activity.findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            activity.setTitle(R.string.ovp_fragment_title);
-        }
+        //---INFO---//
+        Log.i(TAG, "OPEN TabFragment");
+        MainActivity.setToolbarTitle(R.string.ovp_fragment_title, getActivity());
+        //---INFO---//
     }
 
     @Override
@@ -43,15 +41,16 @@ public class TabFragment extends Fragment {
         // Setting ViewPager for each Tabs
         ViewPager viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+
         // Set Tabs inside Toolbar
         TabLayout tabs = view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
-        FloatingActionButton syncfab = view.findViewById(R.id.sync_btn);
-        syncfab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_reload = view.findViewById(R.id.sync_btn);
+        fab_reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimeTable1Fragment.reload();
+                TimeTableFragment.reload();
             }
         });
 

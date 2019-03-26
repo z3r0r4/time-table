@@ -10,10 +10,10 @@ import android.util.Log;
 
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
-//Dynamically add the Subjects
 
 /**
- * INFO: I don't think that there's a need to separate the initialization of the "Preferences" ATM.
+ * IMPORTANT:
+ * !!!THE USED PACKAGE of the MultiSelectList IS VERY IMPORTANT!!!
  */
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -21,28 +21,27 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
-        final MultiSelectListPreference multiSelectListPreference;
-        final SwitchPreference switchPreference;
-        final ListPreference listPreference;
-
-        //TODO: If this listener won't be re-assigned, set it to final
-        Preference.OnPreferenceChangeListener multi_listener;
+        final MultiSelectListPreference multiSelectListPreference_Courses;
+        final SwitchPreference switchPreference_ShowAll;
+        final ListPreference listPreference_Grade;
+        final Preference.OnPreferenceChangeListener multi_listener; //should be fine
+        // Load the Preferences from the XML file
+        addPreferencesFromResource(R.xml.app_preferences);
 
         //---INFO---//
         Log.i(TAG, "OPEN Fragment");
         MainActivity.setToolbarTitle(R.string.settings_fragment_title, getActivity());
         //---INFO---//
 
-        // Load the Preferences from the XML file
-        addPreferencesFromResource(R.xml.app_preferences);
+        switchPreference_ShowAll = (SwitchPreference) findPreference("switch_preference_1"); //Use ID "switch_preference_1" of the SwitchPreference XML object in app_preferences.xml to init a local SwitchPreference Object
+        listPreference_Grade = (ListPreference) findPreference("list_preference_1");  //Use ID "list_preference_1" of the ListPreference XML object in app_preferences.xml to init a local ListPreference Object
+        multiSelectListPreference_Courses = (MultiSelectListPreference) findPreference("multi_select_list_preference_1"); //Use ID "multi_select_list_preference_1" of the  MultiSelectList XML object in app_preferences.xml to init a local  MultiSelectList Object
 
-        /*
-        IMPORTANT:
-        Set Entries of MultiSelectListPreference !!!THE USED PACKAGE IS VERY IMPORTANT!!!
-        */
-        multiSelectListPreference = (MultiSelectListPreference) findPreference("multi_select_list_preference_1");
-        //multiSelectListPreference.setEntries(new String[]{"F", "this"});
 
+        //Set the access to the List based on the state of switchPreference_ShowAll
+        multiSelectListPreference_Courses.setShouldDisableView(switchPreference_ShowAll.isChecked());
+        multiSelectListPreference_Courses.setEnabled(!switchPreference_ShowAll.isChecked());
+        //Do (Log the Value) when the selected Value of the MultiSelectList is changed
         multi_listener = new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -50,34 +49,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         };
-        multiSelectListPreference.setOnPreferenceChangeListener(multi_listener);
+        multiSelectListPreference_Courses.setOnPreferenceChangeListener(multi_listener);
 
 
-        //Use ID "switch_preference_1" of the SwitchPreference XML object in app_preferences.xml to init a local SwitchPreference Object
-        switchPreference = (SwitchPreference) findPreference("switch_preference_1");
-
-        //TODO: Define what "Stuff" means!
-        //Do Stuff when the Switch is flipped
-        switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                Log.d(TAG, "SwitchPreference_1 active: " + o);
-                //set the accessibility of the MultiSelectListPreference depending on the the state of the switch
-                multiSelectListPreference.setShouldDisableView((boolean) o);
-                multiSelectListPreference.setEnabled(!(boolean) o);
-                Log.d(TAG, "Set MultiSelectListPreference.enabled to: " + !(boolean) o);
-                return true;
-            }
-        });
-
-        //Use ID "list_preference_1" of the ListPreference XML object in app_preferences.xml to init a local ListPreference Object
-        listPreference = (ListPreference) findPreference("list_preference_1");
         //Set the ListPreference Value to the first entry if nothing is selected
-        if (listPreference.getValue() == null) {
-            listPreference.setValueIndex(0);
+        if (listPreference_Grade.getValue() == null) {
+            listPreference_Grade.setValueIndex(0);
         }
-        //TODO: Define what "Stuff" means!
-        //Do Stuff when the selected Value of the ListPreference is changed
+        //Do (Log the Value) when the selected Value of the ListPreference_Grade is changed
         Preference.OnPreferenceChangeListener listener = new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -85,7 +64,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         };
-        listPreference.setOnPreferenceChangeListener(listener);
-    }
+        listPreference_Grade.setOnPreferenceChangeListener(listener);
 
+
+        //Do (Log selection, enable or disable MultiSelectList) when the Switch is flipped
+        switchPreference_ShowAll.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                Log.d(TAG, "SwitchPreference_1 active: " + o);
+                //set the "enablement" of the MultiSelectListPreference depending on the the state of the switch (switch of -> list on)
+                multiSelectListPreference_Courses.setShouldDisableView((boolean) o);
+                multiSelectListPreference_Courses.setEnabled(!(boolean) o);
+                Log.d(TAG, "Set MultiSelectListPreference_Course.enabled to: " + !(boolean) o);
+                return true;
+            }
+        });
+
+    }
 }

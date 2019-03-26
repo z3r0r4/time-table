@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.zero.zero.timetable.R;
 import com.zero.zero.timetable.login.LoginManager;
-
+//TODO remove instance classes of TTFragment and create them when needed from this
 public class TimeTableFragment extends Fragment {
     private static final String TAG = "TimeTableFragment";
 
@@ -19,34 +19,34 @@ public class TimeTableFragment extends Fragment {
     protected int mTextViewId;
     protected int mProgressBarId;
     protected WebView mTimeTable = null;
-
+    protected static WebView sTimeTable = null;
     private boolean mHasLoadingScreen = true;
 
-    protected void setIdentificationNumbers(int timeTableId, int webViewId, int textViewId, int progressBarId) {
-        mTimeTableId   = timeTableId;
-        mWebViewId     = webViewId;
-        mTextViewId   = textViewId;
+    public void setIdentificationNumbers(int timeTableId, int webViewId, int textViewId, int progressBarId) {
+        mTimeTableId = timeTableId;
+        mWebViewId = webViewId;
+        mTextViewId = textViewId;
         mProgressBarId = progressBarId;
+
     }
 
     protected void setIdentificationNumbers(int timeTableId, int webViewId) {
-        mTimeTableId   = timeTableId;
-        mWebViewId     = webViewId;
-
-       mHasLoadingScreen = false;
+        mTimeTableId = timeTableId;
+        mWebViewId = webViewId;
+        mHasLoadingScreen = false;
     }
 
     protected void initializeWebView(View reference) {
         mTimeTable = reference.findViewById(mWebViewId);
-
-        if(!mHasLoadingScreen) {
+        sTimeTable = mTimeTable;
+        if (!mHasLoadingScreen) {
             return;
         }
 
-        final TextView textView;
+        final TextView textView_loadingSign;
         final ProgressBar progressBar;
 
-        textView = reference.findViewById(mTextViewId);
+        textView_loadingSign = reference.findViewById(mTextViewId);
         progressBar = reference.findViewById(mProgressBarId);
 
         mTimeTable.setWebChromeClient(new WebChromeClient() {
@@ -55,7 +55,7 @@ public class TimeTableFragment extends Fragment {
 
                     mTimeTable.setVisibility(WebView.INVISIBLE);
                     progressBar.setVisibility(ProgressBar.VISIBLE);
-                    textView.setVisibility(View.VISIBLE);
+                    textView_loadingSign.setVisibility(View.VISIBLE);
 
                     Log.v(TAG, "Loading " + mTimeTable.getProgress() + "% done");
                 }
@@ -65,7 +65,7 @@ public class TimeTableFragment extends Fragment {
                 if (progress == 100) {
                     mTimeTable.setVisibility(WebView.VISIBLE);
                     progressBar.setVisibility(ProgressBar.GONE);
-                    textView.setVisibility(View.GONE);
+                    textView_loadingSign.setVisibility(View.GONE);
 
                     Log.v(TAG, "FINISHED Loading");
                 }
@@ -75,9 +75,14 @@ public class TimeTableFragment extends Fragment {
 
     protected String getLoginData() {
         return "http://".
-            concat(LoginManager.readLoginData(getContext())).
-            concat("@").
-            concat(getString(R.string.ovp_link)).
-            concat(mTimeTableId + ".htm");
+                concat(LoginManager.readLoginData(getContext())).
+                concat("@").
+                concat(getString(R.string.ovp_link)).
+                concat(mTimeTableId + ".htm");
+    }
+
+    public static void reload() {
+        sTimeTable.loadUrl("about:blank"); //TODO only last added is reloaded because static
+        sTimeTable.reload();
     }
 }
