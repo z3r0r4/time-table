@@ -33,9 +33,9 @@ public class TimeTableFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View fragment_Tab;
 
-        //get access to the fragment_tab1.xml (Pointer)
+        //get access to the fragment_tab.xml(Pointer)
 
-        fragment_Tab = inflater.inflate(getResources().getIdentifier("fragment_tab1", "layout", this.getContext().getPackageName()), container, false);
+        fragment_Tab = inflater.inflate(getResources().getIdentifier("fragment_tab", "layout", this.getContext().getPackageName()), container, false);
 
         initializeWebView(fragment_Tab);
 
@@ -46,7 +46,7 @@ public class TimeTableFragment extends Fragment {
 
     protected void initializeWebView(View fragment_Tab) {
         Log.e(TAG, "lololo" + mTTWebViewId);
-        mTimeTable = fragment_Tab.findViewById( R.id.Table1);//TODO find out why passing this instead causes an error mTTWebViewId
+        mTimeTable = fragment_Tab.findViewById( R.id.webViewTTable);//TODO find out why passing this instead causes an error mTTWebViewId
         sTimeTable = mTimeTable;
         if (!mHasLoadingScreen) {
             return;
@@ -55,8 +55,8 @@ public class TimeTableFragment extends Fragment {
         final TextView textView_loadingSign;
         final ProgressBar progressBar;
 
-        textView_loadingSign = fragment_Tab.findViewById(R.id.tV1);//TODO find out why passing this instead causes an error mTextViewId
-        progressBar = fragment_Tab.findViewById(R.id.pB1);//TODO find out why passing this instead causes an error mProgressBarId
+        textView_loadingSign = fragment_Tab.findViewById(R.id.textViewLoad);//TODO find out why passing this instead causes an error mTextViewId
+        progressBar = fragment_Tab.findViewById(R.id.progressBar);//TODO find out why passing this instead causes an error mProgressBarId
 
         mTimeTable.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
@@ -92,7 +92,7 @@ public class TimeTableFragment extends Fragment {
         mTTWebViewId = webViewId;
         mTextViewId = textViewId;
         mProgressBarId = progressBarId;
-//        Log.e(TAG, getString(getResources().getIdentifier("fragment_tab1", "layout", this.getContext().getPackageName())));
+//        Log.e(TAG, getString(getResources().getIdentifier("fragment_tab", "layout", this.getContext().getPackageName())));
     }
 
     //    protected void setIdentificationNumbers(int timeTableId, int webViewId) {

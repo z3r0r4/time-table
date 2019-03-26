@@ -3,16 +3,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-    <!--TODO check if the fragment_tabs can be merged-->
+    <!--TODO remove numeral references to old stuff-->
 
     <WebView
-        android:id="@+id/Table1"
+        android:id="@+id/webViewTTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"/>
 
     <ProgressBar
-        android:id="@+id/pB1"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         />
 
     <TextView
-        android:id="@+id/tV1"
+        android:id="@+id/textViewLoad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

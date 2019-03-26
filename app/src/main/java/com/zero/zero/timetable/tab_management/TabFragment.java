@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
-import com.zero.zero.timetable.tab_management.timetable_webview.TimeTable1Fragment;
-import com.zero.zero.timetable.tab_management.timetable_webview.TimeTable2Fragment;
 import com.zero.zero.timetable.tab_management.timetable_webview.TimeTableFragment;
 
 import java.util.ArrayList;
@@ -39,8 +37,8 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final TimeTableFragment mTT1Fragment = new TimeTableFragment();
         final TimeTableFragment mTT2Fragment = new TimeTableFragment();
-        mTT1Fragment.setIdentificationNumbers(1, R.id.Table1, R.id.tV1, R.id.pB1);
-        mTT2Fragment.setIdentificationNumbers(2, R.id.Table2, R.id.tV2, R.id.pB2);
+        mTT1Fragment.setIdentificationNumbers(1, R.id.webViewTTable, R.id.textViewLoad, R.id.progressBar);
+        mTT2Fragment.setIdentificationNumbers(2, R.id.webViewTTable, R.id.textViewLoad, R.id.progressBar);
 
 
         View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
@@ -69,12 +67,12 @@ public class TabFragment extends Fragment {
     }
 
     // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title)); //TODO create instances of TTfragment instead of TT1fragment...
-        adapter.addFragment(new TimeTable2Fragment(), getString(R.string.tab2title));
-        viewPager.setAdapter(adapter);
-    }
+//    private void setupViewPager(ViewPager viewPager) {
+//        Adapter adapter = new Adapter(getChildFragmentManager());
+//        adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title)); //TODO create instances of TTfragment instead of TT1fragment...
+//        adapter.addFragment(new TimeTable2Fragment(), getString(R.string.tab2title));
+//        viewPager.setAdapter(adapter);
+//    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
