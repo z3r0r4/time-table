@@ -37,12 +37,21 @@ public class TabFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fixtures_new_tabs, container, false);
-        // Setting ViewPager for each Tabs
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        final TimeTableFragment mTT1Fragment = new TimeTableFragment();
+        final TimeTableFragment mTT2Fragment = new TimeTableFragment();
+        mTT1Fragment.setIdentificationNumbers(1, R.id.Table1, R.id.tV1, R.id.pB1);
+        mTT2Fragment.setIdentificationNumbers(2, R.id.Table2, R.id.tV2, R.id.pB2);
 
-        // Set Tabs inside Toolbar
+
+        View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
+
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
+//        setupViewPager(viewPager);
+        Adapter adapter = new Adapter(getChildFragmentManager());
+        adapter.addFragment(mTT1Fragment, getString(R.string.tab1title)); //TODO create instances of TTfragment instead of TT1fragment...
+        adapter.addFragment(mTT2Fragment, getString(R.string.tab2title));
+        viewPager.setAdapter(adapter);
+
         TabLayout tabs = view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
@@ -50,7 +59,8 @@ public class TabFragment extends Fragment {
         fab_reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimeTableFragment.reload();
+                mTT1Fragment.reload();
+                mTT2Fragment.reload();
             }
         });
 
@@ -58,11 +68,10 @@ public class TabFragment extends Fragment {
 
     }
 
-
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title));
+        adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title)); //TODO create instances of TTfragment instead of TT1fragment...
         adapter.addFragment(new TimeTable2Fragment(), getString(R.string.tab2title));
         viewPager.setAdapter(adapter);
     }

@@ -2,7 +2,6 @@ package com.zero.zero.timetable;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,6 +19,12 @@ import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 import com.zero.zero.timetable.notifications.NotificationsFragment;
 import com.zero.zero.timetable.settings.SettingsFragment;
 import com.zero.zero.timetable.tab_management.TabFragment;
+//TODO improve background fetching
+//todo add notification when lesson is canceled
+//todo add personal timetable creator
+//todo auto add lessons into calendar
+//todo auto remove canceled lessons
+//todo add grade tracker
 
 //FINISHED: make it necessary to input the password instead of hardcoding it
 //FINISHED reload webview better plz
@@ -84,11 +89,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    //TODO improve loading of Fragments to supress laggs
+    //TODO improve loading of Fragments to improve performance
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        clickedNavItem = menuItem.getItemId(); // USE THIS IF FRAGMENT OPENING LAGGS BECAUSE OF SLOW DEVICE
         switch (menuItem.getItemId()) {
             case R.id.nav_ovp:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -132,9 +136,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (toolbar != null)
             activity.setTitle(Title);
     }
-  public static Context getContext(){
+
+    public static Context getContext() {
         return MainContext;
-  }
+    }
 
 }
 

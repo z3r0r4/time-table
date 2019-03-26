@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
+    <!--TODO check if the fragment_tabs can be merged-->
 
     <WebView
         android:id="@+id/Table1"
