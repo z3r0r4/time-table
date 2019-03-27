@@ -6,7 +6,7 @@
     <string name="password">Passwort</string>
     <string name="Username">Benutzername</string>
     <string name="login_data_storage">USERDATA</string>
-    <string name="loadingtext">Loading, . . .</string>
+    <string name="loadingText">Loading, . . .</string>
 
 
     <string-array name="list_preference_entries_Stufen">

@@ -24,8 +24,9 @@ public class TimeTableFragment extends Fragment {
     protected int mTTWebViewId;
     protected int mTextViewId;
     protected int mProgressBarId;
+
     protected WebView mTimeTable = null;
-    protected static WebView sTimeTable = null;
+
     private boolean mHasLoadingScreen = true;
 
     @Nullable
@@ -34,41 +35,37 @@ public class TimeTableFragment extends Fragment {
         final View fragment_Tab;
 
         //get access to the fragment_tab.xml(Pointer)
-
         fragment_Tab = inflater.inflate(getResources().getIdentifier("fragment_tab", "layout", this.getContext().getPackageName()), container, false);
 
         initializeWebView(fragment_Tab);
 
         TimeTableDisplay.ViewOVP(mTimeTable, getLoginData());
 
-        return  fragment_Tab;
+        return fragment_Tab;
     }
 
     protected void initializeWebView(View fragment_Tab) {
-        Log.e(TAG, "lololo" + mTTWebViewId);
-        mTimeTable = fragment_Tab.findViewById( R.id.webViewTTable);//TODO find out why passing this instead causes an error mTTWebViewId
-        sTimeTable = mTimeTable;
+        mTimeTable = fragment_Tab.findViewById(R.id.webViewTTable);//todo find out why passing this instead causes an error mTTWebViewId
+
         if (!mHasLoadingScreen) {
             return;
         }
-
+        //Adding a webview loading message to the tabfragment
         final TextView textView_loadingSign;
         final ProgressBar progressBar;
 
-        textView_loadingSign = fragment_Tab.findViewById(R.id.textViewLoad);//TODO find out why passing this instead causes an error mTextViewId
-        progressBar = fragment_Tab.findViewById(R.id.progressBar);//TODO find out why passing this instead causes an error mProgressBarId
+        textView_loadingSign = fragment_Tab.findViewById(R.id.textViewLoad);//todo find out why passing this instead causes an error mTextViewId
+        progressBar = fragment_Tab.findViewById(R.id.progressBar);//todo find out why passing this instead causes an error mProgressBarId
 
         mTimeTable.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
-
                     mTimeTable.setVisibility(WebView.INVISIBLE);
                     progressBar.setVisibility(ProgressBar.VISIBLE);
                     textView_loadingSign.setVisibility(View.VISIBLE);
 
                     Log.v(TAG, "Loading " + mTimeTable.getProgress() + "% done");
                 }
-
                 progressBar.setProgress(progress);
 
                 if (progress == 100) {
@@ -83,8 +80,16 @@ public class TimeTableFragment extends Fragment {
     }
 
     public void reload() {
-        mTimeTable.loadUrl("about:blank"); //TODO fix only last added WebView initialized is reloaded because static
+        mTimeTable.loadUrl("about:blank");
         mTimeTable.reload();
+    }
+
+    protected String getLoginData() {
+        return "http://".
+                concat(LoginManager.readLoginData(getContext())).
+                concat("@").
+                concat(getString(R.string.ovp_link)).
+                concat(mTimeTableId + ".htm");
     }
 
     public void setIdentificationNumbers(int timeTableId, int webViewId, int textViewId, int progressBarId) {
@@ -92,19 +97,12 @@ public class TimeTableFragment extends Fragment {
         mTTWebViewId = webViewId;
         mTextViewId = textViewId;
         mProgressBarId = progressBarId;
-//        Log.e(TAG, getString(getResources().getIdentifier("fragment_tab", "layout", this.getContext().getPackageName())));
     }
 
-    //    protected void setIdentificationNumbers(int timeTableId, int webViewId) {
-//        mTimeTableId = timeTableId;
-//        mTTWebViewId = webViewId;
-//        mHasLoadingScreen = false;
-//    }
-    protected String getLoginData() {
-        return "http://".
-                concat(LoginManager.readLoginData(getContext())).
-                concat("@").
-                concat(getString(R.string.ovp_link)).
-                concat(mTimeTableId + ".htm");
+    @Deprecated
+    protected void setIdentificationNumbers(int timeTableId, int webViewId) {
+        mTimeTableId = timeTableId;
+        mTTWebViewId = webViewId;
+        mHasLoadingScreen = false;
     }
 }

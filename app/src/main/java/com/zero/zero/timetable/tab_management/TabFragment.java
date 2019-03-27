@@ -1,6 +1,7 @@
 package com.zero.zero.timetable.tab_management;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -34,26 +35,28 @@ public class TabFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Create TimeTableFragments containing a WebView for each day
         final TimeTableFragment mTT1Fragment = new TimeTableFragment();
         final TimeTableFragment mTT2Fragment = new TimeTableFragment();
         mTT1Fragment.setIdentificationNumbers(1, R.id.webViewTTable, R.id.textViewLoad, R.id.progressBar);
         mTT2Fragment.setIdentificationNumbers(2, R.id.webViewTTable, R.id.textViewLoad, R.id.progressBar);
-
-
+        //reference the layout of the used fragment
         View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
 
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-//        setupViewPager(viewPager);
+
+        ViewPager viewPager = view.findViewById(R.id.viewpager); //wraps the tabs?
+
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(mTT1Fragment, getString(R.string.tab1title)); //TODO create instances of TTfragment instead of TT1fragment...
+        adapter.addFragment(mTT1Fragment, getString(R.string.tab1title));
         adapter.addFragment(mTT2Fragment, getString(R.string.tab2title));
+
         viewPager.setAdapter(adapter);
 
-        TabLayout tabs = view.findViewById(R.id.result_tabs);
+        TabLayout tabs = view.findViewById(R.id.result_tabs); //references the tablayoutthingy from the wrapping fragmentviewpager xml
         tabs.setupWithViewPager(viewPager);
 
-        FloatingActionButton fab_reload = view.findViewById(R.id.sync_btn);
+        FloatingActionButton fab_reload = view.findViewById(R.id.sync_btn); //references the fab from the wrapping fragmentviewpager xml
         fab_reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,16 +66,7 @@ public class TabFragment extends Fragment {
         });
 
         return view;
-
     }
-
-    // Add Fragments to Tabs
-//    private void setupViewPager(ViewPager viewPager) {
-//        Adapter adapter = new Adapter(getChildFragmentManager());
-//        adapter.addFragment(new TimeTable1Fragment(), getString(R.string.tab1title)); //TODO create instances of TTfragment instead of TT1fragment...
-//        adapter.addFragment(new TimeTable2Fragment(), getString(R.string.tab2title));
-//        viewPager.setAdapter(adapter);
-//    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

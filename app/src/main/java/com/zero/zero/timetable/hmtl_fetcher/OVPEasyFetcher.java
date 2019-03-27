@@ -10,7 +10,11 @@ import com.zero.zero.timetable.hmtl_fetcher.receive.HTMLFetcher;
 import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 
 import java.util.concurrent.ExecutionException;
-
+//TODO fetch truly async
+//TODO add background task to check for updates
+//--maybe--//
+//todo add storage for older OVP's (for highly scientific analyses)
+//todo add additional info to datastructure (mapping lesson to teacher, )
 public class OVPEasyFetcher {
     public SubstitutionSchedule schedule = null;
     private static String TAG = "OVPEasyFetcher";

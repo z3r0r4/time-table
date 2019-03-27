@@ -11,7 +11,8 @@ import com.zero.zero.timetable.MainActivity;
 
 public class TimeTableDisplay {
     private static final String TAG = "TimeTableDisplay";
-
+    //TODO test on different devices
+    // TODO: 2019-03-27 Add zoom and other webview controls in settings
     public static void ViewOVP(WebView webView_OVP, String link) {
         Log.d(TAG, "LOADING Website: " + link);
 
@@ -19,9 +20,8 @@ public class TimeTableDisplay {
 
             webView_OVP.loadUrl(link); //loads the Website into the WebView
             //set interaction environment variables and disable clickable links
-            final boolean interactions_enabled = false;
             webView_OVP.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-            webView_OVP.getSettings().setBuiltInZoomControls(interactions_enabled); //TODO make WebView zoom relative to display width
+            webView_OVP.getSettings().setBuiltInZoomControls(false);
             webView_OVP.setWebViewClient(new WebViewClient() {  //just disables the redirection to hyperlinks
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     return true;

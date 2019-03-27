@@ -20,43 +20,19 @@ import com.zero.zero.timetable.notifications.NotificationsFragment;
 import com.zero.zero.timetable.settings.SettingsFragment;
 import com.zero.zero.timetable.tab_management.TabFragment;
 //TODO improve background fetching
-//todo add notification when lesson is canceled
-//todo add personal timetable creator
-//todo auto add lessons into calendar
-//todo auto remove canceled lessons
-//todo add grade tracker
-
-//FINISHED: make it necessary to input the password instead of hardcoding it
-//FINISHED reload webview better plz
-//REFACTOR so that it can be used in every tabfragment
-//refactor
-//FINISHED add a drawer space for all differnet kind of stuff
-//FINISHED translate all the shorts to actual names
-
-//improve reloading of webview
-//improve loading of fragments (splashscreen maybe)
-
-//add the own timetable to auto-show those lessons that are canceled
-//add a storage layout space or whatever to store the data
-//add a converter
-//extract all courses from the Q2 plan
-//make the user chose which courses he is taking
-
-//automagically notify when the plan is updated and if one of my lessons is canceled
-
-//FINISHED add information about current date and week on top of the app or in info space
-
-//ideas: merge the automatic timetable creator (maybe ocr maybe file based) with this ovp. then save the created timetable and mark the lessons that are canceled
-// or substitute lessons
-
-//future: add controller for grades and homework and plan for exams
 //TODO fix references to Context
+//---less important----//
+// TODO: 2019-03-27   add notification when lesson is canceled
+// TODO: 2019-03-27   add personal timetable creator
+// TODO: 2019-03-27   auto add lessons into calendar
+// TODO: 2019-03-27   auto remove canceled lessons
+// TODO: 2019-03-27   add grade tracker
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
     private DrawerLayout mDrawerLayout;
     private static Context MainContext;
-    private int clickedNavItem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO put this into a separate class
+        //TODO put this into a separate class (maybe?)
         //declare a drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
         //add a navigationbar into the drawer

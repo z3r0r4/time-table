@@ -28,8 +28,11 @@ import com.zero.zero.timetable.login.LoginManager;
 
 import java.util.ArrayList;
 
+//TODO refactor
+//  TODO make functions shorter
+//TODO add explainations
+//TODO rename to make use clear
 //TODO use tabfragment to show both days
-
 public class MyTimeTableFragment extends Fragment {
     private final static String TAG = "MyTimeTableFragment";
     private static View viewTimetable = null;
