@@ -20,7 +20,7 @@ import com.zero.zero.timetable.notifications.NotificationsFragment;
 import com.zero.zero.timetable.settings.SettingsFragment;
 import com.zero.zero.timetable.tab_management.TabFragment;
 //TODO improve background fetching
-//TODO fix references to Context
+//TODO correct references to Context
 //---less important----//
 // TODO: 2019-03-27   add notification when lesson is canceled
 // TODO: 2019-03-27   add personal timetable creator
@@ -30,7 +30,7 @@ import com.zero.zero.timetable.tab_management.TabFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "MainActivity";
+    private final static String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
     private static Context MainContext;
 

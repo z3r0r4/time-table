@@ -15,10 +15,11 @@ import android.widget.TextView;
 
 import com.zero.zero.timetable.R;
 import com.zero.zero.timetable.login.LoginManager;
+import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 import com.zero.zero.timetable.tab_management.TimeTableDisplay;
 
 public class TimeTableFragment extends Fragment {
-    private static final String TAG = "TimeTableFragment";
+    private final static String TAG = TimeTableFragment.class.getSimpleName();
 
     protected int mTimeTableId;
     protected int mTTWebViewId;
@@ -86,7 +87,7 @@ public class TimeTableFragment extends Fragment {
 
     protected String getLoginData() {
         return "http://".
-                concat(LoginManager.readLoginData(getContext())).
+                concat(LoginManager.readLoginData()).
                 concat("@").
                 concat(getString(R.string.ovp_link)).
                 concat(mTimeTableId + ".htm");

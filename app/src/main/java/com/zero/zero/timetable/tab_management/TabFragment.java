@@ -15,13 +15,14 @@ import android.view.ViewGroup;
 
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
+import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 import com.zero.zero.timetable.tab_management.timetable_webview.TimeTableFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TabFragment extends Fragment {
-    private static final String TAG = "TabFragment";
+    private final static String TAG = TabFragment.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

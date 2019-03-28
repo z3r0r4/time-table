@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,23 +27,26 @@ import com.zero.zero.timetable.login.LoginManager;
 
 import java.util.ArrayList;
 
+//TODO reconsider if the table should look like the OVP itself "https://www.darkhorseanalytics.com/blog/clear-off-the-table/"
+
 //TODO refactor
 //  TODO make functions shorter
+//  todo put first line into own table
 //TODO add explainations
 //TODO rename to make use clear
 //TODO use tabfragment to show both days
-public class MyTimeTableFragment extends Fragment {
-    private final static String TAG = "MyTimeTableFragment";
-    private static View viewTimetable = null;
-    private TableLayout tableLayout = null;
 
-    private TextView mTextInfo = null;
+public class MyTimeTableFragment extends Fragment {
+    private final static String TAG = MyTimeTableFragment.class.getSimpleName();
 
     private int mNumberOfLessonsPerDay = 11;
-    private TableRow[] mTableRowBody = null;
+    private String[] mStringsHeader = {"Stunde", "Klasse(n)", "Kurs", "Raum", "Art", "Info"}; //maybe make local
 
-    private TableRow mTableRowHeader = null;
-    private String[] mStringsHeader = {"Stunde", "Klasse(n)", "Kurs", "Raum", "Art", "Info"};
+    private View viewTtFragment;
+    private TableLayout mTableLayout = null;
+    private TableRow[] mTableBodyRow = null;
+    private TextView mTextInfo = null; //maybe make local
+
 
     @Nullable
     @Override
@@ -54,60 +56,51 @@ public class MyTimeTableFragment extends Fragment {
         MainActivity.setToolbarTitle(R.string.my_tt_fragment_title, getActivity());
         ////INFO MESSAGES
 
-        viewTimetable = inflater.inflate(R.layout.fragment_mytimetable, container, false);
-        mTextInfo = viewTimetable.findViewById(R.id.textViewInfo);
-        tableLayout = viewTimetable.findViewById(R.id.TableLayoutTT);
-
-        final ScrollView.LayoutParams params = new ScrollView.LayoutParams(
-                ScrollView.LayoutParams.MATCH_PARENT,
-                ScrollView.LayoutParams.WRAP_CONTENT);
-        params.setMargins(10, 0, 10, 0);
-
-        tableLayout.setLayoutParams(params);
-        tableLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-
+        //initializes the layout and its child's specified in the xml as views
+        viewTtFragment = inflater.inflate(R.layout.fragment_mytimetable, container, false);
+        mTextInfo = viewTtFragment.findViewById(R.id.textViewInfo);
+        mTableLayout = viewTtFragment.findViewById(R.id.TableLayoutTt);
 
         //adding a indexing first line
-        constructTableViewHeader();
+        constructTableViewHeader(inflater);
 
         //adding a row for every lesson of the day and add a numbering TextView
         constructTableViewBody();
 
-        //Testing of OVPEasyFetcher//
+        //fetch data and put data into textviews and put textviews into rows
         initializeOVPFetcher();
 
-        return viewTimetable;
+        return viewTtFragment;
     }
 
-    private void constructTableViewHeader() {
-        mTableRowHeader = new TableRow(getActivity());
-        mTableRowHeader.setBackgroundColor(Color.BLACK);
-        //align this row with all the other rows FIXED!: added LayoutParams to TextViewLessonNumber!
+    private void constructTableViewHeader(LayoutInflater inflater) { //COMPLETED: align this row with all the other rows FIXED!: added LayoutParams to TextViewLessonNumber!
+        TableRow tableHeaderRow = new TableRow(getContext());
+        tableHeaderRow.setBackgroundColor(Color.BLACK);
 
-        for (String Header : mStringsHeader) {
-            //TODO improve speed by removing init of textview in loop
-            final TextView header = new TextView(getActivity());
+        for (String headerText : mStringsHeader) {
+            //todo improve speed by removing init of textview in loop:
+            TextView txtViewHeader = (TextView) inflater.inflate(R.layout.textviewheader, null);
+//            TextView txtViewHeader = new TextView(getContext());
+//            txtViewHeader.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
+//            txtViewHeader.setPadding(0, 10, 10, 10);
+//            txtViewHeader.setTypeface(Typeface.DEFAULT_BOLD);
+//            txtViewHeader.setTextColor(Color.WHITE);
+//            txtViewHeader.setGravity(Gravity.CENTER);
 
-            header.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-            header.setPadding(0, 10, 10, 10);
-            header.setTypeface(Typeface.DEFAULT_BOLD);
-            header.setTextColor(Color.WHITE);
-            header.setGravity(Gravity.CENTER);
-
-            header.setText(Header);
-            mTableRowHeader.addView(header);
+            txtViewHeader.setText(headerText);
+            tableHeaderRow.addView(txtViewHeader);
         }
-        tableLayout.addView(mTableRowHeader);
+        mTableLayout.addView(tableHeaderRow);
     }
 
     private void constructTableViewBody() {
-        mTableRowBody = new TableRow[mNumberOfLessonsPerDay];
+        mTableBodyRow = new TableRow[mNumberOfLessonsPerDay];
 
-        for (int i = 0, n = mTableRowBody.length; i < n; i++) {
-            final TextView lessonNumber = new TextView(getActivity());
+        for (int i = 0, n = mTableBodyRow.length; i < n; i++) {
+            final TextView lessonNumber = new TextView(getContext());
 
-            mTableRowBody[i] = new TableRow(getActivity());
-            mTableRowBody[i].setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
+            mTableBodyRow[i] = new TableRow(getContext());
+            mTableBodyRow[i].setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
 
             lessonNumber.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
             lessonNumber.setPadding(30, 10, 0, 10);
@@ -115,8 +108,10 @@ public class MyTimeTableFragment extends Fragment {
 
             lessonNumber.setText(i + 1 + ".");
 
-            mTableRowBody[i].addView(lessonNumber);
-            tableLayout.addView(mTableRowBody[i]);
+            mTableBodyRow[i].addView(lessonNumber);
+            mTableLayout.addView(mTableBodyRow[i]);
+
+//            if(i%2==0) mTableBodyRow[i].setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border)); //use to add color scheme
         }
     }
 
@@ -125,10 +120,7 @@ public class MyTimeTableFragment extends Fragment {
 
         for (String[] ScheduleEntry : ScheduleEntries)
             for (int i = 0; i < ScheduleEntry.length; i++) {
-                final TextView textView = new TextView(getActivity());
-
-//              TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1);
-//              params.setMargins(1, 1, 1, 1);
+                final TextView textView = new TextView(getContext());
 
                 setupLessonTextView(textView, scheduleEntries);
 
@@ -146,21 +138,21 @@ public class MyTimeTableFragment extends Fragment {
                 });
 
                 if (i == 0) {
-                    if (mTableRowBody[LessonNumber - 1].getChildAt(i + 1) == null) {
+                    if (mTableBodyRow[LessonNumber - 1].getChildAt(i + 1) == null) {
                         textView.setText(ScheduleEntry[i]);
 
-                        mTableRowBody[LessonNumber - 1].addView(textView);
+                        mTableBodyRow[LessonNumber - 1].addView(textView);
                     } else {
-                        TextView oldTextView = (TextView) mTableRowBody[LessonNumber - 1].getChildAt(i + 1);
+                        TextView oldTextView = (TextView) mTableBodyRow[LessonNumber - 1].getChildAt(i + 1);
                         oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i]);
                     }
                 } else if (i > 1) {
-                    if (mTableRowBody[LessonNumber - 1].getChildAt(i) == null) {
+                    if (mTableBodyRow[LessonNumber - 1].getChildAt(i) == null) {
                         textView.setText(ScheduleEntry[i]);
 
-                        mTableRowBody[LessonNumber - 1].addView(textView);
+                        mTableBodyRow[LessonNumber - 1].addView(textView);
                     } else {
-                        TextView oldTextView = (TextView) mTableRowBody[LessonNumber - 1].getChildAt(i);
+                        TextView oldTextView = (TextView) mTableBodyRow[LessonNumber - 1].getChildAt(i);
                         oldTextView.setText(oldTextView.getText() + "\n" + ScheduleEntry[i]);
                     }
                 }
@@ -215,7 +207,7 @@ public class MyTimeTableFragment extends Fragment {
         OVPEasyFetcher.initializeContext(getContext());
         OVPEasyFetcher fetcher = new OVPEasyFetcher();
         if (fetcher.schedule == null) {
-            String[] LoginData = LoginManager.readLoginData(getContext()).split(":");
+            String[] LoginData = LoginManager.readLoginData().split(":");
             fetcher.init("http://" + getString(R.string.ovp_link) + "2.htm",
                     LoginData[0],
                     LoginData[1],

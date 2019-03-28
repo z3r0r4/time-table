@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 //todo add additional info to datastructure (mapping lesson to teacher, )
 public class OVPEasyFetcher {
     public SubstitutionSchedule schedule = null;
-    private static String TAG = "OVPEasyFetcher";
+    private final static String TAG = OVPEasyFetcher.class.getSimpleName();
     private static Context contextRef;
     private static ProgressDialog progressDialog;
 

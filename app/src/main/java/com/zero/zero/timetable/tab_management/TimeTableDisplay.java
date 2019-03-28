@@ -8,9 +8,10 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.zero.zero.timetable.MainActivity;
+import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 
 public class TimeTableDisplay {
-    private static final String TAG = "TimeTableDisplay";
+    private final static String TAG = TimeTableDisplay.class.getSimpleName();
     //TODO test on different devices
     // TODO: 2019-03-27 Add zoom and other webview controls in settings
     public static void ViewOVP(WebView webView_OVP, String link) {

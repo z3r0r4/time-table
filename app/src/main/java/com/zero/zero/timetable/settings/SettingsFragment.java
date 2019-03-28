@@ -17,7 +17,7 @@ import com.zero.zero.timetable.R;
  */
 
 public class SettingsFragment extends PreferenceFragmentCompat {
-    private final static String TAG = "SettingsFragment";
+    private final static String TAG = SettingsFragment.class.getSimpleName();
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -25,13 +25,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final SwitchPreference switchPreference_ShowAll;
         final ListPreference listPreference_Grade;
         final Preference.OnPreferenceChangeListener multi_listener; //should be fine
-        // Load the Preferences from the XML file
-        addPreferencesFromResource(R.xml.app_preferences);
-
         //---INFO---//
         Log.i(TAG, "OPEN Fragment");
         MainActivity.setToolbarTitle(R.string.settings_fragment_title, getActivity());
         //---INFO---//
+
+        // Load the Preferences from the XML file
+        addPreferencesFromResource(R.xml.app_preferences);
 
         switchPreference_ShowAll = (SwitchPreference) findPreference("switch_preference_1"); //Use ID "switch_preference_1" of the SwitchPreference XML object in app_preferences.xml to init a local SwitchPreference Object
         listPreference_Grade = (ListPreference) findPreference("list_preference_1");  //Use ID "list_preference_1" of the ListPreference XML object in app_preferences.xml to init a local ListPreference Object
@@ -53,9 +53,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
 
         //Set the ListPreference Value to the first entry if nothing is selected
-        if (listPreference_Grade.getValue() == null) {
-            listPreference_Grade.setValueIndex(0);
-        }
+        if (listPreference_Grade.getValue() == null) listPreference_Grade.setValueIndex(0);
         //Do (Log the Value) when the selected Value of the ListPreference_Grade is changed
         Preference.OnPreferenceChangeListener listener = new Preference.OnPreferenceChangeListener() {
             @Override
