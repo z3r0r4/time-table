@@ -1,11 +1,9 @@
-package com.zero.zero.timetable.SettingManagement;
+package com.zero.zero.timetable.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 import com.zero.zero.timetable.R;
-
-import java.util.List;
 
 public class SettingsActivity extends PreferenceActivity{
     @Override

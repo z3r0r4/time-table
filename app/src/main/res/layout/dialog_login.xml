@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:orientation="vertical"
               android:padding="10dp">
 
     <TextView
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/Username"/>
+        android:hint="@string/Username"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/etPassword"
@@ -30,6 +30,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/password"/>
+        android:hint="@string/password"
+        android:inputType="textPassword"/>
+
+    <CheckBox
+        android:id="@+id/chbShowLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link anzeigen"/>
+
+    <EditText
+        android:id="@+id/etLink"
+        android:text="@string/ovp_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
 </LinearLayout>

@@ -1,10 +1,11 @@
-package com.zero.zero.timetable.HTMLFetcher.receive;
+package com.zero.zero.timetable.hmtl_fetcher.receive;
 
 import android.util.Log;
 
-import com.zero.zero.timetable.HTMLFetcher.process.DataExtractor;
-import com.zero.zero.timetable.HTMLFetcher.process.SimpleBase64Encoder;
-import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.hmtl_fetcher.process.DataExtractor;
+import com.zero.zero.timetable.hmtl_fetcher.process.SimpleBase64Encoder;
+import com.zero.zero.timetable.hmtl_fetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class HTMLFetcher {
     private String password = "";
     private String Token = getToken();
     private boolean requiresAuthentication = true;
-    private static final String TAG = "HTMLFetcher";
+    private final static String TAG = HTMLFetcher.class.getSimpleName();
 
     public HTMLFetcher(String url) {
         requiresAuthentication = false;

@@ -6,7 +6,7 @@
     <string name="password">Passwort</string>
     <string name="Username">Benutzername</string>
     <string name="login_data_storage">USERDATA</string>
-    <string name="loadingtext">Loading, . . .</string>
+    <string name="loadingText">Loading, . . .</string>
 
 
     <string-array name="list_preference_entries_Stufen">
@@ -46,4 +46,7 @@
     <string name="login_button_title">Login</string>
     <string name="settings_fragment_title">Settings</string>
     <string name="login_data_prefs_key">LoginDataPrefs</string>
+    <string name="txtviewInfo">Information</string>
+    <string name="confirmbutton">Bestätigen</string>
+    <string name="cancelbutton">Abbrechen</string>
 </resources>

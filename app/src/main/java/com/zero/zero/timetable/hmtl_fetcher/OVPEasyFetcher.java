@@ -1,19 +1,23 @@
-package com.zero.zero.timetable.HTMLFetcher;
+package com.zero.zero.timetable.hmtl_fetcher;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.zero.zero.timetable.HTMLFetcher.process.SubstitutionSchedule;
-import com.zero.zero.timetable.HTMLFetcher.receive.HTMLFetcher;
-import com.zero.zero.timetable.MyTimeTableManagement.MyTimeTableFragment;
+import com.zero.zero.timetable.hmtl_fetcher.process.SubstitutionSchedule;
+import com.zero.zero.timetable.hmtl_fetcher.receive.HTMLFetcher;
+import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
 
 import java.util.concurrent.ExecutionException;
-
+//TODO fetch truly async
+//TODO add background task to check for updates
+//--maybe--//
+//todo add storage for older OVP's (for highly scientific analyses)
+//todo add additional info to datastructure (mapping lesson to teacher, )
 public class OVPEasyFetcher {
     public SubstitutionSchedule schedule = null;
-    private static String TAG = "OVPEasyFetcher";
+    private final static String TAG = OVPEasyFetcher.class.getSimpleName();
     private static Context contextRef;
     private static ProgressDialog progressDialog;
 

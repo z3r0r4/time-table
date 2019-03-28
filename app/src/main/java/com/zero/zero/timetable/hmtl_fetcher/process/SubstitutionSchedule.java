@@ -1,4 +1,4 @@
-package com.zero.zero.timetable.HTMLFetcher.process;
+package com.zero.zero.timetable.hmtl_fetcher.process;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,12 +7,12 @@ import java.util.Iterator;
 
 public class SubstitutionSchedule {
     public static boolean convertOnInitialization = true;
-    private String title = "";
-    private ArrayList<String[]> data = null;
-    private ArrayList<String[]> infos = null;
-    public Calendar calendar = null;
+    private String title;
+    private ArrayList<String[]> data;
+    private ArrayList<String[]> infos;
+    private Calendar calendar;
 
-    public SubstitutionSchedule(ArrayList<String[]> data, ArrayList<String[]> infos, String title) {
+    protected SubstitutionSchedule(ArrayList<String[]> data, ArrayList<String[]> infos, String title) {
         this.data = data;
         this.title = title;
         this.infos = infos;
@@ -43,8 +43,8 @@ public class SubstitutionSchedule {
         this.data = data;
     }
 
-    public ArrayList<String[]> getData(String Identifier) {
-        ArrayList<String[]> result = new ArrayList<String[]>();
+    private ArrayList<String[]> getData(String Identifier) {
+        ArrayList<String[]> result = new ArrayList<>();
         Iterator<String[]> dataIterator = data.iterator();
         while (dataIterator.hasNext()) {
             String[] row = dataIterator.next();
@@ -113,12 +113,12 @@ public class SubstitutionSchedule {
     }
 
     public String stringify(String Identifier) {
-        String result = new String();
+        String result = "";
         ArrayList<String[]> data = getData(Identifier);
         Iterator<String[]> dataIterator = data.iterator();
         while (dataIterator.hasNext()) {
             String[] currentString = dataIterator.next();
-            result.concat(Arrays.deepToString(currentString) + "\n");
+            result = result.concat(Arrays.deepToString(currentString) + "\n");
         }
         return result;
     }
@@ -158,11 +158,11 @@ public class SubstitutionSchedule {
     }
 
     public boolean monthIsEven() {
-        return calendar.get(calendar.MONTH) % 2 == 0;
+        return calendar.get(Calendar.MONTH) % 2 == 0;
     }
 
-    public float daysSinceLastUpdate() {
-        return -this.calendar.compareTo(Calendar.getInstance()) / 86400;
+    public double daysSinceLastUpdate() {
+        return -this.calendar.compareTo(Calendar.getInstance()) / 86400d;
     }
 
     private void convertSubjectsS1() {
