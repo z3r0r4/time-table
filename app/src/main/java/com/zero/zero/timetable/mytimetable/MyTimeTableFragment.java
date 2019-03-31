@@ -1,7 +1,6 @@
 package com.zero.zero.timetable.mytimetable;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,15 +77,7 @@ public class MyTimeTableFragment extends Fragment {
         tableHeaderRow.setBackgroundColor(Color.BLACK);
 
         for (String headerText : mStringsHeader) {
-            //todo improve speed by removing init of textview in loop:
             TextView txtViewHeader = (TextView) inflater.inflate(R.layout.textviewheader, null);
-//            TextView txtViewHeader = new TextView(getContext());
-//            txtViewHeader.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-//            txtViewHeader.setPadding(0, 10, 10, 10);
-//            txtViewHeader.setTypeface(Typeface.DEFAULT_BOLD);
-//            txtViewHeader.setTextColor(Color.WHITE);
-//            txtViewHeader.setGravity(Gravity.CENTER);
-
             txtViewHeader.setText(headerText);
             tableHeaderRow.addView(txtViewHeader);
         }
@@ -208,7 +199,7 @@ public class MyTimeTableFragment extends Fragment {
         OVPEasyFetcher fetcher = new OVPEasyFetcher();
         if (fetcher.schedule == null) {
             String[] LoginData = LoginManager.readLoginData().split(":");
-            fetcher.init("http://" + getString(R.string.ovp_link) + "2.htm",
+            fetcher.init("http://" + getString(R.string.ovp_link) + "1.htm",
                     LoginData[0],
                     LoginData[1],
                     this);

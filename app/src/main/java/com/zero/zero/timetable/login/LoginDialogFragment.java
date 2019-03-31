@@ -22,7 +22,6 @@ public class LoginDialogFragment extends DialogFragment {
     private EditText mUsername = null;
     private EditText mPassword = null;
 
-    //TODO don't save / overwrite with empty login data
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

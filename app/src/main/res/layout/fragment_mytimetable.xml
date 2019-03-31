@@ -27,18 +27,7 @@
                      android:layout_height="wrap_content"
                      android:layout_marginLeft="10dp"
                      android:layout_marginRight="10dp"
-                     android:background="@drawable/border">
-<!--maybe could be used instead of initializing different instances and then adding the attributes-->
-            <!--<TextView-->
-                <!--android:id="@+id/textViewHeader"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="10dp"-->
-                <!--android:textColor="#fff"-->
-                <!--android:textStyle="bold"/>-->
-        </TableLayout>
+                     android:background="@drawable/border"/>
 
     </ScrollView>
 

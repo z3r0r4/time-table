@@ -3,6 +3,7 @@ package com.zero.zero.timetable.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.zero.zero.timetable.MainActivity;
 import com.zero.zero.timetable.R;
@@ -20,6 +21,11 @@ public class LoginManager {
         userData = mUsername.getText().toString().
                 concat(":").
                 concat(mPassword.getText().toString());
+
+        if (userData == ":") {
+            Toast.makeText(ctx, "Bitte Felder ausfüllen!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         sharedPref = MainActivity.getContext().getSharedPreferences(
                 ctx.getString(R.string.login_data_prefs_key),

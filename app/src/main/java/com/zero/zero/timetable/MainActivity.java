@@ -22,6 +22,7 @@ import com.zero.zero.timetable.tab_management.TabFragment;
 //TODO improve background fetching
 //TODO correct references to Context
 //---less important----//
+// TODO: 2019-03-31   add icons and graphics
 // TODO: 2019-03-27   add notification when lesson is canceled
 // TODO: 2019-03-27   add personal timetable creator
 // TODO: 2019-03-27   auto add lessons into calendar
