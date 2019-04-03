@@ -7,21 +7,23 @@ import android.util.Log;
 
 import com.zero.zero.timetable.hmtl_fetcher.process.SubstitutionSchedule;
 import com.zero.zero.timetable.hmtl_fetcher.receive.HTMLFetcher;
-import com.zero.zero.timetable.mytimetable.MyTimeTableFragment;
+import com.zero.zero.timetable.mytimetable.MyTimeTableManager;
 
 import java.util.concurrent.ExecutionException;
+
 //TODO fetch truly async
 //TODO add background task to check for updates
 //--maybe--//
 //todo add storage for older OVP's (for highly scientific analyses)
 //todo add additional info to datastructure (mapping lesson to teacher, )
 public class OVPEasyFetcher {
-    public SubstitutionSchedule schedule = null;
     private final static String TAG = OVPEasyFetcher.class.getSimpleName();
     private static Context contextRef;
     private static ProgressDialog progressDialog;
+    public SubstitutionSchedule schedule = null;
 
-    public OVPEasyFetcher() {}
+    public OVPEasyFetcher() {
+    }
 
     public static void initializeContext(Context ctx) {
         contextRef = ctx;
@@ -29,7 +31,8 @@ public class OVPEasyFetcher {
 
     public static void clearContext() {
         contextRef = null;
-        progressDialog = null; }
+        progressDialog = null;
+    }
 
     public SubstitutionSchedule getSchedule(String url, String username, String password) {
         if (schedule != null) {
@@ -49,17 +52,17 @@ public class OVPEasyFetcher {
         return result;
     }
 
-    public SubstitutionSchedule getSchedule(){
+    public SubstitutionSchedule getSchedule() {
         return this.schedule;
     }
 
-    public void init(String url, String username, String password, MyTimeTableFragment TimeTableRef) {
+    public void init(String url, String username, String password, MyTimeTableManager TimeTableRef) { //MyTimeTableFragment TimeTableRef) {
         HTTPRequestTask task = new HTTPRequestTask();
         task.execute(url, username, password);
 
         try {
             this.schedule = task.get();
-            if(this.schedule != null) {
+            if (this.schedule != null) {
                 TimeTableRef.fillContent(this.schedule);
             } else {
                 Log.d(TAG, "The SubstitutionSchedule couldn't be received!");
@@ -76,7 +79,8 @@ public class OVPEasyFetcher {
         protected void onPreExecute() {
             super.onPreExecute();
             if (contextRef == null) {
-                Log.d(TAG, "Context has not been initialized!"); } else {
+                Log.d(TAG, "Context has not been initialized!");
+            } else {
             }
         }
 

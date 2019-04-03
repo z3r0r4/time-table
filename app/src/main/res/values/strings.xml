@@ -49,4 +49,5 @@
     <string name="txtviewInfo">Information</string>
     <string name="confirmbutton">Bestätigen</string>
     <string name="cancelbutton">Abbrechen</string>
+    <string name="lesson_number">%1$d.</string>
 </resources>
