@@ -5,7 +5,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -23,8 +25,6 @@ public class MyTimeTableManager extends MyTimeTableFragment {
 
     public MyTimeTableManager() {
         initializeOVPFetcher();
-        super.mTextInfo = viewTtFragment.findViewById(R.id.textViewInfo);
-        mTableLayout = viewTtFragment.findViewById(R.id.TableLayoutTt);
     }
 
     protected void initializeOVPFetcher() {//Todo initalize through async task //Todo just access the fetched data from here
@@ -126,7 +126,7 @@ public class MyTimeTableManager extends MyTimeTableFragment {
     }
 
     public void setInfo(SubstitutionSchedule schedule) {
-       if ( getViewTtFragment() == null)
+        if (getViewTtFragment()== null)
             throw new NullPointerException();//MyTimeTableFragment.mTextInfo==null ||
         setTextInfo((TextView) getViewTtFragment().findViewById(R.id.textViewInfo));
         getTextInfo().setText(schedule.getTitle());

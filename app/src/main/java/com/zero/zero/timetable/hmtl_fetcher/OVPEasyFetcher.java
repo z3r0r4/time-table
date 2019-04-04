@@ -63,7 +63,7 @@ public class OVPEasyFetcher {
         try {
             this.schedule = task.get();
             if (this.schedule != null) {
-                TimeTableRef.fillContent(this.schedule);
+//                TimeTableRef.fillContent(this.schedule);
             } else {
                 Log.d(TAG, "The SubstitutionSchedule couldn't be received!");
             }
