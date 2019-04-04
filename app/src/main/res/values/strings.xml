@@ -50,4 +50,5 @@
     <string name="confirmbutton">Bestätigen</string>
     <string name="cancelbutton">Abbrechen</string>
     <string name="lesson_number">%1$d.</string>
+    <string name="timetableentry">%1$s\n%2$s</string>
 </resources>
